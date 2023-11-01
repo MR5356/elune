@@ -20,3 +20,15 @@ html, body {
     box-shadow: 0 0 2rem rgba(0,180,220,.1) inset;
     box-sizing: border-box;
 }
+
+@keyframes jump {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}

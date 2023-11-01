@@ -3,6 +3,7 @@
 import { ref } from 'vue'
 import { RouterView } from 'vue-router'
 import { getConfig, setConfig } from '@/request/app'
+import router from '@/router'
 
 const setting = ref({
   title: '',
@@ -42,7 +43,7 @@ const handleSelect = (key, keyPath) => {
     <el-header
       class="bg-white flex justify-between items-center shadow-md shadow-slate-100 sticky top-0 z-[999]"
     >
-      <div class="flex gap-2 items-center font-bold">
+      <div class="flex gap-2 items-center font-bold cursor-pointer" @click="router.push('/')">
         <img :src="setting.logo" alt="logo" class="w-10 h-10" />
         <div>{{ setting.title }}</div>
       </div>
@@ -104,18 +105,6 @@ const handleSelect = (key, keyPath) => {
     color: #0a0a0a !important;
     font-weight: bold !important;
     animation: jump 0.5s;
-  }
-}
-
-@keyframes jump {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-4px);
-  }
-  100% {
-    transform: translateY(0);
   }
 }
 </style>

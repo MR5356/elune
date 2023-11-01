@@ -112,7 +112,7 @@ const openPage = (item) => {
         >
           <template #reference>
             <div
-              class="bg-slate-50 p-4 flex gap-4 w-full rounded-lg items-center hover:bg-slate-100 cursor-pointer hover:shadow-lg min-w-[220px]"
+              class="bg-slate-50 p-4 flex gap-4 w-full rounded-lg items-center hover:bg-slate-100 cursor-pointer hover:shadow-lg min-w-[220px] navigation"
               @click="openPage(item)"
             >
               <img :src="item.logo" alt="logo" class="w-14 h-14 rounded" />
@@ -190,4 +190,10 @@ const openPage = (item) => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+.navigation {
+  &:hover {
+    animation: jump 0.5s;
+  }
+}
+</style>
