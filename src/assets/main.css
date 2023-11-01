@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+    background: #FFFFFF;
+}
+
+.border-style-1 {
+    width: 100%;
+    height: 100%; color:white; padding: 1rem;
+    box-shadow: 0 0 3rem rgba(100,200,255,.5) inset;
+    background: rgba(0,0,0,0);
+    box-sizing: border-box;
+}
+
+.border-style-2 {
+    height: 100%; width: 100%; color:rgba(60,240,250,1); font-size: 1.5rem; padding:1rem;
+    background: linear-gradient(180deg,rgba(0,180,220,0.3),rgba(0,180,220,0.1),rgba(0,180,220,0.1),rgba(0,180,220,0.3));
+    box-shadow: 0 0 2rem rgba(0,180,220,.1) inset;
+    box-sizing: border-box;
+}
