@@ -56,7 +56,7 @@ const handleSelect = (key, keyPath) => {
           @select="handleSelect"
         >
           <el-menu-item index="/">导航</el-menu-item>
-          <el-menu-item index="/blog">博客</el-menu-item>
+          <!--          <el-menu-item index="/blog">博客</el-menu-item>-->
         </el-menu>
       </div>
       <div class="flex gap-2 items-center">
