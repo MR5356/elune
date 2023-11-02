@@ -1,15 +1,103 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="p-4 bg-slate-100 rounded-lg">
+    <div class="flex flex-col gap-8 py-4">
+      <div class="flex flex-col gap-4">
+        <div class="flex gap-2 text-sm font-bold items-center">
+          <Server theme="outline" size="18" fill="#333" />
+          <div>服务器状态</div>
+        </div>
+        <div class="flex gap-4 justify-items-center">
+          <CircularProcessBar :size="100" :percent="percent" title="cpu" />
+          <CircularProcessBar :size="100" :percent="percent" title="memory" />
+          <CircularProcessBar :size="100" :percent="percent" title="storage" />
+          <MultCircularProcessBar :size="100" :percent="fakedata" />
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <div class="flex gap-2 text-sm font-bold items-center">
+          <ApplicationOne theme="outline" size="18" fill="#333" />
+          <div>服务状态</div>
+        </div>
+        <div class="p-4 rounded-3xl">
+          <CapsuleChart :data="data" />
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <div class="flex gap-2 text-sm font-bold items-center">
+          <NetworkDrive theme="outline" size="18" fill="#333" />
+          <div>集群状态</div>
+        </div>
+        <div class="p-4 rounded-3xl">
+          <CapsuleChart :data="data1" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
+<style></style>
+<script setup>
+import CapsuleChart from '@/components/charts/CapsuleChart.vue'
+import { ApplicationOne, NetworkDrive, Server } from '@icon-park/vue-next'
+import MultCircularProcessBar from '@/components/charts/MultCircularProcessBar.vue'
+import CircularProcessBar from '@/components/charts/CircularProcessBar.vue'
+import { ref } from 'vue'
+
+const percent = ref(Math.round(Math.random() * 100))
+setInterval(() => {
+  percent.value = Math.round(Math.random() * 100)
+  fakedata.value[0] = Math.round(Math.random() * 100)
+  fakedata.value[1] = Math.round(Math.random() * 100)
+  fakedata.value[2] = Math.round(Math.random() * 100)
+}, 2000)
+
+const fakedata = ref([10, 20, 30])
+
+const data = ref([
+  {
+    name: 'API',
+    value: 100
+  },
+  {
+    name: '前端',
+    value: 100
+  },
+  {
+    name: 'redis',
+    value: 33
+  },
+  {
+    name: 'postgres',
+    value: 100
   }
-}
-</style>
+])
+
+const data1 = ref([
+  {
+    name: 'master-1',
+    value: 100
+  },
+  {
+    name: 'master-2',
+    value: 100
+  },
+  {
+    name: 'master-3',
+    value: 100
+  },
+  {
+    name: 'node-1',
+    value: 100
+  },
+  {
+    name: 'node-2',
+    value: 100
+  },
+  {
+    name: 'node-3',
+    value: 100
+  }
+])
+</script>

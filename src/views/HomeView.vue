@@ -3,6 +3,63 @@ import { ref } from 'vue'
 import { getNavigation, addNavigation, updateNavigation, deleteNavigation } from '@/request/home'
 import { PlusCross } from '@icon-park/vue-next'
 import { ElLoading } from 'element-plus'
+//
+// const keyWords = ref('')
+// function handleKeyEvent(event) {
+//   console.log(event.key, event.keyCode)
+//   // esc
+//   if (event.keyCode === 27) {
+//     keyWords.value = ''
+//     console.log(keyWords.value)
+//     return
+//   }
+//
+//   // enter
+//   if (event.keyCode === 13) {
+//     return
+//   }
+//
+//   // delete
+//   if (event.keyCode === 8) {
+//     keyWords.value = keyWords.value.substring(0, keyWords.value.length - 1)
+//     console.log(keyWords.value)
+//     return
+//   }
+//
+//   if (event.keyCode >= 65 && event.keyCode <= 90) {
+//     keyWords.value += event.key
+//     console.log(keyWords.value)
+//   }
+//   let queryStringArr = keyWords.value.split('')
+//   let str = '(.*?)'
+//   let regStr = str + queryStringArr.join(str) + str
+//   let reg = RegExp(regStr, 'i')
+//   let temp = []
+//   console.log(reg)
+//   navigationData.value.map((item) => {
+//     if (reg.test(item.title) || reg.test(item.desc) || reg.test(item.url)) {
+//       temp.push(item)
+//     }
+//   })
+//   console.log(temp)
+// }
+//
+// onMounted(() => {
+//   document.addEventListener('keyup', handleKeyEvent)
+// })
+//
+// onBeforeUnmount(() => {
+//   document.removeEventListener('keyup', handleKeyEvent)
+// })
+//
+// const highlightKeywords = (result) => {
+//   let highlightedResult = result
+//   const regex = new RegExp('你好', 'gi')
+//   highlightedResult = highlightedResult.replace(regex, `<span style="color: #f20639">你好</span>`)
+//   return highlightedResult
+// }
+//
+// console.log(highlightKeywords('你好世界'))
 
 const isEdit = ref(false)
 const dialogFormVisible = ref(false)
@@ -139,14 +196,17 @@ const openPage = (item) => {
               <img :src="item.logo" alt="logo" class="w-14 h-14 rounded" />
               <div class="flex flex-col gap-1">
                 <div class="flex gap-2 items-center">
-                  <div class="text-sm font-medium whitespace-nowrap">{{ item.title }}</div>
+                  <div class="text-sm font-medium whitespace-nowrap" v-html="item.title"></div>
                   <div
                     class="text-xs bg-slate-100 text-center p-[2px] rounded text-gray-500 w-16 truncate"
                   >
                     {{ categories[item.parent].title }}
                   </div>
                 </div>
-                <div class="text-xs text-gray-500 line-clamp-1 text-ellipsis">{{ item.desc }}</div>
+                <div
+                  class="text-xs text-gray-500 line-clamp-1 text-ellipsis"
+                  v-html="item.desc"
+                ></div>
               </div>
             </div>
           </template>
