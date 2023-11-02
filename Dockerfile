@@ -14,6 +14,8 @@ RUN yarn build
 
 FROM nginx:stable-alpine
 
+COPY default.conf /etc/nginx/conf.d/
+
 RUN rm -rf /usr/share/nginx/html/*
 
 COPY --from=builder /build/dist /usr/share/nginx/html
