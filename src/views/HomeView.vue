@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { getNavigation, addNavigation, updateNavigation, deleteNavigation } from '@/request/home'
 import { PlusCross } from '@icon-park/vue-next'
+import { ElLoading } from 'element-plus'
 
 const isEdit = ref(false)
 const dialogFormVisible = ref(false)
@@ -16,6 +17,11 @@ const navigationData = ref([])
 const formData = ref({})
 
 function initNavigation() {
+  const loading = ElLoading.service({
+    lock: true,
+    text: 'loading',
+    background: 'rgba(0, 0, 0, 0.7)'
+  })
   getNavigation().then((res) => {
     // 按照Order排序
     navigationData.value = res.sort((a, b) => b.order - a.order)
@@ -24,6 +30,7 @@ function initNavigation() {
         categories.value[item.id] = item
       }
     })
+    loading.close()
   })
   formData.value = {
     id: 0,
@@ -39,15 +46,22 @@ function initNavigation() {
 initNavigation()
 
 function submitNavigation() {
+  const loading = ElLoading.service({
+    lock: true,
+    text: '正在更新',
+    background: 'rgba(0, 0, 0, 0.7)'
+  })
   if (isEdit.value) {
     updateNavigation(formData.value).then(() => {
       dialogFormVisible.value = false
       initNavigation()
+      loading.close()
     })
   } else {
     addNavigation(formData.value).then(() => {
       dialogFormVisible.value = false
       initNavigation()
+      loading.close()
     })
   }
 }
@@ -87,8 +101,14 @@ function updateNav(item) {
 }
 
 function deleteNav(id) {
+  const loading = ElLoading.service({
+    lock: true,
+    text: '正在更新',
+    background: 'rgba(0, 0, 0, 0.7)'
+  })
   deleteNavigation(id).then(() => {
     initNavigation()
+    loading.close()
   })
 }
 
@@ -99,7 +119,9 @@ const openPage = (item) => {
 
 <template>
   <div class="flex w-full justify-center">
-    <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 w-[80%]">
+    <div
+      class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 2xl:w-[80%] xl:w-[80%] lg:w-[80%] md:w-full sm:w-full"
+    >
       <template v-for="item in navigationData">
         <el-popover
           ref="popover"
@@ -108,11 +130,10 @@ const openPage = (item) => {
           class="p-0"
           v-if="item.parent !== 0"
           :key="item.id"
-          placement="bottom-end"
         >
           <template #reference>
             <div
-              class="bg-slate-50 p-4 flex gap-4 w-full rounded-lg items-center hover:bg-slate-100 cursor-pointer hover:shadow-lg min-w-[220px] navigation"
+              class="bg-slate-50 p-4 flex gap-4 w-full rounded-lg items-center hover:bg-slate-100 cursor-pointer hover:shadow-lg min-w-[220px] jump"
               @click="openPage(item)"
             >
               <img :src="item.logo" alt="logo" class="w-14 h-14 rounded" />
@@ -141,15 +162,15 @@ const openPage = (item) => {
       </template>
     </div>
     <!-- 新增、修改 -->
-    <div class="absolute bottom-10 right-10">
-      <el-button type="primary" @click="addNav" size="large" :icon="PlusCross" circle />
+    <div class="absolute bottom-4 right-4 jump">
+      <el-button color="rgb(203 213 225)" @click="addNav" size="large" :icon="PlusCross" circle />
     </div>
     <el-dialog
       v-model="dialogFormVisible"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :show-close="false"
-      class="max-w-[500px]"
+      class="max-w-[600px] min-w-[420px]"
       :title="isEdit ? '更新菜单' : formData.parent === 0 ? '新增分类' : '新增菜单'"
     >
       <el-form :model="formData">
@@ -181,7 +202,7 @@ const openPage = (item) => {
         </el-form-item>
       </el-form>
       <template #footer>
-        <span class="dialog-footer">
+        <span>
           <el-button @click="closeDialog">取消</el-button>
           <el-button type="primary" @click="submitNavigation">提交</el-button>
         </span>
@@ -190,10 +211,4 @@ const openPage = (item) => {
   </div>
 </template>
 
-<style scoped lang="scss">
-.navigation {
-  &:hover {
-    animation: jump 0.5s;
-  }
-}
-</style>
+<style scoped lang="scss"></style>

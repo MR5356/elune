@@ -3,6 +3,8 @@ import { ref } from 'vue'
 import CircularProcessBar from '@/components/charts/CircularProcessBar.vue'
 import CapsuleChart from '@/components/charts/CapsuleChart.vue'
 import MultCircularProcessBar from '@/components/charts/MultCircularProcessBar.vue'
+import { Like, Dislike, ShareOne, Server, ApplicationOne, NetworkDrive } from '@icon-park/vue-next'
+
 const percent = ref(Math.round(Math.random() * 100))
 setInterval(() => {
   percent.value = Math.round(Math.random() * 100)
@@ -100,15 +102,15 @@ const data1 = ref([
               </div>
               <div class="flex gap-4 text-sm">
                 <div class="flex gap-1 items-center">
-                  <icon-park-like theme="outline" size="16" fill="#333" />
+                  <Like theme="outline" size="16" fill="#333" />
                   <div>1024</div>
                 </div>
                 <div class="flex gap-1 items-center">
-                  <icon-park-dislike theme="outline" size="16" fill="#333" />
+                  <Dislike theme="outline" size="16" fill="#333" />
                   <div>1024</div>
                 </div>
                 <div class="flex gap-1 items-center">
-                  <icon-park-share-one theme="outline" size="16" fill="#333" />
+                  <ShareOne theme="outline" size="16" fill="#333" />
                   <div>1024</div>
                 </div>
               </div>
@@ -121,7 +123,7 @@ const data1 = ref([
       <div class="flex flex-col gap-8 py-4">
         <div class="flex flex-col gap-4">
           <div class="flex gap-2 text-sm font-bold items-center">
-            <icon-park-server theme="outline" size="18" fill="#333" />
+            <Server theme="outline" size="18" fill="#333" />
             <div>服务器状态</div>
           </div>
           <div class="grid grid-cols-4 justify-items-center">
@@ -134,7 +136,7 @@ const data1 = ref([
 
         <div class="flex flex-col gap-4">
           <div class="flex gap-2 text-sm font-bold items-center">
-            <icon-park-application-one theme="outline" size="18" fill="#333" />
+            <ApplicationOne theme="outline" size="18" fill="#333" />
             <div>服务状态</div>
           </div>
           <div class="p-4 rounded-3xl">
@@ -144,7 +146,7 @@ const data1 = ref([
 
         <div class="flex flex-col gap-4">
           <div class="flex gap-2 text-sm font-bold items-center">
-            <icon-park-network-drive theme="outline" size="18" fill="#333" />
+            <NetworkDrive theme="outline" size="18" fill="#333" />
             <div>集群状态</div>
           </div>
           <div class="p-4 rounded-3xl">
