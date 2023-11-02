@@ -52,8 +52,6 @@ const menus = ref([
 //   console.log(res)
 // })
 
-const activeIndex = ref('/')
-
 const dialogFormVisible = ref(false)
 const newSetting = ref({})
 
@@ -90,13 +88,15 @@ async function onSubmitSetting() {
       </div>
       <div>
         <el-menu
-          :default-active="activeIndex"
+          :default-active="$route.path"
+          background-color="transparent"
           router
-          class="el-menu-demo"
           mode="horizontal"
           :ellipsis="false"
         >
-          <el-menu-item v-for="menu in menus" :index="menu.path">{{ menu.title }}</el-menu-item>
+          <el-menu-item v-for="menu in menus" :key="menu" :index="menu.path">{{
+            menu.title
+          }}</el-menu-item>
         </el-menu>
       </div>
       <div class="flex gap-2 items-center">
@@ -174,7 +174,7 @@ async function onSubmitSetting() {
   padding: 0 10px !important;
   &.is-active,
   &:hover {
-    background: inherit !important;
+    background: transparent !important;
     color: #0a0a0a !important;
     font-weight: bold !important;
     animation: jump 0.5s;
