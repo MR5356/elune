@@ -105,7 +105,7 @@ async function onSubmitSetting() {
             <img
               src="@/assets/avatar.svg"
               alt="avatar"
-              class="w-10 h-10 rounded-full"
+              class="w-10 h-10 rounded-full jump"
               title="管理员"
             />
           </template>
@@ -143,12 +143,17 @@ async function onSubmitSetting() {
     <el-footer class="flex flex-col gap-1 justify-center items-center text-xs">
       <div>{{ setting.copyright }}</div>
       <div class="flex gap-2">
-        <a v-if="setting.beianMiit" target="_blank" href="http://www.beian.miit.gov.cn/">{{
-          setting.beianMiit
-        }}</a>
+        <a
+          v-if="setting.beianMiit"
+          class="jump"
+          target="_blank"
+          href="http://www.beian.miit.gov.cn/"
+          >{{ setting.beianMiit }}</a
+        >
         <a
           v-if="setting.beian"
           target="_blank"
+          class="jump"
           :href="`http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=${setting.beian.replace(
             /[^\d]/g,
             ''

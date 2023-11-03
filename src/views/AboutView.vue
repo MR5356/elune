@@ -7,10 +7,10 @@
           <div>服务器状态</div>
         </div>
         <div class="flex gap-4 justify-items-center">
-          <CircularProcessBar :size="100" :percent="percent" title="cpu" />
-          <CircularProcessBar :size="100" :percent="percent" title="memory" />
-          <CircularProcessBar :size="100" :percent="percent" title="storage" />
-          <MultCircularProcessBar :size="100" :percent="fakedata" />
+          <CircularProcessBar :size="88" :percent="percent" title="cpu" />
+          <CircularProcessBar :size="88" :percent="percent" title="memory" />
+          <CircularProcessBar :size="88" :percent="percent" title="storage" />
+          <MultCircularProcessBar :size="88" :percent="fakedata" />
         </div>
       </div>
 

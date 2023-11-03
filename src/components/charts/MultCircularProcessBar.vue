@@ -23,7 +23,12 @@ defineProps({
 <template>
   <div
     class="relative p-0 m-0 flex justify-center items-center"
-    :style="{ width: size + 'px', height: size + 'px' }"
+    :style="{
+      width: size + 'px',
+      height: size + 'px',
+      minWidth: size + 'px',
+      minHeight: size + 'px'
+    }"
   >
     <CircularProcessBar
       class="absolute top-0 bottom-0 left-0 right-0 m-auto"
