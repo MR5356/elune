@@ -80,7 +80,7 @@ async function onSubmitSetting() {
 <template>
   <el-container class="w-full">
     <el-header
-      class="bg-white flex justify-between items-center shadow-md shadow-slate-100 sticky top-0 z-[999] select-none"
+      class="bg-inherit flex justify-between items-center shadow-md shadow-slate-100 sticky top-0 z-[999] select-none"
     >
       <div class="flex gap-2 items-center font-bold cursor-pointer" @click="router.push('/')">
         <img :src="setting.logo" alt="logo" class="w-10 h-10" />

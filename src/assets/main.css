@@ -21,10 +21,8 @@ html, body {
     box-sizing: border-box;
 }
 
-.jump {
-    &:hover {
-        animation: jump 0.5s;
-    }
+.jump:hover {
+    animation: jump 0.5s;
 }
 
 @keyframes jump {

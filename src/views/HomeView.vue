@@ -177,7 +177,7 @@ const openPage = (item) => {
 <template>
   <div class="flex w-full justify-center">
     <div
-      class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 2xl:w-[80%] xl:w-[80%] lg:w-[80%] md:w-full sm:w-full"
+      class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 2xl:w-[80%] xl:w-[80%] lg:w-[80%] md:w-full w-full"
     >
       <template v-for="item in navigationData">
         <el-popover
