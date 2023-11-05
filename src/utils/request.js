@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+import { ElLoading } from 'element-plus'
 
 const service = axios.create({
   baseURL: '/api/v1',
@@ -14,6 +15,7 @@ service.interceptors.request.use(
   (error) => {
     console.log(error)
     ElMessage.error(error)
+    ElLoading.service().close()
     return Promise.reject(error)
   }
 )
@@ -28,6 +30,7 @@ service.interceptors.response.use(
     if (res.code !== 0) {
       ElMessage.error(res.message)
       console.log('请求出错', res.message)
+      ElLoading.service().close()
       return Promise.reject(new Error(res.message || '请求出错'))
     } else {
       return res.data
@@ -36,6 +39,7 @@ service.interceptors.response.use(
   (error) => {
     console.log(error)
     ElMessage.error(error)
+    ElLoading.service().close()
     return Promise.reject(error)
   }
 )

@@ -2,9 +2,33 @@
 <script setup>
 import { ref } from 'vue'
 import { RouterView } from 'vue-router'
-import { getConfig, setConfig } from '@/request/app'
+import { getConfig, login, setConfig } from '@/request/app'
 import { ElLoading } from 'element-plus'
 import router from '@/router'
+import LoginForm from '@/components/system/LoginForm.vue'
+import { getUserInfo, logout, getNeedRefreshToken, refreshToken } from '@/request/app'
+import { useSystemStore } from '@/stores/system'
+import moment from 'moment'
+import zhCn from 'moment/locale/zh-cn'
+moment.locale('zh-cn')
+
+const { userInfo } = useSystemStore()
+
+getUserInfo().then((res) => {
+  userInfo.value = res
+  if (res) {
+    getNeedRefreshToken().then((res) => {
+      if (res && res.need) {
+        refreshToken()
+      }
+    })
+  }
+})
+
+async function onLogout() {
+  await logout()
+  history.go(0)
+}
 
 const setting = ref({
   title: '',
@@ -100,19 +124,52 @@ async function onSubmitSetting() {
         </el-menu>
       </div>
       <div class="flex gap-2 items-center">
-        <el-popover ref="popover" :width="100" trigger="hover" class="p-0" placement="bottom-end">
+        <el-popover
+          ref="popover"
+          :width="100"
+          trigger="hover"
+          class="p-0"
+          placement="bottom-end"
+          v-if="userInfo.value"
+        >
           <template #reference>
             <img
               src="@/assets/avatar.svg"
               alt="avatar"
               class="w-10 h-10 rounded-full jump"
-              title="管理员"
+              :title="userInfo.value.username"
             />
           </template>
           <template #default>
-            <div class="flex flex-col gap-0">
-              <div class="w-full hover:bg-gray-50 p-2 rounded" @click="onOpenDialog">系统设置</div>
+            <div class="flex flex-col gap-2">
+              <div>
+                <div class="w-full text-center font-bold">{{ userInfo.value.username }}</div>
+                <div class="w-full text-center text-xs text-gray-400">
+                  ({{ moment(userInfo.value.createdAt).fromNow() }})
+                </div>
+              </div>
+              <div>
+                <div class="w-full hover:bg-gray-50 p-2 rounded" @click="onOpenDialog">
+                  系统设置
+                </div>
+                <div class="w-full hover:bg-gray-50 p-2 rounded" @click="onLogout">登出</div>
+              </div>
             </div>
+          </template>
+        </el-popover>
+        <el-popover
+          ref="popover"
+          :width="280"
+          trigger="hover"
+          class="p-10"
+          placement="bottom-end"
+          v-else
+        >
+          <template #reference>
+            <div class="cursor-pointer rounded px-2 py-1 text-sm">登录</div>
+          </template>
+          <template #default>
+            <LoginForm />
           </template>
         </el-popover>
       </div>

@@ -3,6 +3,10 @@ import { ref } from 'vue'
 import { getNavigation, addNavigation, updateNavigation, deleteNavigation } from '@/request/home'
 import { PlusCross } from '@icon-park/vue-next'
 import { ElLoading } from 'element-plus'
+import { useSystemStore } from '@/stores/system'
+
+const { userInfo } = useSystemStore()
+
 //
 // const keyWords = ref('')
 // function handleKeyEvent(event) {
@@ -222,7 +226,7 @@ const openPage = (item) => {
       </template>
     </div>
     <!-- 新增、修改 -->
-    <div class="absolute bottom-4 right-4 jump">
+    <div class="absolute bottom-4 right-4 jump" v-if="userInfo.value">
       <el-button color="rgb(203 213 225)" @click="addNav" size="large" :icon="PlusCross" circle />
     </div>
     <el-dialog
