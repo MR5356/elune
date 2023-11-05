@@ -180,6 +180,10 @@ const openPage = (item) => {
 
 <template>
   <div class="flex w-full justify-center">
+    <!-- 新增、修改 -->
+    <div class="fixed bottom-4 right-4 jump" v-if="userInfo.value">
+      <el-button color="rgb(203 213 225)" @click="addNav" size="large" :icon="PlusCross" circle />
+    </div>
     <div
       class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 2xl:w-[80%] xl:w-[80%] lg:w-[80%] md:w-full w-full"
     >
@@ -197,7 +201,12 @@ const openPage = (item) => {
               class="bg-slate-50 p-4 flex gap-4 w-full rounded-lg items-center hover:bg-slate-100 cursor-pointer hover:shadow-lg min-w-[220px] jump"
               @click="openPage(item)"
             >
-              <img :src="item.logo" alt="logo" class="w-14 h-14 rounded" />
+              <img
+                :src="item.logo"
+                alt="logo"
+                class="w-14 h-14 rounded"
+                onerror="this.src='/logo.svg'"
+              />
               <div class="flex flex-col gap-1">
                 <div class="flex gap-2 items-center">
                   <div class="text-sm font-medium whitespace-nowrap" v-html="item.title"></div>
@@ -224,10 +233,6 @@ const openPage = (item) => {
           </template>
         </el-popover>
       </template>
-    </div>
-    <!-- 新增、修改 -->
-    <div class="absolute bottom-4 right-4 jump" v-if="userInfo.value">
-      <el-button color="rgb(203 213 225)" @click="addNav" size="large" :icon="PlusCross" circle />
     </div>
     <el-dialog
       v-model="dialogFormVisible"

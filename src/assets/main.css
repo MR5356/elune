@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 html, body {
-    background: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255, 0.95)), url('https://www.dmoe.cc/random.php') no-repeat;
+    /*background: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255, 0.95)), url('https://www.dmoe.cc/random.php') no-repeat;*/
+    background: white;
 }
 
 .border-style-1 {

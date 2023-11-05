@@ -111,7 +111,7 @@ async function onSubmitSetting() {
 <template>
   <el-container class="w-full">
     <el-header
-      class="bg-inherit flex justify-between items-center shadow-md shadow-slate-100 sticky top-0 z-[999] select-none"
+      class="bg-white flex justify-between items-center shadow-md shadow-slate-100 sticky top-0 z-[999] select-none"
     >
       <div class="flex gap-2 items-center font-bold cursor-pointer" @click="router.push('/')">
         <img :src="setting.logo" alt="logo" class="w-10 h-10" />
@@ -205,7 +205,7 @@ async function onSubmitSetting() {
     <el-main>
       <RouterView />
     </el-main>
-    <el-footer class="flex flex-col gap-1 justify-center items-center text-xs">
+    <el-footer class="flex flex-col gap-1 justify-center items-center text-xs m-4">
       <div v-if="setting.copyright">{{ setting.copyright }}</div>
       <div class="flex gap-2">
         <a
