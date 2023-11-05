@@ -36,7 +36,8 @@ const setting = ref({
   copyright: 'Copyright © TOODOFUN',
   beian: '',
   beianMiit: '',
-  favicon: '/favicon.ico'
+  favicon: '/favicon.ico',
+  menus: []
 })
 
 function initSetting() {
@@ -49,28 +50,34 @@ function initSetting() {
         if (key === 'favicon') {
           document.querySelector('link[rel="icon"]').href = res
         }
-        setting.value[key] = res
+        if (key === 'menus') {
+          setting.value[key] = JSON.parse(res)
+        } else {
+          setting.value[key] = res
+        }
       }
     })
   }
 }
 
 initSetting()
-
-const menus = ref([
-  {
-    title: '首页',
-    path: '/'
-  },
-  {
-    title: '博客',
-    path: '/blog'
-  },
-  {
-    title: '关于',
-    path: '/about'
-  }
-])
+//
+// const menus = ref([
+//   {
+//     title: '首页',
+//     path: '/'
+//   },
+//   {
+//     title: '博客',
+//     path: '/blog'
+//   },
+//   {
+//     title: '关于',
+//     path: '/about'
+//   }
+// ])
+//
+// console.log(JSON.stringify(menus.value))
 
 // setConfig('test', '123').then((res) => {
 //   console.log(res)
@@ -117,8 +124,9 @@ async function onSubmitSetting() {
           router
           mode="horizontal"
           :ellipsis="false"
+          v-if="setting.menus.length > 0"
         >
-          <el-menu-item v-for="menu in menus" :key="menu" :index="menu.path">{{
+          <el-menu-item v-for="menu in setting.menus" :key="menu" :index="menu.path">{{
             menu.title
           }}</el-menu-item>
         </el-menu>
@@ -198,7 +206,7 @@ async function onSubmitSetting() {
       <RouterView />
     </el-main>
     <el-footer class="flex flex-col gap-1 justify-center items-center text-xs">
-      <div>{{ setting.copyright }}</div>
+      <div v-if="setting.copyright">{{ setting.copyright }}</div>
       <div class="flex gap-2">
         <a
           v-if="setting.beianMiit"
