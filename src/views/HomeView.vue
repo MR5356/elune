@@ -39,7 +39,7 @@ function filterNavigationData(type, key) {
   // 按照Order排序
   navigationData.value = navigationData.value.sort((a, b) => b.order - a.order)
 
-  categories.value = {}
+  // categories.value = {}
   navigationData.value.forEach((item) => {
     if (item.parent === 0) {
       categories.value[item.id] = item
@@ -136,6 +136,7 @@ function deleteNav(id) {
   deleteNavigation(id).then(() => {
     initNavigation()
     loading.close()
+    history.go(0)
   })
 }
 
