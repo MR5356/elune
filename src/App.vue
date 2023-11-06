@@ -82,30 +82,6 @@ initSetting()
 // setConfig('test', '123').then((res) => {
 //   console.log(res)
 // })
-
-const dialogFormVisible = ref(false)
-const newSetting = ref({})
-
-function onOpenDialog() {
-  dialogFormVisible.value = true
-  newSetting.value = JSON.parse(JSON.stringify(setting.value))
-}
-
-async function onSubmitSetting() {
-  const loading = ElLoading.service({
-    lock: true,
-    text: '正在更新',
-    background: 'rgba(0, 0, 0, 0.7)'
-  })
-  for (var key in newSetting.value) {
-    if (newSetting.value[key] !== setting.value[key]) {
-      await setConfig(key, newSetting.value[key])
-      dialogFormVisible.value = false
-      initSetting()
-      loading.close()
-    }
-  }
-}
 </script>
 
 <template>
@@ -157,10 +133,10 @@ async function onSubmitSetting() {
                 </div>
               </div>
               <div>
-                <div class="w-full hover:bg-gray-50 p-2 rounded" @click="onOpenDialog">
+                <div class="w-full hover:bg-gray-50 p-2 rounded" @click="router.push('/setting')">
                   系统设置
                 </div>
-                <div class="w-full hover:bg-gray-50 p-2 rounded" @click="onLogout">登出</div>
+                <div class="w-full hover:bg-gray-50 p-2 rounded" @click="onLogout">退出登录</div>
               </div>
             </div>
           </template>
@@ -181,26 +157,6 @@ async function onSubmitSetting() {
           </template>
         </el-popover>
       </div>
-      <el-dialog
-        v-model="dialogFormVisible"
-        :close-on-click-modal="false"
-        :close-on-press-escape="false"
-        :show-close="false"
-        class="max-w-[600px] min-w-[420px]"
-        title="系统设置"
-      >
-        <el-form :model="newSetting">
-          <el-form-item v-for="(value, key) in newSetting" :key="key" :label="key">
-            <el-input v-model="newSetting[key]" autocomplete="off" />
-          </el-form-item>
-        </el-form>
-        <template #footer>
-          <span>
-            <el-button @click="dialogFormVisible = false">取消</el-button>
-            <el-button type="primary" @click="onSubmitSetting">提交</el-button>
-          </span>
-        </template>
-      </el-dialog>
     </el-header>
     <el-main>
       <RouterView />

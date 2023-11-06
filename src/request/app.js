@@ -27,3 +27,7 @@ export function getNeedRefreshToken() {
 export function refreshToken() {
   return service.put('/user/token/refresh')
 }
+
+export function getUserRole() {
+  return service.get('/user/role')
+}
