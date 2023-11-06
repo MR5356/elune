@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-import { getConfig, setConfig, getUserRole } from '@/request/app'
-import { ElLoading } from 'element-plus'
+import { getConfig, setConfig, getUserRole, updatePassword } from '@/request/app'
+import { ElLoading, ElMessage } from 'element-plus'
 import router from '@/router'
 
 getUserRole().then((res) => {
@@ -9,6 +9,10 @@ getUserRole().then((res) => {
     router.push('/')
   }
 })
+
+const password = ref('')
+const comfirmPassword = ref('')
+const oldPassword = ref('')
 
 const setting = ref([
   {
@@ -88,6 +92,7 @@ async function onSubmitSetting() {
     text: '正在更新',
     background: 'rgba(0, 0, 0, 0.7)'
   })
+  // 更新系统设置
   for (const index in newSetting.value) {
     let item = newSetting.value[index]
     let itemOld = setting.value.find((it) => it.id === item.id)
@@ -95,6 +100,26 @@ async function onSubmitSetting() {
       await setConfig(item.id, item.value)
     }
   }
+  loading.close()
+  history.go(0)
+}
+
+async function onSubmitUser() {
+  const loading = ElLoading.service({
+    lock: true,
+    text: '正在更新',
+    background: 'rgba(0, 0, 0, 0.7)'
+  })
+  // 更新用户信息
+  if (password.value !== comfirmPassword.value) {
+    ElMessage.error({
+      message: '两次密码不一致'
+    })
+    loading.close()
+    return
+  }
+  await updatePassword({ password: password.value, oldPassword: oldPassword.value })
+  ElMessage.success('密码修改成功')
   loading.close()
   history.go(0)
 }
@@ -114,12 +139,23 @@ async function onSubmitSetting() {
             </div>
           </el-form-item>
         </el-form>
+        <el-button color="" @click="onSubmitSetting">保存</el-button>
       </div>
-      <!--      <div>-->
-      <!--        <div class="text-sm font-bold border-l-2 pl-2 border-gray-600">系统设置</div>-->
-      <!--      </div>-->
-
-      <el-button color="" @click="onSubmitSetting">保存</el-button>
+      <div>
+        <div class="text-sm font-bold border-l-2 pl-2 border-gray-600">用户设置</div>
+        <el-form :model="newSetting" class="my-4" label-position="top">
+          <el-form-item label="原密码">
+            <el-input v-model="oldPassword" type="password" autocomplete="new-password" />
+          </el-form-item>
+          <el-form-item label="新密码">
+            <el-input v-model="password" type="password" autocomplete="new-password" />
+          </el-form-item>
+          <el-form-item label="确认密码">
+            <el-input v-model="comfirmPassword" type="password" autocomplete="new-password" />
+          </el-form-item>
+        </el-form>
+        <el-button color="" @click="onSubmitUser">保存</el-button>
+      </div>
     </div>
   </div>
 </template>

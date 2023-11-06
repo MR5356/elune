@@ -31,3 +31,7 @@ export function refreshToken() {
 export function getUserRole() {
   return service.get('/user/role')
 }
+
+export function updatePassword(data) {
+  return service.put('/user/password', data)
+}
