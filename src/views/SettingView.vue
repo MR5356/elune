@@ -11,7 +11,7 @@ getUserRole().then((res) => {
 })
 
 const password = ref('')
-const comfirmPassword = ref('')
+const confirmPassword = ref('')
 const oldPassword = ref('')
 
 const setting = ref([
@@ -111,7 +111,7 @@ async function onSubmitUser() {
     background: 'rgba(0, 0, 0, 0.7)'
   })
   // 更新用户信息
-  if (password.value !== comfirmPassword.value) {
+  if (password.value !== confirmPassword.value) {
     ElMessage.error({
       message: '两次密码不一致'
     })
@@ -151,7 +151,7 @@ async function onSubmitUser() {
             <el-input v-model="password" type="password" autocomplete="new-password" />
           </el-form-item>
           <el-form-item label="确认密码">
-            <el-input v-model="comfirmPassword" type="password" autocomplete="new-password" />
+            <el-input v-model="confirmPassword" type="password" autocomplete="new-password" />
           </el-form-item>
         </el-form>
         <el-button color="" @click="onSubmitUser">保存</el-button>
