@@ -261,13 +261,13 @@ const openPage = (item) => {
             <template #default>
               <div class="flex flex-col gap-0 text-sm">
                 <div
-                  class="w-full hover:bg-gray-50 p-2 rounded cursor-pointer"
+                  class="w-full hover:bg-gray-50 p-1.5 rounded cursor-pointer"
                   @click="copyText(item.href)"
                 >
                   复制链接地址
                 </div>
                 <div
-                  class="w-full hover:bg-gray-50 p-2 rounded cursor-pointer"
+                  class="w-full hover:bg-gray-50 p-1.5 rounded cursor-pointer"
                   @click="copyText(item.logo)"
                 >
                   复制图标地址
@@ -276,13 +276,13 @@ const openPage = (item) => {
                 <div class="border-b-[1px] border-gray-300 my-1"></div>
 
                 <div
-                  class="w-full hover:bg-gray-50 p-2 rounded cursor-pointer"
+                  class="w-full hover:bg-gray-50 p-1.5 rounded cursor-pointer"
                   @click="updateNav(item)"
                 >
                   编辑菜单
                 </div>
                 <div
-                  class="w-full hover:bg-gray-50 p-2 rounded cursor-pointer"
+                  class="w-full hover:bg-gray-50 p-1.5 rounded cursor-pointer"
                   @click="deleteNav(item.id)"
                 >
                   删除菜单
