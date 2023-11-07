@@ -1,5 +1,6 @@
 <script setup>
 import { Like, Dislike, ShareOne } from '@icon-park/vue-next'
+import router from '@/router'
 </script>
 
 <template>
@@ -9,6 +10,7 @@ import { Like, Dislike, ShareOne } from '@icon-park/vue-next'
         <div v-for="i in 3" :key="i">
           <div
             class="p-4 flex gap-4 hover:bg-gray-50 border-b-[1px] border-gray-100 cursor-pointer jump"
+            @click="router.push('/blog/' + i)"
           >
             <el-image
               style="width: 192px; min-width: 192px; max-width: 192px; height: 108px"
@@ -52,6 +54,7 @@ import { Like, Dislike, ShareOne } from '@icon-park/vue-next'
               v-for="i in 3"
               :key="i"
               class="flex gap-2 hover:bg-gray-50 border-b-[1px] border-gray-100 items-center p-2 cursor-pointer jump"
+              @click="router.push('/blog/' + i)"
             >
               <el-image
                 style="width: 66px; min-width: 66px; max-width: 66px; height: 37px"
