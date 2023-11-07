@@ -260,19 +260,31 @@ const openPage = (item) => {
             </template>
             <template #default>
               <div class="flex flex-col gap-0 text-sm">
-                <div class="w-full hover:bg-gray-50 p-2 rounded" @click="copyText(item.href)">
+                <div
+                  class="w-full hover:bg-gray-50 p-2 rounded cursor-pointer"
+                  @click="copyText(item.href)"
+                >
                   复制链接地址
                 </div>
-                <div class="w-full hover:bg-gray-50 p-2 rounded" @click="copyText(item.logo)">
+                <div
+                  class="w-full hover:bg-gray-50 p-2 rounded cursor-pointer"
+                  @click="copyText(item.logo)"
+                >
                   复制图标地址
                 </div>
 
                 <div class="border-b-[1px] border-gray-300 my-1"></div>
 
-                <div class="w-full hover:bg-gray-50 p-2 rounded" @click="updateNav(item)">
+                <div
+                  class="w-full hover:bg-gray-50 p-2 rounded cursor-pointer"
+                  @click="updateNav(item)"
+                >
                   编辑菜单
                 </div>
-                <div class="w-full hover:bg-gray-50 p-2 rounded" @click="deleteNav(item.id)">
+                <div
+                  class="w-full hover:bg-gray-50 p-2 rounded cursor-pointer"
+                  @click="deleteNav(item.id)"
+                >
                   删除菜单
                 </div>
               </div>
