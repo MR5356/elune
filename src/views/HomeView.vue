@@ -2,8 +2,26 @@
 import { ref } from 'vue'
 import { getNavigation, addNavigation, updateNavigation, deleteNavigation } from '@/request/home'
 import { PlusCross } from '@icon-park/vue-next'
-import { ElLoading } from 'element-plus'
+import { ElLoading, ElMessage } from 'element-plus'
 import { useSystemStore } from '@/stores/system'
+import { useClipboard } from '@vueuse/core'
+
+const { copy, isSupported } = useClipboard()
+
+function copyText(text) {
+  if (!isSupported.value) {
+    ElMessage({
+      message: '浏览器不支持复制',
+      type: 'error'
+    })
+    return
+  }
+  copy(text)
+  ElMessage({
+    message: '复制成功',
+    type: 'success'
+  })
+}
 
 const { userInfo } = useSystemStore()
 
@@ -241,10 +259,21 @@ const openPage = (item) => {
               </div>
             </template>
             <template #default>
-              <div class="flex flex-col gap-0">
-                <div class="w-full hover:bg-gray-50 p-2 rounded" @click="updateNav(item)">修改</div>
+              <div class="flex flex-col gap-0 text-sm">
+                <div class="w-full hover:bg-gray-50 p-2 rounded" @click="copyText(item.href)">
+                  复制链接地址
+                </div>
+                <div class="w-full hover:bg-gray-50 p-2 rounded" @click="copyText(item.logo)">
+                  复制图标地址
+                </div>
+
+                <div class="border-b-[1px] border-gray-300 my-1"></div>
+
+                <div class="w-full hover:bg-gray-50 p-2 rounded" @click="updateNav(item)">
+                  编辑菜单
+                </div>
                 <div class="w-full hover:bg-gray-50 p-2 rounded" @click="deleteNav(item.id)">
-                  删除
+                  删除菜单
                 </div>
               </div>
             </template>
