@@ -77,6 +77,11 @@ getBlogDetail(params.id).then((res) => {
   }
 }
 
+.ordered-list li + li,
+.unordered-list li + li {
+  margin-top: 0.5rem;
+}
+
 .unordered-list li {
   list-style-type: disc;
   list-style-position: inside;
