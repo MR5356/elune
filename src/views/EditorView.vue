@@ -91,6 +91,7 @@ onMounted(() => {
   &::after {
     content: '发布';
     font-size: small;
+    white-space: nowrap;
     display: flex;
     align-items: center;
     position: absolute;
