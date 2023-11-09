@@ -133,10 +133,15 @@ initSetting()
                 </div>
               </div>
               <div>
-                <div class="w-full hover:bg-gray-50 p-2 rounded" @click="router.push('/setting')">
+                <div
+                  class="w-full hover:bg-gray-50 p-2 rounded cursor-pointer"
+                  @click="router.push('/setting')"
+                >
                   系统设置
                 </div>
-                <div class="w-full hover:bg-gray-50 p-2 rounded" @click="onLogout">退出登录</div>
+                <div class="w-full hover:bg-gray-50 p-2 rounded cursor-pointer" @click="onLogout">
+                  退出登录
+                </div>
               </div>
             </div>
           </template>
