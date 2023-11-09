@@ -21,6 +21,7 @@
     "numeral": "^2.0.6",
     "pinia": "^2.1.7",
     "uuid": "^9.0.1",
+    "vditor": "^3.9.6",
     "video.js": "^8.6.1",
     "videojs-contrib-hls": "^5.15.0",
     "vue": "^3.3.4",

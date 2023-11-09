@@ -1,23 +1,25 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { Like, Eyes } from '@icon-park/vue-next'
 import { getBlogDetail } from '@/request/blog'
 import numeral from 'numeral'
 import moment from 'moment'
-import { markdown2html } from '@/utils/markdown'
+import { Eyes, Like } from '@icon-park/vue-next'
+import VditorPreview from 'vditor/dist/method.min'
+import 'vditor/dist/index.css'
 
-// 获取blogID
 const { params } = useRoute()
-
 const blog = ref({})
-getBlogDetail(params.id).then((res) => {
-  res.readTime = Math.ceil(res.content.length / 400)
 
-  res.content = markdown2html(res.content)
-  res.likes = numeral(res.likes).format('0.0[000]a')
-  res.reads = numeral(res.reads).format('0.0[000]a')
-  blog.value = res
+onMounted(() => {
+  getBlogDetail(params.id).then((res) => {
+    res.readTime = Math.ceil(res.content.length / 400)
+    res.likes = numeral(res.likes).format('0.0[000]a')
+    res.reads = numeral(res.reads).format('0.0[000]a')
+    blog.value = res
+
+    VditorPreview.preview(document.getElementById('reader'), res.content, {})
+  })
 })
 </script>
 
@@ -50,7 +52,7 @@ getBlogDetail(params.id).then((res) => {
           </div>
         </div>
       </div>
-      <div v-html="blog.content"></div>
+      <div id="reader" class="w-full"></div>
       <div class="flex gap-2 text-gray-500 text-sm">
         <div>标签：</div>
         <div v-for="item in blog.categories" :key="item">
@@ -62,38 +64,16 @@ getBlogDetail(params.id).then((res) => {
 </template>
 
 <style scoped lang="scss">
-:deep(.ordered-list) li {
-  list-style-type: decimal;
-  list-style-position: inside;
-  & li {
-    list-style-type: lower-alpha;
-    list-style-position: inside;
-    padding-left: 1rem;
-    & li {
-      list-style-type: lower-roman;
-      list-style-position: inside;
-      padding-left: 1rem;
-    }
+:deep(.vditor-toolbar),
+:deep(.vditor-content),
+:deep(.vditor),
+#editor {
+  border: none !important;
+  &:hover {
+    background: white;
   }
 }
-
-:deep(.ordered-list) li + li,
-:deep(.unordered-list) li + li {
-  margin-top: 0.5rem;
-}
-
-:deep(.unordered-list) li {
-  list-style-type: disc;
-  list-style-position: inside;
-  & li {
-    list-style-type: circle;
-    list-style-position: inside;
-    padding-left: 1rem;
-    & li {
-      list-style-type: square;
-      list-style-position: inside;
-      padding-left: 1rem;
-    }
-  }
+:deep(.vditor-toolbar) {
+  display: none;
 }
 </style>
