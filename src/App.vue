@@ -135,6 +135,13 @@ initSetting()
               <div>
                 <div
                   class="w-full hover:bg-gray-50 p-2 rounded cursor-pointer"
+                  @click="router.push('/blog/editor/new')"
+                >
+                  写文章
+                </div>
+                <div class="border-b-[1px] border-gray-300 my-1"></div>
+                <div
+                  class="w-full hover:bg-gray-50 p-2 rounded cursor-pointer"
                   @click="router.push('/setting')"
                 >
                   系统设置
