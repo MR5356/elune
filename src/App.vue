@@ -36,9 +36,26 @@ const setting = ref({
   copyright: 'Copyright © TOODOFUN',
   beian: '',
   beianMiit: '',
-  favicon: '/favicon.ico',
-  menus: []
+  favicon: '/favicon.ico'
+  // menus: []
 })
+
+const menus = ref([
+  // {
+  //   title: '首页',
+  //   path: '/'
+  // },
+  // {
+  //   title: '博客',
+  //   path: '/blog'
+  // },
+  // {
+  //   title: '关于',
+  //   path: '/about'
+  // }
+])
+
+// console.log(JSON.stringify(menus.value))
 
 function initSetting() {
   for (const key in setting.value) {
@@ -58,27 +75,10 @@ function initSetting() {
       }
     })
   }
+  setting.value.menus = menus.value
 }
 
 initSetting()
-//
-// const menus = ref([
-//   {
-//     title: '首页',
-//     path: '/'
-//   },
-//   {
-//     title: '博客',
-//     path: '/blog'
-//   },
-//   {
-//     title: '关于',
-//     path: '/about'
-//   }
-// ])
-//
-// console.log(JSON.stringify(menus.value))
-
 // setConfig('test', '123').then((res) => {
 //   console.log(res)
 // })
@@ -87,7 +87,7 @@ initSetting()
 <template>
   <el-container class="w-full">
     <el-header
-      class="bg-white flex justify-between items-center shadow-md shadow-slate-100 sticky top-0 z-[999] select-none"
+      class="bg-white flex justify-between items-center shadow-none shadow-slate-100 sticky top-0 z-[999] select-none"
     >
       <div class="flex gap-2 items-center font-bold cursor-pointer" @click="router.push('/')">
         <img :src="setting.logo" alt="logo" class="w-10 h-10" />
@@ -133,13 +133,13 @@ initSetting()
                 </div>
               </div>
               <div>
-                <div
-                  class="w-full hover:bg-gray-50 p-2 rounded cursor-pointer"
-                  @click="router.push('/blog/editor/new')"
-                >
-                  写文章
-                </div>
-                <div class="border-b-[1px] border-gray-300 my-1"></div>
+                <!--                <div-->
+                <!--                  class="w-full hover:bg-gray-50 p-2 rounded cursor-pointer"-->
+                <!--                  @click="router.push('/blog/editor/new')"-->
+                <!--                >-->
+                <!--                  写文章-->
+                <!--                </div>-->
+                <!--                <div class="border-b-[1px] border-gray-300 my-1"></div>-->
                 <div
                   class="w-full hover:bg-gray-50 p-2 rounded cursor-pointer"
                   @click="router.push('/setting')"
@@ -199,6 +199,9 @@ initSetting()
 </template>
 
 <style scoped lang="scss">
+.el-main {
+  padding: 0;
+}
 .el-footer {
   height: 48px;
 }
