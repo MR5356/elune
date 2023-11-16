@@ -5,13 +5,29 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
-      redirect: '/nav'
+      redirect: '/basic'
     },
     {
-      path: '/nav',
-      name: 'nav',
-      component: () => import('../views/NavView.vue')
+      path: '/basic',
+      name: 'basic',
+      component: () => import('../layouts/BasicLayout.vue'),
+      children: [
+        {
+          path: '',
+          name: 'home',
+          redirect: '/basic/nav'
+        },
+        {
+          path: 'nav',
+          name: 'nav',
+          component: () => import('../views/NavView.vue')
+        }
+      ]
+    },
+    {
+      path: '/devops',
+      name: 'devops',
+      component: () => import('../layouts/FrameworkLayout.vue')
     },
     // {
     //   path: '/player',

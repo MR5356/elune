@@ -9,18 +9,44 @@ html, body {
 
 .border-style-1 {
     width: 100%;
-    height: 100%; color:white; padding: 1rem;
-    box-shadow: 0 0 3rem rgba(100,200,255,.5) inset;
-    background: rgba(0,0,0,0);
+    height: 100%;
+    color: white;
+    padding: 1rem;
+    box-shadow: 0 0 3rem rgba(100, 200, 255, .5) inset;
+    background: rgba(0, 0, 0, 0);
     box-sizing: border-box;
 }
 
 .border-style-2 {
-    height: 100%; width: 100%; color:rgba(60,240,250,1); font-size: 1.5rem; padding:1rem;
-    background: linear-gradient(180deg,rgba(0,180,220,0.3),rgba(0,180,220,0.1),rgba(0,180,220,0.1),rgba(0,180,220,0.3));
-    box-shadow: 0 0 2rem rgba(0,180,220,.1) inset;
+    height: 100%;
+    width: 100%;
+    color: rgba(60, 240, 250, 1);
+    font-size: 1.5rem;
+    padding: 1rem;
+    background: linear-gradient(180deg, rgba(0, 180, 220, 0.3), rgba(0, 180, 220, 0.1), rgba(0, 180, 220, 0.1), rgba(0, 180, 220, 0.3));
+    box-shadow: 0 0 2rem rgba(0, 180, 220, .1) inset;
     box-sizing: border-box;
 }
+
+/*// 全局滚动条修改*/
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: #f2f5f9;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
 
 .jump:hover {
     animation: jump 0.5s;
