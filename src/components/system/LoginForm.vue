@@ -29,7 +29,7 @@ async function onSubmit() {
         <el-input
           placeholder="password"
           @keydown.enter="onSubmit"
-          autocomplete="new-password"
+          autocomplete="password"
           type="password"
           v-model="userForm.password"
         />
