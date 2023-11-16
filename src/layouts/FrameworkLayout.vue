@@ -132,7 +132,7 @@ setting.value.menus = [
               <UserInfo />
             </div>
           </el-header>
-          <el-main class="bg-white relative" style="height: calc(100% - 60px)">
+          <el-main class="relative" style="height: calc(100% - 60px)">
             <RouterView />
           </el-main>
         </el-col>
