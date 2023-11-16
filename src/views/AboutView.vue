@@ -1,6 +1,6 @@
 <template>
-  <div class="h-full overflow-y-auto box-border">
-    <div class="rounded-lg bg-blue-50 p-4 m-4" v-for="i in 10" :key="i">
+  <div class="absolute top-0 bottom-0 left-0 right-0 overflow-y-auto box-border p-4">
+    <div class="rounded-lg bg-blue-50 p-4" v-for="i in 10" :key="i">
       <div class="flex flex-col gap-8 py-4">
         <div class="flex flex-col gap-4">
           <div class="flex gap-2 text-sm font-bold items-center">

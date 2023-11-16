@@ -8,7 +8,10 @@ import { ref } from 'vue'
 const setting = ref({
   title: '',
   logo: '/logo.svg',
-  favicon: '/favicon.ico'
+  favicon: '/favicon.ico',
+  copyright: '',
+  beian: '',
+  beianMiit: ''
 })
 initSetting(setting)
 setting.value.menus = [
@@ -53,20 +56,18 @@ setting.value.menus = [
 
 <template>
   <el-container class="fixed top-0 bottom-0 left-0 right-0 overflow-hidden bg">
-    <el-header
-      class="bg-white flex justify-between items-center shadow-none shadow-slate-100 border-b-[1px] border-slate-200 sticky top-0 z-[999] select-none"
-    >
-      <div class="flex gap-2 items-center font-bold cursor-pointer" @click="router.push('/')">
-        <img :src="setting.logo" alt="logo" class="w-8 h-8" />
-        <div>{{ setting.title }}</div>
-      </div>
-      <div class="flex gap-2 items-center">
-        <UserInfo />
-      </div>
-    </el-header>
     <el-main class="overflow-hidden">
       <el-row class="h-full w-full overflow-hidden">
-        <el-col :span="3" class="border-r-[0px] select-none h-full overflow-y-auto relative">
+        <el-col
+          :span="3"
+          class="border-r-[0px] select-none h-full overflow-y-auto relative flex flex-col"
+        >
+          <div class="w-full flex items-center h-[60px] p-4 sticky top-0 bg-[#eef6ff] z-[999]">
+            <div class="flex gap-2 items-center font-bold cursor-pointer" @click="router.push('/')">
+              <img :src="setting.logo" alt="logo" class="w-8 h-8" />
+              <div>{{ setting.title }}</div>
+            </div>
+          </div>
           <el-menu
             :default-active="$route.path"
             router
@@ -96,9 +97,44 @@ setting.value.menus = [
               </el-menu-item>
             </template>
           </el-menu>
+          <div class="grow" />
+          <div
+            class="w-full flex flex-col gap-1 items-start p-4 sticky bottom-0 text-xs backdrop-blur-md"
+          >
+            <div v-if="setting.copyright">{{ setting.copyright }}</div>
+            <div class="flex flex-col text-[0.7rem]">
+              <a
+                v-if="setting.beianMiit"
+                class="jump"
+                target="_blank"
+                href="http://www.beian.miit.gov.cn/"
+                >{{ setting.beianMiit }}</a
+              >
+              <a
+                v-if="setting.beian"
+                target="_blank"
+                class="jump"
+                :href="`http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=${setting.beian.replace(
+                  /[^\d]/g,
+                  ''
+                )}`"
+                >{{ setting.beian }}</a
+              >
+            </div>
+          </div>
         </el-col>
-        <el-col :span="21" class="bg-white h-full">
-          <RouterView />
+        <el-col :span="21" class="h-full">
+          <el-header
+            class="flex justify-between items-center shadow-sm shadow-slate-100 border-b-[0px] border-slate-200 sticky top-0 z-[999] select-none"
+          >
+            <div />
+            <div class="flex gap-2 items-center">
+              <UserInfo />
+            </div>
+          </el-header>
+          <el-main class="bg-white relative" style="height: calc(100% - 60px)">
+            <RouterView />
+          </el-main>
         </el-col>
       </el-row>
     </el-main>
