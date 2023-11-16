@@ -125,7 +125,7 @@ setting.value.menus = [
         </el-col>
         <el-col :span="21" class="h-full">
           <el-header
-            class="flex justify-between items-center shadow-sm shadow-slate-100 border-b-[0px] border-slate-200 sticky top-0 z-[999] select-none"
+            class="flex justify-between items-center shadow-none shadow-slate-100 border-b-[0px] border-slate-200 sticky top-0 z-[999] select-none"
           >
             <div />
             <div class="flex gap-2 items-center">
