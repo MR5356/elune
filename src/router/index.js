@@ -5,17 +5,17 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/basic'
+      redirect: '/public'
     },
     {
-      path: '/basic',
-      name: 'basic',
+      path: '/public',
+      name: 'public',
       component: () => import('../layouts/BasicLayout.vue'),
       children: [
         {
           path: '',
           name: 'home',
-          redirect: '/basic/nav'
+          redirect: '/public/nav'
         },
         {
           path: 'nav',
@@ -27,7 +27,14 @@ const router = createRouter({
     {
       path: '/devops',
       name: 'devops',
-      component: () => import('../layouts/FrameworkLayout.vue')
+      component: () => import('../layouts/FrameworkLayout.vue'),
+      children: [
+        {
+          path: 'about',
+          name: 'about',
+          component: () => import('../views/AboutView.vue')
+        }
+      ]
     },
     // {
     //   path: '/player',
@@ -38,7 +45,7 @@ const router = createRouter({
       path: '/setting',
       name: 'setting',
       component: () => import('../views/SettingView.vue')
-    }
+    },
     // {
     //   path: '/blog',
     //   name: 'blog',
@@ -69,6 +76,10 @@ const router = createRouter({
     //   name: 'about',
     //   component: () => import('../views/AboutView.vue')
     // }
+    {
+      path: '/:pathMatch(.*)',
+      redirect: '/'
+    }
   ]
 })
 

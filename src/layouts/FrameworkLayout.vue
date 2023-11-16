@@ -15,7 +15,7 @@ setting.value.menus = [
   {
     title: 'Dashboard',
     icon: `<?xml version="1.0" encoding="UTF-8"?><svg width="22" height="22" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 6H8C6.89543 6 6 6.89543 6 8V18C6 19.1046 6.89543 20 8 20H18C19.1046 20 20 19.1046 20 18V8C20 6.89543 19.1046 6 18 6Z" fill="#6abaf3" stroke="#333" stroke-width="2" stroke-linejoin="round"/><path d="M18 28H8C6.89543 28 6 28.8954 6 30V40C6 41.1046 6.89543 42 8 42H18C19.1046 42 20 41.1046 20 40V30C20 28.8954 19.1046 28 18 28Z" fill="#6abaf3" stroke="#333" stroke-width="2" stroke-linejoin="round"/><path d="M40 6H30C28.8954 6 28 6.89543 28 8V18C28 19.1046 28.8954 20 30 20H40C41.1046 20 42 19.1046 42 18V8C42 6.89543 41.1046 6 40 6Z" fill="#6abaf3" stroke="#333" stroke-width="2" stroke-linejoin="round"/><path d="M40 28H30C28.8954 28 28 28.8954 28 30V40C28 41.1046 28.8954 42 30 42H40C41.1046 42 42 41.1046 42 40V30C42 28.8954 41.1046 28 40 28Z" fill="#6abaf3" stroke="#333" stroke-width="2" stroke-linejoin="round"/></svg>`,
-    path: '/devops'
+    path: '/devops/about'
   },
   {
     title: '备份管理',
@@ -24,7 +24,7 @@ setting.value.menus = [
     children: [
       {
         title: '备份策略',
-        path: '/blog/backup'
+        path: '/devops/about1'
       },
       {
         title: '备份列表',
@@ -52,7 +52,7 @@ setting.value.menus = [
 </script>
 
 <template>
-  <el-container class="fixed top-0 bottom-0 left-0 right-0 overflow-hidden">
+  <el-container class="fixed top-0 bottom-0 left-0 right-0 overflow-hidden bg">
     <el-header
       class="bg-white flex justify-between items-center shadow-none shadow-slate-100 border-b-[1px] border-slate-200 sticky top-0 z-[999] select-none"
     >
@@ -66,7 +66,7 @@ setting.value.menus = [
     </el-header>
     <el-main class="overflow-hidden">
       <el-row class="h-full w-full overflow-hidden">
-        <el-col :span="3" class="border-r-[1px] select-none h-full overflow-y-auto">
+        <el-col :span="3" class="border-r-[0px] select-none h-full overflow-y-auto relative">
           <el-menu
             :default-active="$route.path"
             router
@@ -97,7 +97,7 @@ setting.value.menus = [
             </template>
           </el-menu>
         </el-col>
-        <el-col :span="21">
+        <el-col :span="21" class="bg-white h-full">
           <RouterView />
         </el-col>
       </el-row>
@@ -111,13 +111,20 @@ setting.value.menus = [
 }
 .el-menu {
   border: 0 !important;
+  background: transparent;
+}
+
+:deep(.el-menu--inline) {
+  background: transparent !important;
 }
 
 :deep(.el-sub-menu__title),
 .el-menu-item {
   font-size: 0.9rem;
   height: 48px !important;
+  color: #0a0a0a !important;
   border: 0 !important;
+  background: transparent !important;
   //padding: 0 10px !important;
   &.is-active,
   &:hover {
@@ -129,5 +136,12 @@ setting.value.menus = [
 }
 .el-col {
   padding: 0;
+}
+
+.bg {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.5)),
+    url('/background.svg') no-repeat;
+  background-size: cover;
 }
 </style>

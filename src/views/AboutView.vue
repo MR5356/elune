@@ -1,36 +1,38 @@
 <template>
-  <div class="rounded-lg">
-    <div class="flex flex-col gap-8 py-4">
-      <div class="flex flex-col gap-4">
-        <div class="flex gap-2 text-sm font-bold items-center">
-          <Server theme="outline" size="18" fill="#333" />
-          <div>服务器状态</div>
+  <div class="h-full overflow-y-auto box-border">
+    <div class="rounded-lg bg-blue-50 p-4 m-4" v-for="i in 10" :key="i">
+      <div class="flex flex-col gap-8 py-4">
+        <div class="flex flex-col gap-4">
+          <div class="flex gap-2 text-sm font-bold items-center">
+            <Server theme="outline" size="18" fill="#333" />
+            <div>服务器状态</div>
+          </div>
+          <div class="flex gap-4 justify-items-center">
+            <CircularProcessBar :size="88" :percent="percent" title="cpu" />
+            <CircularProcessBar :size="88" :percent="percent" title="memory" />
+            <CircularProcessBar :size="88" :percent="percent" title="storage" />
+            <MultCircularProcessBar :size="88" :percent="fakedata" />
+          </div>
         </div>
-        <div class="flex gap-4 justify-items-center">
-          <CircularProcessBar :size="88" :percent="percent" title="cpu" />
-          <CircularProcessBar :size="88" :percent="percent" title="memory" />
-          <CircularProcessBar :size="88" :percent="percent" title="storage" />
-          <MultCircularProcessBar :size="88" :percent="fakedata" />
-        </div>
-      </div>
 
-      <div class="flex flex-col gap-4">
-        <div class="flex gap-2 text-sm font-bold items-center">
-          <ApplicationOne theme="outline" size="18" fill="#333" />
-          <div>服务状态</div>
+        <div class="flex flex-col gap-4">
+          <div class="flex gap-2 text-sm font-bold items-center">
+            <ApplicationOne theme="outline" size="18" fill="#333" />
+            <div>服务状态</div>
+          </div>
+          <div class="p-4 rounded-3xl">
+            <CapsuleChart :data="data" />
+          </div>
         </div>
-        <div class="p-4 rounded-3xl">
-          <CapsuleChart :data="data" />
-        </div>
-      </div>
 
-      <div class="flex flex-col gap-4">
-        <div class="flex gap-2 text-sm font-bold items-center">
-          <NetworkDrive theme="outline" size="18" fill="#333" />
-          <div>集群状态</div>
-        </div>
-        <div class="p-4 rounded-3xl">
-          <CapsuleChart :data="data1" />
+        <div class="flex flex-col gap-4">
+          <div class="flex gap-2 text-sm font-bold items-center">
+            <NetworkDrive theme="outline" size="18" fill="#333" />
+            <div>集群状态</div>
+          </div>
+          <div class="p-4 rounded-3xl">
+            <CapsuleChart :data="data1" />
+          </div>
         </div>
       </div>
     </div>
