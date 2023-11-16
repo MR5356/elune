@@ -171,8 +171,19 @@ const openPage = (item) => {
         <el-button color="rgb(203 213 225)" @click="addNav" size="large" :icon="PlusCross" circle />
       </div>
       <!-- 标签 -->
-      <div class="flex gap-2 items-center justify-between my-4 w-full">
-        <div style="max-width: calc(100% - 260px)" class="overflow-auto">
+      <div class="flex flex-col gap-0 items-start justify-center my-4 w-full">
+        <!-- 搜索框 -->
+        <div class="flex justify-end w-full">
+          <el-input
+            v-model="keyWords"
+            autofocus
+            placeholder="点击开始搜索"
+            @keydown.enter="filterNavigationData('search', keyWords)"
+            @update:modelValue="filterNavigationData('search', keyWords)"
+          />
+        </div>
+        <!-- 分类 -->
+        <div style="max-width: calc(100%)" class="overflow-auto">
           <el-menu
             :default-active="selectedCategory"
             background-color="transparent"
@@ -209,16 +220,6 @@ const openPage = (item) => {
               </el-popover></el-menu-item
             >
           </el-menu>
-        </div>
-        <!-- 搜索框 -->
-        <div>
-          <el-input
-            v-model="keyWords"
-            autofocus
-            placeholder="点击开始搜索"
-            @keydown.enter="filterNavigationData('search', keyWords)"
-            @update:modelValue="filterNavigationData('search', keyWords)"
-          />
         </div>
       </div>
       <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-4">
