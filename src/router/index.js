@@ -30,6 +30,21 @@ const router = createRouter({
       component: () => import('../layouts/FrameworkLayout.vue'),
       children: [
         {
+          path: '',
+          name: 'dashboard',
+          component: () => import('../views/DashboardView.vue')
+        },
+        {
+          path: 'apps',
+          name: 'applications',
+          component: () => import('../views/ApplicationView.vue')
+        },
+        {
+          path: 'cluster',
+          name: 'cluster',
+          component: () => import('../views/ClusterView.vue')
+        },
+        {
           path: 'about',
           name: 'about',
           component: () => import('../views/AboutView.vue')

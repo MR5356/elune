@@ -84,7 +84,7 @@ watch(
       :cy="size / 2"
       fill="transparent"
       stroke="#f2f5f9"
-      stroke-opacity="0.1"
+      stroke-opacity="0.5"
       stroke-linecap="round"
       :stroke-width="strokeWidth + 'px'"
       :stroke-dasharray="2 * 3.1416 * (size / 2 - strokeWidth)"
