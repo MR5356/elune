@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { getConfig, setConfig, getUserRole, updatePassword } from '@/request/app'
 import { ElLoading, ElMessage } from 'element-plus'
 import router from '@/router'
+import PanelCard from '@/components/common/PanelCard.vue'
 
 getUserRole().then((res) => {
   if (!res || res.length === 0) {
@@ -56,14 +57,14 @@ const setting = ref([
     value: '/favicon.ico',
     readonly: false,
     isImg: true
-  },
-  {
-    id: 'menus',
-    name: '菜单',
-    value: '',
-    readonly: true,
-    isImg: false
   }
+  // {
+  //   id: 'menus',
+  //   name: '菜单',
+  //   value: '',
+  //   readonly: true,
+  //   isImg: false
+  // }
 ])
 
 async function initSetting() {
@@ -126,12 +127,11 @@ async function onSubmitUser() {
 </script>
 
 <template>
-  <div class="flex w-full justify-center">
-    <div class="flex flex-col 2xl:w-[80%] xl:w-[80%] md:w-full w-full gap-16">
+  <div class="absolute top-0 left-0 right-0 bottom-0 overflow-y-auto rounded-lg z-10 mb-4 pr-4">
+    <div class="flex flex-col w-full gap-4">
       <!-- 设置块 -->
-      <div>
-        <div class="text-sm font-bold border-l-2 pl-2 border-gray-600">网站设置</div>
-        <el-form :model="newSetting" class="my-4" label-position="top">
+      <PanelCard class="bg-white bg-opacity-70" title="网站设置">
+        <el-form :model="newSetting" label-position="top">
           <el-form-item v-for="item in newSetting" :key="item.id" :label="item.name">
             <div class="flex w-full gap-2 items-center">
               <el-input v-model="item.value" :disabled="item.readonly" autocomplete="off" />
@@ -140,10 +140,9 @@ async function onSubmitUser() {
           </el-form-item>
         </el-form>
         <el-button color="" @click="onSubmitSetting">保存</el-button>
-      </div>
-      <div>
-        <div class="text-sm font-bold border-l-2 pl-2 border-gray-600">用户设置</div>
-        <el-form :model="newSetting" class="my-4" label-position="top">
+      </PanelCard>
+      <PanelCard class="bg-white bg-opacity-70" title="修改密码">
+        <el-form :model="newSetting" label-position="top">
           <el-form-item label="原密码">
             <el-input v-model="oldPassword" type="password" autocomplete="new-password" />
           </el-form-item>
@@ -155,21 +154,30 @@ async function onSubmitUser() {
           </el-form-item>
         </el-form>
         <el-button color="" @click="onSubmitUser">保存</el-button>
-      </div>
+      </PanelCard>
     </div>
   </div>
 </template>
 
 <style scoped>
 :deep(.el-form-item__label) {
-  font-size: small;
-  color: #0a0a0a;
-  margin-bottom: 4px !important;
+  font-size: 0.75rem;
+  color: rgba(75, 85, 99, 0.7);
+  margin-bottom: 2px !important;
   padding-bottom: 0 !important;
+}
+:deep(.el-form-item) {
+  margin-bottom: 8px;
+}
+:deep(.el-input__inner) {
+  font-size: 0.8rem;
 }
 :deep(.el-button) {
   border: 0;
   color: white;
+  font-size: 0.8rem;
+  padding: 6px 10px;
+  height: fit-content;
   background: #b993d6; /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #8ca6db, #b993d6); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(

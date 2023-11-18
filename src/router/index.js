@@ -45,6 +45,11 @@ const router = createRouter({
           component: () => import('../views/ClusterView.vue')
         },
         {
+          path: 'setting',
+          name: 'setting',
+          component: () => import('../views/SettingView.vue')
+        },
+        {
           path: 'about',
           name: 'about',
           component: () => import('../views/AboutView.vue')
@@ -56,11 +61,6 @@ const router = createRouter({
     //   name: 'tv',
     //   component: () => import('../views/TVView.vue')
     // },
-    {
-      path: '/setting',
-      name: 'setting',
-      component: () => import('../views/SettingView.vue')
-    },
     // {
     //   path: '/blog',
     //   name: 'blog',

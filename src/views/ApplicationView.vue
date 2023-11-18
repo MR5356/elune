@@ -8,7 +8,9 @@ function filterAppsData() {
 </script>
 
 <template>
-  <div class="absolute top-0 left-0 right-0 bottom-0 overflow-y-auto rounded-lg z-10 mb-4 pr-4">
+  <div
+    class="absolute top-0 left-0 right-0 bottom-0 overflow-y-auto rounded-lg bg-white bg-opacity-0 z-10 mb-4 pr-4"
+  >
     <div class="font-medium text-xl mb-6">应用商店</div>
     <!--搜索-->
     <div class="flex justify-end w-full mb-4">
@@ -53,8 +55,6 @@ function filterAppsData() {
       </div>
     </div>
   </div>
-  <!-- 透明背景层 -->
-  <div class="absolute top-0 left-0 right-0 bottom-0 mr-4 mb-4 opacity-0 bg-white rounded-lg" />
 </template>
 
 <style scoped></style>

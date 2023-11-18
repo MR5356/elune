@@ -57,7 +57,7 @@ async function onLogout() {
           <!--                <div class="border-b-[1px] border-gray-300 my-1"></div>-->
           <div
             class="w-full hover:bg-gray-50 p-2 rounded cursor-pointer"
-            @click="router.push('/setting')"
+            @click="router.push('/devops/setting')"
           >
             系统设置
           </div>
