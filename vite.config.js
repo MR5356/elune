@@ -27,6 +27,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
+        // target: 'http://127.0.0.1:5678/api',
         target: 'https://docker.ac.cn/api',
         changeOrigin: true,
         ws: true,

@@ -18,7 +18,7 @@ const setting = ref({
 const menus = ref([
   // {
   //   title: '首页',
-  //   path: '/'
+  //   path: '/public/nav'
   // },
   // {
   //   title: '博客',
