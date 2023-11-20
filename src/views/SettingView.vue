@@ -1,15 +1,9 @@
 <script setup>
 import { ref } from 'vue'
-import { getConfig, setConfig, getUserRole, updatePassword } from '@/request/app'
-import { ElLoading, ElMessage } from 'element-plus'
-import router from '@/router'
+import { getConfig, setConfig, updatePassword } from '@/request/app'
+import { ElMessage } from 'element-plus'
 import PanelCard from '@/components/common/PanelCard.vue'
-
-getUserRole().then((res) => {
-  if (!res || res.length === 0) {
-    router.push('/')
-  }
-})
+import withLoading from '@/utils/loading'
 
 const password = ref('')
 const confirmPassword = ref('')
@@ -68,60 +62,50 @@ const setting = ref([
 ])
 
 async function initSetting() {
-  const loading = ElLoading.service({
-    lock: true,
-    text: '正在加载',
-    background: 'rgba(0, 0, 0, 0.7)'
-  })
-  for (const index in setting.value) {
-    let item = setting.value[index]
-    const res = await getConfig(item.id)
-    if (res) {
-      item.value = res
+  await withLoading(async () => {
+    for (const index in setting.value) {
+      let item = setting.value[index]
+      const res = await getConfig(item.id)
+      if (res) {
+        item.value = res
+      }
     }
-  }
+  }, '加载中')
+
   newSetting.value = JSON.parse(JSON.stringify(setting.value))
-  loading.close()
 }
 
 const newSetting = ref()
 initSetting()
 
 async function onSubmitSetting() {
-  const loading = ElLoading.service({
-    lock: true,
-    text: '正在更新',
-    background: 'rgba(0, 0, 0, 0.7)'
-  })
   // 更新系统设置
-  for (const index in newSetting.value) {
-    let item = newSetting.value[index]
-    let itemOld = setting.value.find((it) => it.id === item.id)
-    if (itemOld.value !== item.value && !item.readonly) {
-      await setConfig(item.id, item.value)
+  await withLoading(async () => {
+    for (const index in newSetting.value) {
+      let item = newSetting.value[index]
+      let itemOld = setting.value.find((it) => it.id === item.id)
+      if (itemOld.value !== item.value && !item.readonly) {
+        await setConfig(item.id, item.value)
+      }
     }
-  }
-  loading.close()
+  }, '更新中')
+
   history.go(0)
 }
 
 async function onSubmitUser() {
-  const loading = ElLoading.service({
-    lock: true,
-    text: '正在更新',
-    background: 'rgba(0, 0, 0, 0.7)'
-  })
   // 更新用户信息
   if (password.value !== confirmPassword.value) {
     ElMessage.error({
       message: '两次密码不一致'
     })
-    loading.close()
     return
   }
-  await updatePassword({ password: password.value, oldPassword: oldPassword.value })
+  await withLoading(updatePassword, '更新中', {
+    password: password.value,
+    oldPassword: oldPassword.value
+  })
   ElMessage.success('密码修改成功')
-  loading.close()
   history.go(0)
 }
 </script>

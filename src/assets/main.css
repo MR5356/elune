@@ -47,6 +47,16 @@ html, body {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
+/* 全局loading样式 */
+.circular {
+    animation: none !important;
+}
+
+.el-loading-text {
+    color: rgb(51 65 85) !important;
+    font-weight: bold;
+}
+/* 全局loading样式结束 */
 
 .jump:hover {
     animation: jump 0.5s;

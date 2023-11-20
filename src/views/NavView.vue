@@ -1,9 +1,10 @@
 <script setup>
 import { ref } from 'vue'
-import { getNavigation, addNavigation, updateNavigation, deleteNavigation } from '@/request/home'
+import { addNavigation, deleteNavigation, getNavigation, updateNavigation } from '@/request/home'
 import { PlusCross } from '@icon-park/vue-next'
 import { ElLoading, ElMessage } from 'element-plus'
 import { useSystemStore } from '@/stores/system'
+import withLoading from '@/utils/loading'
 import { useClipboard } from '@vueuse/core'
 
 const { copy, isSupported } = useClipboard()
@@ -65,17 +66,9 @@ function filterNavigationData(type, key) {
   })
 }
 
-function initNavigation() {
-  const loading = ElLoading.service({
-    lock: true,
-    text: 'loading',
-    background: 'rgba(0, 0, 0, 0.7)'
-  })
-  getNavigation().then((res) => {
-    rawNavigationData.value = res
-    filterNavigationData()
-    loading.close()
-  })
+async function initNavigation() {
+  rawNavigationData.value = await withLoading(getNavigation, '加载中')
+  filterNavigationData()
   formData.value = {
     id: 0,
     title: '',
@@ -89,24 +82,15 @@ function initNavigation() {
 
 initNavigation()
 
-function submitNavigation() {
-  const loading = ElLoading.service({
-    lock: true,
-    text: '正在更新',
-    background: 'rgba(0, 0, 0, 0.7)'
-  })
+async function submitNavigation() {
   if (isEdit.value) {
-    updateNavigation(formData.value).then(() => {
-      dialogFormVisible.value = false
-      initNavigation()
-      loading.close()
-    })
+    await withLoading(updateNavigation, '更新中', formData.value)
+    dialogFormVisible.value = false
+    await initNavigation()
   } else {
-    addNavigation(formData.value).then(() => {
-      dialogFormVisible.value = false
-      initNavigation()
-      loading.close()
-    })
+    await withLoading(addNavigation, '添加中', formData.value)
+    dialogFormVisible.value = false
+    await initNavigation()
   }
 }
 
@@ -145,17 +129,10 @@ function updateNav(item) {
   dialogFormVisible.value = true
 }
 
-function deleteNav(id) {
-  const loading = ElLoading.service({
-    lock: true,
-    text: '正在更新',
-    background: 'rgba(0, 0, 0, 0.7)'
-  })
-  deleteNavigation(id).then(() => {
-    initNavigation()
-    loading.close()
-    history.go(0)
-  })
+async function deleteNav(id) {
+  await withLoading(deleteNavigation, '删除中', id)
+  await initNavigation()
+  history.go(0)
 }
 
 const openPage = (item) => {

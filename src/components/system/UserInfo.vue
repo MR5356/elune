@@ -3,6 +3,7 @@ import router from '@/router'
 import moment from 'moment/moment'
 import { getUserInfo, logout, getNeedRefreshToken, refreshToken } from '@/request/app'
 import { useSystemStore } from '@/stores/system'
+import LoginForm from '@/components/system/LoginForm.vue'
 
 const { userInfo } = useSystemStore()
 getUserInfo().then((res) => {
@@ -70,7 +71,11 @@ async function onLogout() {
   </el-popover>
   <el-popover ref="popover" :width="280" trigger="hover" class="p-10" placement="bottom-end" v-else>
     <template #reference>
-      <div class="cursor-pointer rounded px-2 py-1 text-sm">登录</div>
+      <div
+        class="cursor-pointer flex items-center justify-center text-sm w-12 h-12 rounded-full jump bg-sky-100 p-1 font-medium text-gray-600"
+      >
+        登录
+      </div>
     </template>
     <template #default>
       <LoginForm />
