@@ -57,12 +57,19 @@ async function onLogout() {
           <!--                </div>-->
           <!--                <div class="border-b-[1px] border-gray-300 my-1"></div>-->
           <div
-            class="w-full hover:bg-gray-50 p-2 rounded cursor-pointer"
+            class="w-full hover:bg-gray-50 px-2 py-1.5 rounded cursor-pointer"
+            @click="router.push('/devops')"
+          >
+            运维看板
+          </div>
+          <div
+            class="w-full hover:bg-gray-50 px-2 py-1.5 rounded cursor-pointer"
             @click="router.push('/devops/setting')"
           >
             系统设置
           </div>
-          <div class="w-full hover:bg-gray-50 p-2 rounded cursor-pointer" @click="onLogout">
+          <div class="border-b-[1px] border-gray-300 my-1 mx-2"></div>
+          <div class="w-full hover:bg-gray-50 px-2 py-1.5 rounded cursor-pointer" @click="onLogout">
             退出登录
           </div>
         </div>
