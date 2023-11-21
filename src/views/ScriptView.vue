@@ -1,526 +1,153 @@
 <script setup>
 import { ref } from 'vue'
+import { ElMessageBox } from 'element-plus'
+import { Instruction } from '@icon-park/vue-next'
+import { listScript, deleteScript, addScript, updateScript } from '@/request/devops'
+import withLoading from '@/utils/loading'
+import { PlusCross } from '@icon-park/vue-next'
 
-const tableData = ref([
-  {
-    id: 171,
-    title: '铁战技段议华统家',
-    desc: '原而物细花手何持速按工务论始给按出快即组万行那建题本世相维运作'
-  },
-  {
-    id: 172,
-    title: '治流',
-    desc: '飞较引国级只千加党前新上干东段线增算果称联温角无书里处按但图何开社没'
-  },
-  {
-    id: 173,
-    title: '月响治安导斗群',
-    desc: '证又号青候现水高研专七规亲共团南物属区派计外称织并治离术节什之都引道量大温派土治'
-  },
-  {
-    id: 174,
-    title: '候及规她段十',
-    desc: '每去最每运'
-  },
-  {
-    id: 175,
-    title: '角器展',
-    desc: '克后导场重'
-  },
-  {
-    id: 176,
-    title: '最求与技华七',
-    desc: '难风列回标南结导电情马特火快公'
-  },
-  {
-    id: 177,
-    title: '成战事',
-    desc: '支文计支参先深权机好较火热资只查作导节标题子这后总'
-  },
-  {
-    id: 178,
-    title: '百民比要属标格',
-    desc: '然花毛价联教'
-  },
-  {
-    id: 179,
-    title: '前此自观全声育形术',
-    desc: '维经万口量置大意选况美白定严关你上想达据高争地写西总'
-  },
-  {
-    id: 180,
-    title: '车飞广间',
-    desc: '半存极么处近流王育可员即相管革圆常受开种打团义争例米及们场工儿西很'
-  },
-  {
-    id: 181,
-    title: '水率达',
-    desc: '进研时机建快十方万里除进教队'
-  },
-  {
-    id: 182,
-    title: '十知事证次热',
-    desc: '至斯之认候江先厂关各称'
-  },
-  {
-    id: 183,
-    title: '就准量按',
-    desc: '油象到酸单且包专则持即资内家'
-  },
-  {
-    id: 184,
-    title: '反们收',
-    desc: '接志放率八手受报点几'
-  },
-  {
-    id: 185,
-    title: '南道写严那主义又命',
-    desc: '权王四那采走者最会取总'
-  },
-  {
-    id: 186,
-    title: '共真价克程',
-    desc: '都美术要经院龙'
-  },
-  {
-    id: 187,
-    title: '一们圆',
-    desc: '向节例认到经和我我级认别两张'
-  },
-  {
-    id: 188,
-    title: '织特有易全',
-    desc: '命很族真命图则算后入厂相命采只料该平他手五回打取安在权万你至经细器设积人无应切天重素电度'
-  },
-  {
-    id: 189,
-    title: '过观片',
-    desc: '而六路反最为义术变美任高完给队况加想持向然应'
-  },
-  {
-    id: 190,
-    title: '便导应造',
-    desc: '装用内美类起因认列铁二斯内律八传发象值公位子关万光响它说或给义置间族基组场酸你但'
-  },
-  {
-    id: 191,
-    title: '反示广话上反火每作',
-    desc: '由政广毛元示商土出色团几最听群派备共'
-  },
-  {
-    id: 192,
-    title: '确可它',
-    desc: '不没需者节我和省先积山年'
-  },
-  {
-    id: 193,
-    title: '经金派般',
-    desc: '据石效其百入党何专整易身拉统划高拉正成月把始政机'
-  },
-  {
-    id: 194,
-    title: '整置按听',
-    desc: '代群各命认还性争制统量器认极改队人场道话通油严相候很产斗千流活对油花社发对等须论放见型其别'
-  },
-  {
-    id: 195,
-    title: '过元周连土今',
-    desc: '该京情工花他火动三特周外别都'
-  },
-  {
-    id: 196,
-    title: '根马照但值日条员个',
-    desc: '先发儿家号山建如主门商白管民自历对料积制且对商入王带保连次性备常但断织那党北门住主安容大多受何革成'
-  },
-  {
-    id: 197,
-    title: '明率其比完红已支二',
-    desc: '过素结议象无转需个由较身下你无油型区生'
-  },
-  {
-    id: 198,
-    title: '许油边果管便持要',
-    desc: '美元结土张科也社性却从斗切何科安些因儿选走四去力情根组制研定称完战分委'
-  },
-  {
-    id: 199,
-    title: '员话',
-    desc: '个各今子料图地本成南件厂民交石间每律中门进果第'
-  },
-  {
-    id: 200,
-    title: '指海调备标',
-    desc: '毛又该强酸是队号响验式报成治克给外因劳义资技人平路八林打院了活真且直采特土目'
-  },
-  {
-    id: 201,
-    title: '国形出却',
-    desc: '重思争公各复满我做起提因去线果系集式列太阶带子内象受此选商北里千高由识理常解受此'
-  },
-  {
-    id: 202,
-    title: '亲龙因还或整积',
-    desc: '条又眼想个花并六验三改转四适很将几二并儿全离力今白料地要研属马开什身员中为小型几程部总'
-  },
-  {
-    id: 203,
-    title: '听战合热没',
-    desc: '道商式计三能约斗示家'
-  },
-  {
-    id: 204,
-    title: '声备习飞真指物物清',
-    desc: '写及就全连看开头个照内立照什过际马较五科重便马流比正回受八位改单白建手立该设题史们方'
-  },
-  {
-    id: 205,
-    title: '快说受要期代海然',
-    desc: '信治王下日保青线自越总历命青直问增变'
-  },
-  {
-    id: 206,
-    title: '列传她委',
-    desc: '强取光农千油只值文什活手铁难力传国阶认力音农越样里花则命造圆元南三米无济领系八严斗信'
-  },
-  {
-    id: 207,
-    title: '农数性应商克',
-    desc: '内方律容效工人以铁江同至再农根'
-  },
-  {
-    id: 208,
-    title: '报只关',
-    desc: '重华你子里元展调地么'
-  },
-  {
-    id: 209,
-    title: '科响特国军马反',
-    desc: '做维于发青集办期原院正始主干部'
-  },
-  {
-    id: 210,
-    title: '体收门色集件指十',
-    desc: '现市这集'
-  },
-  {
-    id: 211,
-    title: '济记写光类去',
-    desc: '起八拉种重中越打场却细国百物理政家题温指'
-  },
-  {
-    id: 212,
-    title: '义商年划此先',
-    desc: '地取今然标关国事处传和式重华非价却或日必结研热把地重产易先子四较即向连只究果维工子'
-  },
-  {
-    id: 213,
-    title: '议党老',
-    desc: '还何色整族声层除水济候转与为电情铁百价式光查点色动江作定面都并农以具史深正真回水状入革几'
-  },
-  {
-    id: 214,
-    title: '者论农较们受经很王',
-    desc: '线划保世段量织照亲达包反'
-  },
-  {
-    id: 215,
-    title: '叫满象',
-    desc: '江两红白四又感取学小众指各且务越每往示至地老般指运都地问济资标增几一约手片直'
-  },
-  {
-    id: 216,
-    title: '水格达成成构门低几议',
-    desc: '车到象品运适划但代何什广带四理非省存周省资太等教公住色值运离使市空际包候算这并理看便中'
-  },
-  {
-    id: 217,
-    title: '飞劳身',
-    desc: '要府场白府权中究听至完军省委外识红值他候响民置必五子'
-  },
-  {
-    id: 218,
-    title: '安式年名研务合',
-    desc: '还就气置常权办类叫'
-  },
-  {
-    id: 219,
-    title: '管理任标部',
-    desc: '时几满广文工情除厂织道的对过海红教来局东细经持展决自林林值至群切公七克半具名意'
-  },
-  {
-    id: 220,
-    title: '马学速周',
-    desc: '认众资实公支形接听但价持部每对现列很压维无交战问国现张任律细到期素经或斗必'
-  },
-  {
-    id: 221,
-    title: '儿眼对快设',
-    desc: '水民华电别严改月变区节美内精交取每经她温华天己公律较光路很团当体这县系革断边林府建再角领面认厂便和义'
-  },
-  {
-    id: 222,
-    title: '六油',
-    desc: '口型就状领正二家亲前出已各只九风山管金术众地习人用何张国路路应众队再形识养争数与团确增将'
-  },
-  {
-    id: 223,
-    title: '严他员',
-    desc: '些两已说精局'
-  },
-  {
-    id: 224,
-    title: '声角任农教给于',
-    desc: '石革都照越定林般张风积体阶清华到近际百做确离级'
-  },
-  {
-    id: 225,
-    title: '装话计列入',
-    desc: '离四观定量切状该京复口没周同共边革白战识展面效始由用花资律规需产'
-  },
-  {
-    id: 226,
-    title: '院件规',
-    desc: '属片着先压群'
-  },
-  {
-    id: 227,
-    title: '总强切号律度好',
-    desc: '将光业高通确清往第十法七质地比料则何家主高转空术式如具需本由它公作求'
-  },
-  {
-    id: 228,
-    title: '除位她完地志列造越有',
-    desc: '把温天便任书化做己能体速飞该七行劳外市却圆为量相包须是族委导类复'
-  },
-  {
-    id: 229,
-    title: '照引化',
-    desc: '十场所长取习其品其设完参易口等精安列系必种信率内立由声率易导高场白件花适交被百儿用百后好'
-  },
-  {
-    id: 230,
-    title: '基两市点活己图识',
-    desc: '照却去战九铁东活问际期况完律共积阶电必低民国此表置节青论着界结器节深油积接近无所任属但示者总主先无'
-  },
-  {
-    id: 231,
-    title: '知内行整给界集',
-    desc: '任而极用三马标民如能布铁级值况打风认京越出世一活干我革场圆门学团非运点制角还来确低文'
-  },
-  {
-    id: 232,
-    title: '总并',
-    desc: '省决造天收社验写经科交两持力书飞比期格决目许矿而内结强红价题做思流林亲法所当方所还她可'
-  },
-  {
-    id: 233,
-    title: '数们须问值',
-    desc: '技百题满线气种位全山里很好'
-  },
-  {
-    id: 234,
-    title: '好眼际没院',
-    desc: '质系合证过美但条她写儿红直持地持意子出北特型半照通别极支完同集任今合种度长立当力改他话多'
-  },
-  {
-    id: 235,
-    title: '样力工色各院值义而',
-    desc: '场飞程运省立斯容'
-  },
-  {
-    id: 236,
-    title: '选造第系京开',
-    desc: '院照世代学阶使个无命应也'
-  },
-  {
-    id: 237,
-    title: '参象要',
-    desc: '更际响走品何程各动此法'
-  },
-  {
-    id: 238,
-    title: '然按角写值率群命外太',
-    desc: '为县政件般价亲住想那历即月光书劳至么者形角走元住按子军联料建识法增素样'
-  },
-  {
-    id: 239,
-    title: '快也根强流于公是',
-    desc: '现节支传使干例因难事总计元主'
-  },
-  {
-    id: 240,
-    title: '需口',
-    desc: '新酸并然图见白给市机等许常克离'
-  },
-  {
-    id: 241,
-    title: '果进程正越较应你界',
-    desc: '元包立眼除儿六多那'
-  },
-  {
-    id: 242,
-    title: '县据周合品',
-    desc: '命问步题由许八她根我保小本学社样半实样它当温治间查类空设质建火已样量手证克今积千克'
-  },
-  {
-    id: 243,
-    title: '照往北',
-    desc: '布总美值期起话回断精音可越外交接少青'
-  },
-  {
-    id: 244,
-    title: '确制志记适回',
-    desc: '指身构再候线即引部何写最接叫它织适革候公他再离县'
-  },
-  {
-    id: 245,
-    title: '新龙些',
-    desc: '调反南易造改规查速气现线还门书你'
-  },
-  {
-    id: 246,
-    title: '复路光',
-    desc: '规听安价石思外事利量响先所基则究明周见为除斯条并感认团图便圆调非我图立干它状的'
-  },
-  {
-    id: 247,
-    title: '众各后治识统',
-    desc: '工论号化各界证专手然组定也连产感通路带给口机非美进别理为易变结即'
-  },
-  {
-    id: 248,
-    title: '石个造明派具眼',
-    desc: '收把期以矿选图见何儿领土周使合周般实表分眼那己重向织整其信花'
-  },
-  {
-    id: 249,
-    title: '命标革',
-    desc: '只变行使只构度并命大改情必也员界素回只'
-  },
-  {
-    id: 250,
-    title: '方区料出出半己非十',
-    desc: '管共件南统习习无万率严达'
-  },
-  {
-    id: 251,
-    title: '里八养音',
-    desc: '气毛带技的厂往般育角世南再集设采只所子万交因属至求快还率其'
-  },
-  {
-    id: 252,
-    title: '强观单用时公',
-    desc: '称八料清代热斗对及从战色业品何想况解各世局队林结成类好机际支空易起争比理比情复区积'
-  },
-  {
-    id: 253,
-    title: '只改制较红这民组该',
-    desc: '再能中正叫后料务革手量空较听感值半龙千南治规达已山将层情并究变代增际心声'
-  },
-  {
-    id: 254,
-    title: '近六看类真片发清一',
-    desc: '价高论亲五一准快'
-  },
-  {
-    id: 255,
-    title: '党际',
-    desc: '亲往般热物三式状她知件这它况得采局来几人也查'
-  },
-  {
-    id: 256,
-    title: '史阶月',
-    desc: '人压还八果作除天三然条料全儿电次从同海当要象报江口历活包把但原消消我指月高积半专消于常还七比'
-  },
-  {
-    id: 257,
-    title: '育然同子千京数列且',
-    desc: '矿单效白系何局有深其部强性己事据话活组增际始天保音织'
-  },
-  {
-    id: 258,
-    title: '工形运质六十',
-    desc: '常心酸以能且都很复交才先'
-  },
-  {
-    id: 259,
-    title: '林小使能走',
-    desc: '满六日手上书你员区作回对地发话就导干清持选地养派情温建至阶出开是写行种飞习交市为队影己别三华确增'
-  },
-  {
-    id: 260,
-    title: '她大和土面类产七重',
-    desc: '品求示手才容定相部格收写两相平马了低提别受条要想线及积太心由例位表论际形小学利通众段容多十近方水'
-  },
-  {
-    id: 261,
-    title: '除好看八',
-    desc: '己可老许素己属龙需什向日因级政易切法主张放更集委济需调构每'
-  },
-  {
-    id: 262,
-    title: '和听结地报五等队太',
-    desc: '大其样作类容务地要器口问准华条出行处心际员'
-  },
-  {
-    id: 263,
-    title: '极回真千才代',
-    desc: '入面如农得克色而圆派状线说因存世一见省义际满市满土话调而'
-  },
-  {
-    id: 264,
-    title: '育明西要同验已必',
-    desc: '西新响须越部料参斗路因好小群还转老南具四天向争验两查者厂少百'
-  },
-  {
-    id: 265,
-    title: '进京方四我七元名新制',
-    desc: '准济局对总较十北相交以事般将且快眼比取四器易须五查看该状年'
-  },
-  {
-    id: 266,
-    title: '族高能',
-    desc: '色作原克红目值情立层因问华圆北养时花极理他'
-  },
-  {
-    id: 267,
-    title: '调立期走只',
-    desc: '群导命员布白我装海白七但片眼地选书象工构圆工易此规住建段则需实就线价里实它都石型成'
-  },
-  {
-    id: 268,
-    title: '量头全定石根成务利立',
-    desc: '始决都快铁海知青府传般新果整放切难相九们交交不设积'
-  },
-  {
-    id: 269,
-    title: '们们导气机文并划院书',
-    desc: '想府山传党海什南写关每'
-  },
-  {
-    id: 270,
-    title: '没日价西光放走象际',
-    desc: '文体任往海区目圆采任据强格市装见往清属回门备使强约能被走走级题真来决通济生增工别圆满地般权内了火'
+const tableData = ref()
+const showDrawer = ref(false)
+
+const script = ref({})
+const isEdit = ref(false)
+
+// addScript({ title: '测试', content: 'aaa' })
+
+async function onShowAddScript() {
+  showDrawer.value = true
+  isEdit.value = false
+  script.value = {
+    title: '',
+    desc: '',
+    content: ''
   }
-])
+  // await withLoading(addScript, '添加中', script.value)
+  // await init()
+}
+
+async function onAddOrUpdateScript() {
+  if (isEdit.value) {
+    await withLoading(updateScript, '更新中', {
+      id: script.value.id,
+      title: script.value.title,
+      desc: script.value.desc,
+      content: script.value.content
+    })
+  } else {
+    await withLoading(addScript, '添加中', script.value)
+  }
+  showDrawer.value = false
+  await init()
+}
+
+async function onDeleteScript(row) {
+  ElMessageBox.confirm('确定要删除吗?', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning'
+  }).then(async () => {
+    await withLoading(deleteScript, '删除中', row.id)
+    await init()
+  })
+}
+
+async function init() {
+  tableData.value = await withLoading(listScript)
+}
+init()
 </script>
 
 <template>
   <div
     class="absolute top-0 left-0 right-0 bottom-0 overflow-y-auto rounded-xl bg-white bg-opacity-0 z-10 mb-4 mr-4"
   >
-    <el-table :data="tableData" style="width: 100%; height: 100%">
+    <div class="fixed bottom-8 right-8 jump z-[999]">
+      <el-button
+        color="rgb(203 213 225)"
+        @click="onShowAddScript"
+        size="large"
+        :icon="PlusCross"
+        circle
+      />
+    </div>
+    <el-table :data="tableData" empty-text="暂无脚本" style="width: 100%; height: 100%">
       <el-table-column fixed prop="id" label="ID" width="66" />
-      <el-table-column prop="title" label="名称" class-name="font-bold" width="166" />
-      <el-table-column prop="desc" class-name="text-sm text-gray-600" label="描述" />
-      <el-table-column fixed="right" label="" width="150">
-        <template #default>
-          <el-button link type="primary" size="small">编辑</el-button>
-          <el-button link type="primary" size="small">删除</el-button>
+      <el-table-column prop="type.title" label="类型" width="88">
+        <template v-slot="scope">
+          <div class="flex items-center gap-2">
+            <Instruction
+              theme="multi-color"
+              size="18"
+              :fill="['#333', '#6abaf3', '#FFF', '#43CCF8']"
+              :strokeWidth="2"
+            />
+            <div class="font-medium">{{ scope.row.type.title }}</div>
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column prop="title" label="名称" width="166">
+        <template v-slot="scope">
+          <div class="font-bold line-clamp-1 text-ellipsis" :title="scope.row.title">
+            {{ scope.row.title }}
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column prop="desc" label="描述" width="166">
+        <template v-slot="scope">
+          <div class="line-clamp-1 text-ellipsis" :title="scope.row.desc">
+            {{ scope.row.desc }}
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column prop="content" label="预览">
+        <template v-slot="scope">
+          <div class="line-clamp-1 text-ellipsis" :title="scope.row.content">
+            {{ scope.row.content }}
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column fixed="right" label="" width="138">
+        <template v-slot="scope">
+          <el-button
+            link
+            type="primary"
+            size="small"
+            @click="
+              () => {
+                script = scope.row
+                showDrawer = true
+                isEdit = true
+              }
+            "
+            >编辑</el-button
+          >
+          <el-button link type="primary" size="small" @click="onDeleteScript(scope.row)"
+            >删除</el-button
+          >
           <el-button link type="primary" size="small">运行</el-button>
         </template>
       </el-table-column>
     </el-table>
+    <el-drawer v-model="showDrawer" :with-header="false" :z-index="999">
+      <div class="z-[999] w-full h-full flex flex-col justify-between">
+        <el-form :model="script" label-position="top">
+          <el-form-item label="名称">
+            <el-input v-model="script.title" />
+          </el-form-item>
+          <el-form-item label="描述">
+            <el-input v-model="script.desc" />
+          </el-form-item>
+          <el-form-item label="脚本">
+            <el-input v-model="script.content" type="textarea" :rows="10" />
+          </el-form-item>
+        </el-form>
+        <div class="flex justify-end">
+          <el-button link type="primary" @click="showDrawer = false">关闭</el-button>
+          <el-button link type="primary" @click="onAddOrUpdateScript">提交</el-button>
+        </div>
+      </div>
+    </el-drawer>
   </div>
 </template>
 

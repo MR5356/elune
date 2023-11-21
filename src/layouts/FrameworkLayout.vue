@@ -94,7 +94,7 @@ setting.value.menus = [
           :span="3"
           class="border-r-[0px] select-none h-full overflow-y-auto relative flex flex-col"
         >
-          <div class="w-full flex items-center h-[60px] p-4 sticky top-0 bg-[#eef6ff] z-[999]">
+          <div class="w-full flex items-center h-[60px] p-4 sticky top-0 bg-[#eef6ff]">
             <div class="flex gap-2 items-center font-bold cursor-pointer" @click="router.push('/')">
               <img :src="setting.logo" alt="logo" class="w-8 h-8" />
               <div>{{ setting.title }}</div>
@@ -157,7 +157,7 @@ setting.value.menus = [
         </el-col>
         <el-col :span="21" class="h-full">
           <el-header
-            class="flex justify-between items-center shadow-none shadow-slate-100 border-b-[0px] border-slate-200 sticky top-0 z-[999] select-none"
+            class="flex justify-between items-center shadow-none shadow-slate-100 border-b-[0px] border-slate-200 sticky top-0 select-none"
           >
             <div />
             <div class="flex gap-2 items-center">
