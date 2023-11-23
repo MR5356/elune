@@ -45,6 +45,11 @@ const router = createRouter({
           component: () => import('../views/ClusterView.vue')
         },
         {
+          path: 'machine',
+          name: 'machine',
+          component: () => import('../views/MachineView.vue')
+        },
+        {
           path: 'script',
           name: 'script',
           component: () => import('../views/ScriptView.vue')

@@ -25,7 +25,7 @@ function filterAppsData() {
     <!--展示区域-->
     <div class="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4">
       <div
-        class="bg-white rounded-lg shadow p-8 flex gap-4 sm:p-4 md:p-4 lg:p-6 jump"
+        class="bg-white bg-opacity-50 rounded-2xl shadow shadow-sky-100 p-8 flex gap-4 sm:p-4 md:p-4 lg:p-6 jump"
         v-for="i in 10"
         :key="i"
       >

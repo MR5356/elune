@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { addNavigation, deleteNavigation, getNavigation, updateNavigation } from '@/request/home'
 import { PlusCross } from '@icon-park/vue-next'
-import { ElLoading, ElMessage } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import { useSystemStore } from '@/stores/system'
 import withLoading from '@/utils/loading'
 import { useClipboard } from '@vueuse/core'
