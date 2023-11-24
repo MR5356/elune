@@ -67,6 +67,7 @@ async function withLoading(fn, title = '加载中', ...args) {
   } catch (error) {
     console.log(error)
     loading.close()
+    return Promise.reject(error)
   }
 }
 

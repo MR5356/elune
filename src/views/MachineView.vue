@@ -131,7 +131,7 @@ const infos = {
                 {{ machine.desc }}
               </div>
             </div>
-            <div class="flex gap-2 text-xs text-sky-700">
+            <div class="flex gap-2 text-xs text-sky-700 flex-wrap">
               <div class="bg-sky-100 rounded-full px-2 py-[2px]">
                 {{ machine.metaInfo.hostname }}
               </div>
@@ -139,7 +139,7 @@ const infos = {
               <div class="bg-sky-100 rounded-full px-2 py-[2px]">{{ machine.metaInfo.arch }}</div>
               <div class="bg-sky-100 rounded-full px-2 py-[2px]">{{ machine.metaInfo.kernel }}</div>
               <div class="bg-sky-100 rounded-full px-2 py-[2px]">
-                {{ machine.metaInfo.cpu }}H{{ machine.metaInfo.cpu }}G
+                {{ machine.metaInfo.cpu }}核心 {{ machine.metaInfo.mem }}内存
               </div>
             </div>
           </div>

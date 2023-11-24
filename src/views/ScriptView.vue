@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import router from '@/router'
 import { ElMessageBox } from 'element-plus'
 import { Instruction } from '@icon-park/vue-next'
 import {
@@ -16,17 +17,32 @@ import {
 import moment from 'moment'
 import withLoading from '@/utils/loading'
 import { PlusCross } from '@icon-park/vue-next'
+import { useRoute } from 'vue-router'
 
-const activeTab = ref('script')
+const { query } = useRoute()
+
+const activeTab = ref(query.tab || 'script')
 const tableData = ref()
+const rawTableData = ref()
 const showDrawer = ref(false)
 const recordData = ref([])
 
 const script = ref({})
 const isEdit = ref(false)
-const logView = ref([])
+const logView = ref({})
 const showLogView = ref(false)
 const showRunScript = ref(false)
+const searchKey = ref('')
+
+function onSearchScript() {
+  let queryStringArr = searchKey.value.split('')
+  let str = '(.*?)'
+  let regStr = str + queryStringArr.join(str) + str
+  let reg = RegExp(regStr, 'i')
+  tableData.value = rawTableData.value.filter((item) => {
+    return reg.test(item.title) || reg.test(item.desc)
+  })
+}
 
 async function onShowAddScript() {
   showDrawer.value = true
@@ -36,8 +52,6 @@ async function onShowAddScript() {
     desc: '',
     content: ''
   }
-  // await withLoading(addScript, '添加中', script.value)
-  // await init()
 }
 
 async function onAddOrUpdateScript() {
@@ -68,8 +82,10 @@ async function onDeleteScript(row) {
 
 function onTabChange(e) {
   if (e === 'script') {
+    router.replace({ query: { tab: 'script' } })
     init()
   } else {
+    router.replace({ query: { tab: 'record' } })
     initRecord()
   }
 }
@@ -79,7 +95,8 @@ async function initRecord() {
 }
 
 async function init() {
-  tableData.value = await withLoading(listScript)
+  rawTableData.value = await withLoading(listScript)
+  onSearchScript()
 }
 
 async function onShowRecordLog(id) {
@@ -103,7 +120,6 @@ async function onShowRunScript(row) {
 }
 
 async function onSubmitRunScript() {
-  console.log(runScript.value)
   await withLoading(startNewJob, '提交任务', {
     scriptId: runScript.value.scriptId,
     machineIds: runScript.value.machineIds,
@@ -111,6 +127,7 @@ async function onSubmitRunScript() {
     params: runScript.value.params
   })
   await initRecord()
+  showRunScript.value = false
   activeTab.value = 'record'
 }
 
@@ -122,7 +139,11 @@ function onRunScriptTabChange(e) {
   }
 }
 
-init()
+if (query.tab === 'record') {
+  initRecord()
+} else {
+  init()
+}
 </script>
 
 <template>
@@ -177,6 +198,16 @@ init()
             </template>
           </el-table-column>
           <el-table-column fixed="right" label="" width="138">
+            <template #header>
+              <el-input
+                v-model="searchKey"
+                size="small"
+                placeholder="搜索脚本"
+                clearable
+                @keydown.enter="onShowRunScript"
+                @update:modelValue="onSearchScript"
+              />
+            </template>
             <template v-slot="scope">
               <el-button
                 link
@@ -284,14 +315,9 @@ init()
       <el-tab-pane label="执行记录" name="record">
         <el-table :data="recordData" empty-text="暂无记录" style="width: 100%; height: 100%">
           <el-table-column fixed prop="id" label="ID" width="320" />
-          <el-table-column prop="scriptTitle" label="脚本名称" width="88" />
-          <el-table-column prop="message" label="状态" width="166" />
-          <el-table-column prop="createdAt" label="执行时间" width="166">
-            <template v-slot="scope">
-              {{ moment(scope.row.createdAt).format('YYYY-MM-DD HH:mm:ss') }}
-            </template>
-          </el-table-column>
-          <el-table-column prop="script" label="脚本内容" width="166">
+          <el-table-column prop="message" label="状态" width="120" />
+          <el-table-column prop="scriptTitle" label="脚本名称" width="120" />
+          <el-table-column prop="script" label="脚本内容" width="320">
             <template v-slot="scope">
               <div class="line-clamp-1 text-ellipsis" :title="scope.row.script">
                 {{ scope.row.script }}
@@ -305,11 +331,17 @@ init()
               </div>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="" width="88">
+          <el-table-column prop="createdAt" label="执行时间" width="166">
+            <template v-slot="scope">
+              {{ moment(scope.row.createdAt).format('YYYY-MM-DD HH:mm:ss') }}
+            </template>
+          </el-table-column>
+          <el-table-column fixed="right" label="" width="128">
             <template v-slot="scope">
               <el-button link type="primary" size="small" @click="onShowRecordLog(scope.row.id)"
                 >查看日志</el-button
               >
+              <el-button link type="primary" size="small" @click="initRecord">刷新</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -322,9 +354,18 @@ init()
           title="日志"
         >
           <div class="flex flex-col gap-0 p-0 m-0">
-            <div v-for="(log, index) in logView" :key="index" class="">
-              <span class="tabular-nums">{{ index + 1 }}: </span> {{ log }}
-            </div>
+            <el-collapse>
+              <el-collapse-item
+                v-for="(logs, host) in logView"
+                :key="host"
+                :title="host"
+                :name="host"
+              >
+                <div v-for="(log, index) in logs" :key="index" class="">
+                  <span class="tabular-nums"></span> {{ log }}
+                </div>
+              </el-collapse-item>
+            </el-collapse>
           </div>
         </el-dialog>
       </el-tab-pane>
