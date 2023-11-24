@@ -4,7 +4,7 @@ import { ElLoading } from 'element-plus'
 
 const service = axios.create({
   baseURL: '/api/v1',
-  timeout: 1000 * 5
+  timeout: 1000 * 60
 })
 
 service.interceptors.request.use(
