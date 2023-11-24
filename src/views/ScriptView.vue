@@ -106,10 +106,10 @@ async function onShowRecordLog(id) {
   logView.value = await withLoading(getJobLog, '查询中', id)
   showLogView.value = true
   await nextTick(() => {
-    const logViewEl = document.getElementById('logView')
+    // const logViewEl = document.getElementById('logView')
     logInterval.value = setInterval(async () => {
       logView.value = await getJobLog(id)
-      logViewEl.scrollTop = logViewEl.scrollHeight
+      // logViewEl.scrollTop = logViewEl.scrollHeight
     }, 1000)
   })
 }
