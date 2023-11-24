@@ -1,5 +1,5 @@
 <script setup>
-import { ref, nextTick } from 'vue'
+import { ref, nextTick, onMounted, onBeforeUnmount } from 'vue'
 import router from '@/router'
 import { ElMessageBox } from 'element-plus'
 import { Instruction } from '@icon-park/vue-next'
@@ -12,6 +12,7 @@ import {
   listMachine,
   listMachineGroup,
   listJob,
+  stopJob,
   getJobLog
 } from '@/request/devops'
 import moment from 'moment'
@@ -35,7 +36,24 @@ const showRunScript = ref(false)
 const searchKey = ref('')
 
 const logInterval = ref()
-const scrollToBottom = ref(true)
+const recordInterval = ref()
+const isRecord = ref(false)
+
+onMounted(() => {
+  recordInterval.value = setInterval(async () => {
+    if (isRecord.value) {
+      recordData.value = await listJob()
+    }
+  }, 1000)
+})
+
+onBeforeUnmount(() => {
+  clearInterval(recordInterval.value)
+})
+
+async function onClickStopJob(id) {
+  await withLoading(stopJob, '停止中', id)
+}
 
 function onSearchScript() {
   let queryStringArr = searchKey.value.split('')
@@ -85,9 +103,11 @@ async function onDeleteScript(row) {
 
 function onTabChange(e) {
   if (e === 'script') {
+    isRecord.value = false
     router.replace({ query: { tab: 'script' } })
     init()
   } else {
+    isRecord.value = true
     router.replace({ query: { tab: 'record' } })
     initRecord()
   }
@@ -106,10 +126,8 @@ async function onShowRecordLog(id) {
   logView.value = await withLoading(getJobLog, '查询中', id)
   showLogView.value = true
   await nextTick(() => {
-    // const logViewEl = document.getElementById('logView')
     logInterval.value = setInterval(async () => {
       logView.value = await getJobLog(id)
-      // logViewEl.scrollTop = logViewEl.scrollHeight
     }, 1000)
   })
 }
@@ -156,8 +174,10 @@ function onRunScriptTabChange(e) {
 }
 
 if (query.tab === 'record') {
+  isRecord.value = true
   initRecord()
 } else {
+  isRecord.value = false
   init()
 }
 </script>
@@ -331,12 +351,19 @@ if (query.tab === 'record') {
       <el-tab-pane label="执行记录" name="record">
         <el-table :data="recordData" empty-text="暂无记录" style="width: 100%; height: 100%">
           <el-table-column fixed prop="id" label="ID" width="320" />
-          <el-table-column prop="message" label="状态" width="120" />
-          <el-table-column prop="scriptTitle" label="脚本名称" width="120" />
+          <el-table-column prop="status" label="状态" width="80" />
+          <el-table-column prop="scriptTitle" label="脚本名称" width="180" />
           <el-table-column prop="script" label="脚本内容">
             <template v-slot="scope">
               <div class="line-clamp-1 text-ellipsis" :title="scope.row.script">
                 {{ scope.row.script }}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column prop="script" label="执行机器">
+            <template v-slot="scope">
+              <div class="line-clamp-1 text-ellipsis" :title="scope.row.host">
+                {{ scope.row.host }}
               </div>
             </template>
           </el-table-column>
@@ -352,12 +379,22 @@ if (query.tab === 'record') {
               {{ moment(scope.row.createdAt).format('YYYY-MM-DD HH:mm:ss') }}
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="" width="128">
+          <el-table-column fixed="right" label="" width="98">
             <template v-slot="scope">
-              <el-button link type="primary" size="small" @click="onShowRecordLog(scope.row.id)"
-                >查看日志</el-button
-              >
-              <el-button link type="primary" size="small" @click="initRecord">刷新</el-button>
+              <div class="text-right">
+                <el-button
+                  link
+                  :type="scope.row.status !== 'running' ? 'info' : 'danger'"
+                  size="small"
+                  @click="onClickStopJob(scope.row.id)"
+                  :disabled="scope.row.status !== 'running'"
+                >
+                  停止</el-button
+                >
+                <el-button link type="primary" size="small" @click="onShowRecordLog(scope.row.id)"
+                  >日志</el-button
+                >
+              </div>
             </template>
           </el-table-column>
         </el-table>
@@ -372,7 +409,7 @@ if (query.tab === 'record') {
           id="logView"
         >
           <div class="flex flex-col gap-0 p-0 m-0">
-            <el-collapse>
+            <el-collapse accordion>
               <el-collapse-item
                 v-for="(logs, host) in logView"
                 :key="host"

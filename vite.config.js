@@ -27,9 +27,9 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        // target: 'http://127.0.0.1:5678/api',
+        target: 'http://127.0.0.1:5678/api',
         // target: 'https://docker.ac.cn/api',
-        target: 'http://172.17.163.100:30680/api',
+        // target: 'http://172.17.163.100:30680/api',
         changeOrigin: true,
         ws: true,
         rewrite: (path) => path.replace(/^\/api/, '')
