@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 import router from '@/router'
 import { ElMessageBox } from 'element-plus'
 import { Instruction } from '@icon-park/vue-next'
@@ -33,6 +33,9 @@ const logView = ref({})
 const showLogView = ref(false)
 const showRunScript = ref(false)
 const searchKey = ref('')
+
+const logInterval = ref()
+const scrollToBottom = ref(true)
 
 function onSearchScript() {
   let queryStringArr = searchKey.value.split('')
@@ -102,6 +105,18 @@ async function init() {
 async function onShowRecordLog(id) {
   logView.value = await withLoading(getJobLog, '查询中', id)
   showLogView.value = true
+  await nextTick(() => {
+    const logViewEl = document.getElementById('logView')
+    logInterval.value = setInterval(async () => {
+      logView.value = await getJobLog(id)
+      logViewEl.scrollTop = logViewEl.scrollHeight
+    }, 1000)
+  })
+}
+
+function onCloseLogView() {
+  clearInterval(logInterval.value)
+  showLogView.value = false
 }
 
 const runScript = ref({})
@@ -129,6 +144,7 @@ async function onSubmitRunScript() {
   await initRecord()
   showRunScript.value = false
   activeTab.value = 'record'
+  await router.replace({ query: { tab: 'record' } })
 }
 
 function onRunScriptTabChange(e) {
@@ -317,20 +333,20 @@ if (query.tab === 'record') {
           <el-table-column fixed prop="id" label="ID" width="320" />
           <el-table-column prop="message" label="状态" width="120" />
           <el-table-column prop="scriptTitle" label="脚本名称" width="120" />
-          <el-table-column prop="script" label="脚本内容" width="320">
+          <el-table-column prop="script" label="脚本内容">
             <template v-slot="scope">
               <div class="line-clamp-1 text-ellipsis" :title="scope.row.script">
                 {{ scope.row.script }}
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="result" label="结果">
-            <template v-slot="scope">
-              <div class="line-clamp-1 text-ellipsis" :title="scope.row.result">
-                {{ scope.row.result }}
-              </div>
-            </template>
-          </el-table-column>
+          <!--          <el-table-column prop="result" label="结果">-->
+          <!--            <template v-slot="scope">-->
+          <!--              <div class="line-clamp-1 text-ellipsis" :title="scope.row.result">-->
+          <!--                {{ scope.row.result }}-->
+          <!--              </div>-->
+          <!--            </template>-->
+          <!--          </el-table-column>-->
           <el-table-column prop="createdAt" label="执行时间" width="166">
             <template v-slot="scope">
               {{ moment(scope.row.createdAt).format('YYYY-MM-DD HH:mm:ss') }}
@@ -350,8 +366,10 @@ if (query.tab === 'record') {
           :close-on-click-modal="true"
           :close-on-press-escape="true"
           :show-close="true"
-          class="max-w-[600px] min-w-[420px]"
+          :before-close="onCloseLogView"
+          class="min-w-[50%] h-[66%] overflow-y-auto"
           title="日志"
+          id="logView"
         >
           <div class="flex flex-col gap-0 p-0 m-0">
             <el-collapse>
