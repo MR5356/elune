@@ -52,7 +52,13 @@ onBeforeUnmount(() => {
 })
 
 async function onClickStopJob(id) {
-  await withLoading(stopJob, '停止中', id)
+  ElMessageBox.confirm('确定要停止该任务吗?', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning'
+  }).then(async () => {
+    await withLoading(stopJob, '停止中', id)
+  })
 }
 
 function onSearchScript() {
@@ -111,6 +117,22 @@ function onTabChange(e) {
     router.replace({ query: { tab: 'record' } })
     initRecord()
   }
+}
+
+function formatTime(time) {
+  const h = parseInt(time / 3600)
+  const minute = parseInt((time / 60) % 60)
+  const second = Math.ceil(time % 60)
+
+  const hours = h < 10 ? '0' + h : h
+  const formatSecond = second > 59 ? 59 : second
+  if (hours > 0) {
+    return `${hours}小时${minute}分${formatSecond}秒`
+  }
+  if (minute > 0) {
+    return `${minute}分${formatSecond}秒`
+  }
+  return `${formatSecond}秒`
 }
 
 async function initRecord() {
@@ -220,7 +242,7 @@ if (query.tab === 'record') {
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="desc" label="描述" width="166">
+          <el-table-column prop="desc" label="描述" width="460">
             <template v-slot="scope">
               <div class="line-clamp-1 text-ellipsis" :title="scope.row.desc">
                 {{ scope.row.desc }}
@@ -354,6 +376,13 @@ if (query.tab === 'record') {
           <el-table-column fixed prop="id" label="ID" width="320" />
           <el-table-column prop="status" label="状态" width="80" />
           <el-table-column prop="scriptTitle" label="脚本名称" width="180" />
+          <el-table-column prop="params" label="脚本参数" width="188">
+            <template v-slot="scope">
+              <div class="line-clamp-1 text-ellipsis" :title="scope.row.params">
+                {{ scope.row.params }}
+              </div>
+            </template>
+          </el-table-column>
           <el-table-column prop="script" label="脚本内容">
             <template v-slot="scope">
               <div class="line-clamp-1 text-ellipsis" :title="scope.row.script">
@@ -378,6 +407,11 @@ if (query.tab === 'record') {
           <el-table-column prop="createdAt" label="执行时间" width="166">
             <template v-slot="scope">
               {{ moment(scope.row.createdAt).format('YYYY-MM-DD HH:mm:ss') }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="createdAt" label="耗时时间" width="88">
+            <template v-slot="scope">
+              {{ formatTime(moment(scope.row.updatedAt).diff(scope.row.createdAt, 's')) }}
             </template>
           </el-table-column>
           <el-table-column fixed="right" label="" width="98">
