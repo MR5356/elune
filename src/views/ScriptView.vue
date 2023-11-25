@@ -41,9 +41,9 @@ const isRecord = ref(false)
 
 onMounted(() => {
   recordInterval.value = setInterval(async () => {
-    if (isRecord.value) {
-      recordData.value = await listJob()
-    }
+    // if (isRecord.value) {
+    recordData.value = await listJob()
+    // }
   }, 1000)
 })
 
