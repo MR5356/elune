@@ -104,7 +104,7 @@ async function onClickRestoreNav() {
           <input
             type="file"
             id="files"
-            ref="refFile"
+            ref="refScriptFile"
             style="display: none"
             v-on:change="onClickRestoreScript"
           />
