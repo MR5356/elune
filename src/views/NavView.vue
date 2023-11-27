@@ -180,7 +180,7 @@ const openPage = (item) => {
             <el-menu-item index="0">全部</el-menu-item>
             <el-menu-item v-for="category in categories" :key="category" :index="`${category.id}`"
               ><el-popover ref="popover" :width="100" trigger="contextmenu" class="p-0">
-                <template #reference>{{ category.title }}</template>
+                <template #reference>{{ category?.title }}</template>
                 <template #default>
                   <div class="flex flex-col gap-0">
                     <div class="w-full hover:bg-gray-50 p-2 rounded" @click="updateNav(category)">
@@ -188,7 +188,7 @@ const openPage = (item) => {
                     </div>
                     <div
                       class="w-full hover:bg-gray-50 p-2 rounded"
-                      @click="deleteNav(category.id)"
+                      @click="deleteNav(category?.id)"
                     >
                       删除
                     </div>
@@ -222,11 +222,11 @@ const openPage = (item) => {
                 />
                 <div class="flex flex-col gap-1">
                   <div class="flex gap-2 items-center">
-                    <div class="text-sm font-medium whitespace-nowrap" v-html="item.title"></div>
+                    <div class="text-sm font-medium whitespace-nowrap" v-html="item?.title"></div>
                     <div
                       class="text-xs bg-slate-100 text-center p-[2px] rounded text-gray-500 w-16 truncate"
                     >
-                      {{ categories[item.parent].title }}
+                      {{ categories[item.parent]?.title }}
                     </div>
                   </div>
                   <div

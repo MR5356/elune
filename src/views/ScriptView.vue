@@ -19,7 +19,6 @@ import moment from 'moment'
 import withLoading from '@/utils/loading'
 import { PlusCross } from '@icon-park/vue-next'
 import { useRoute } from 'vue-router'
-import { saveAs } from 'file-saver'
 
 const { query } = useRoute()
 
@@ -203,33 +202,6 @@ if (query.tab === 'record') {
 } else {
   isRecord.value = false
   init()
-}
-
-const refFile = ref(null)
-async function onClickBackupScript() {
-  const blob = new Blob([JSON.stringify(await listScript())], { type: 'text/plain;charset=utf-8' })
-  saveAs(blob, `script.json`)
-}
-
-async function onClickRestoreScript() {
-  await withLoading(async () => {
-    const selectedFile = refFile.value.files[0]
-    const reader = new FileReader()
-    reader.onloadend = async () => {
-      if (!reader.result) return
-      try {
-        const data = JSON.parse(reader.result)
-        for (const item of data) {
-          await addScript({ title: item.title, desc: item.desc, content: item.content })
-        }
-      } catch (error) {
-        console.log(error)
-      } finally {
-        refFile.value.value = ''
-      }
-    }
-    reader.readAsText(selectedFile)
-  }, '恢复中')
 }
 </script>
 
@@ -486,31 +458,6 @@ async function onClickRestoreScript() {
             </el-collapse>
           </div>
         </el-dialog>
-      </el-tab-pane>
-      <el-tab-pane label="备份与恢复" name="backup">
-        <div class="flex gap-4 font-medium text-sm">
-          <div
-            class="bg-blue-100 px-2 py-[1px] rounded-lg text-blue-500 cursor-pointer"
-            @click="onClickBackupScript"
-          >
-            备份脚本
-          </div>
-          <div>
-            <div
-              class="bg-blue-100 px-2 py-[1px] rounded-lg text-blue-500 cursor-pointer"
-              @click="refFile.click()"
-            >
-              还原脚本
-            </div>
-            <input
-              type="file"
-              id="files"
-              ref="refFile"
-              style="display: none"
-              v-on:change="onClickRestoreScript"
-            />
-          </div>
-        </div>
       </el-tab-pane>
     </el-tabs>
   </div>
