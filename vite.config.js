@@ -9,6 +9,16 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  minify: true,
+  build: {
+    rollupOptions: {
+      output: {
+        chunkFileNames: 'assets/js/[hash].js',
+        entryFileNames: 'assets/js/[hash].js',
+        assetFileNames: 'assets/[ext]/[hash].[ext]'
+      }
+    }
+  },
   plugins: [
     vue(),
     vueJsx(),
@@ -27,9 +37,9 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        // target: 'http://127.0.0.1:5678/api',
+        target: 'http://127.0.0.1:5678/api',
         // target: 'https://docker.ac.cn/api',
-        target: 'http://172.17.163.100:30680/api',
+        // target: 'http://172.17.163.100:30680/api',
         changeOrigin: true,
         ws: true,
         rewrite: (path) => path.replace(/^\/api/, '')

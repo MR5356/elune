@@ -214,7 +214,7 @@ setting.value.menus = [
 .bg {
   background:
     linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.5)),
-    url('/background.svg') no-repeat;
+    url('/src/assets/background.svg') no-repeat;
   background-size: cover;
 }
 </style>
