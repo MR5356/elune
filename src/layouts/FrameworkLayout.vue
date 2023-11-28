@@ -14,7 +14,7 @@ getUserRole().then((res) => {
 
 const setting = ref({
   title: '',
-  logo: '/logo.svg',
+  logo: '',
   favicon: '/favicon.ico',
   copyright: '',
   beian: '',

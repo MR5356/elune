@@ -7,11 +7,11 @@ import initSetting from '@/components/system/setting'
 
 const setting = ref({
   title: '',
-  logo: '/logo.svg',
+  logo: '',
   copyright: 'Copyright © TOODOFUN',
   beian: '',
   beianMiit: '',
-  favicon: '/favicon.ico'
+  favicon: ''
   // menus: []
 })
 

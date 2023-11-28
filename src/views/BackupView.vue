@@ -8,6 +8,7 @@ import PanelCard from '@/components/common/PanelCard.vue'
 
 const refScriptFile = ref(null)
 const refNavFile = ref(null)
+
 async function onClickBackupScript() {
   const blob = new Blob([JSON.stringify(await listScript())], { type: 'text/plain;charset=utf-8' })
   saveAs(blob, `script.json`)
@@ -42,39 +43,61 @@ async function onClickRestoreScript() {
 }
 
 async function onClickRestoreNav() {
-  await withLoading(async () => {
-    const selectedFile = refNavFile.value.files[0]
-    const reader = new FileReader()
-    reader.onloadend = async () => {
-      if (!reader.result) return
+  const selectedFile = refNavFile.value.files[0]
+  const reader = new FileReader()
+  reader.onloadend = async () => {
+    if (!reader.result) return
+    const data = JSON.parse(reader.result)
+
+    // 恢复分类
+    try {
+      for (const item of data) {
+        try {
+          if (item.parent === 0) {
+            await withLoading(async () => {
+              await addNavigation({
+                title: item.title,
+                parent: item.parent,
+                href: item.href,
+                logo: item.logo,
+                order: item.order,
+                desc: item.desc
+              })
+            }, `恢复分类 ${item.title}`)
+          }
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      refNavFile.value.value = ''
+    }
+    // 恢复菜单
+    const newData = await getNavigation()
+    for (const item of data) {
       try {
-        const data = JSON.parse(reader.result)
-        for (const item of data) {
-          // await addScript({ title: item.title, desc: item.desc, content: item.content })
-          // if (item.id === 1) {
-          //   continue
-          // }
-          try {
+        if (item.parent !== 0) {
+          await withLoading(async () => {
             await addNavigation({
               title: item.title,
-              parent: item.parent,
+              parent: newData.find(
+                (i) => i.title === data.find((it) => it.id === item.parent).title
+              ).id,
               href: item.href,
               logo: item.logo,
               order: item.order,
               desc: item.desc
             })
-          } catch (error) {
-            console.log(error)
-          }
+          }, `恢复菜单 ${item.title}`)
         }
       } catch (error) {
         console.log(error)
-      } finally {
-        refNavFile.value.value = ''
       }
     }
-    reader.readAsText(selectedFile)
-  }, '恢复中')
+  }
+  reader.readAsText(selectedFile)
 }
 </script>
 
