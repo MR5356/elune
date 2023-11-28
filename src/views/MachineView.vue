@@ -13,6 +13,7 @@ import withLoading from '@/utils/loading'
 import { ElMessageBox } from 'element-plus'
 
 const machines = ref([])
+const rawMachines = ref([])
 const newMachine = ref()
 const showAddMachine = ref(false)
 const isEdit = ref(false)
@@ -77,7 +78,8 @@ async function onDeleteMachine(id) {
 
 async function init() {
   machineGroups.value = await withLoading(listMachineGroup)
-  machines.value = await withLoading(listMachine)
+  rawMachines.value = await withLoading(listMachine)
+  machines.value = rawMachines.value
   machines.value.sort((a, b) => {
     return a.title.localeCompare(b.title)
   })
@@ -99,6 +101,14 @@ const infos = {
       'data:image/png;base64,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'
   }
 }
+
+function filterMachineData(groupId) {
+  if (groupId === '0') {
+    machines.value = rawMachines.value
+  } else {
+    machines.value = rawMachines.value.filter((item) => `${item.groupId}` === groupId)
+  }
+}
 </script>
 
 <template>
@@ -106,6 +116,25 @@ const infos = {
     class="absolute top-0 left-0 right-0 bottom-0 overflow-y-auto rounded-lg bg-white bg-opacity-0 z-10 mb-4 pr-4"
   >
     <div class="font-medium text-xl mb-6">主机管理</div>
+    <div class="overflow-auto">
+      <el-menu
+        default-active="0"
+        background-color="transparent"
+        mode="horizontal"
+        :ellipsis="false"
+        v-if="machineGroups"
+        @select="
+          (e) => {
+            filterMachineData(e)
+          }
+        "
+      >
+        <el-menu-item index="0">全部</el-menu-item>
+        <el-menu-item v-for="mg in machineGroups" :key="mg.title" :index="`${mg.id}`">{{
+          mg.title
+        }}</el-menu-item>
+      </el-menu>
+    </div>
     <div class="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4">
       <div
         class="bg-white bg-opacity-50 rounded-lg shadow p-8 flex justify-between gap-2 sm:p-4 md:p-4 lg:p-6 relative"
@@ -257,5 +286,20 @@ const infos = {
 }
 :deep(.el-input__inner) {
   font-size: 0.8rem;
+}
+.el-menu {
+  border: 0 !important;
+}
+
+.el-menu-item {
+  border: 0 !important;
+  padding: 0 10px !important;
+  &.is-active,
+  &:hover {
+    background: transparent !important;
+    color: #0a0a0a !important;
+    font-weight: bold !important;
+    animation: jump 0.5s;
+  }
 }
 </style>
