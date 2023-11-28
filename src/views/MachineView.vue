@@ -130,9 +130,11 @@ function filterMachineData(groupId) {
         "
       >
         <el-menu-item index="0">全部</el-menu-item>
-        <el-menu-item v-for="mg in machineGroups" :key="mg.title" :index="`${mg.id}`">{{
-          mg.title
-        }}</el-menu-item>
+        <template v-for="mg in machineGroups" :key="mg.id">
+          <el-menu-item v-if="mg?.machines.length > 0" :index="`${mg.id}`">{{
+            mg.title
+          }}</el-menu-item>
+        </template>
       </el-menu>
     </div>
     <div class="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4">
