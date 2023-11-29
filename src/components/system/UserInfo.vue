@@ -36,7 +36,7 @@ async function onLogout() {
       <img
         src="@/assets/avatar.svg"
         alt="avatar"
-        class="w-12 h-12 rounded-full jump bg-sky-100 p-1"
+        class="w-10 h-10 rounded-full jump bg-sky-100 p-1"
         :title="userInfo.value.username"
       />
     </template>

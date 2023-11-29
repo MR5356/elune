@@ -26,10 +26,9 @@ initSetting(setting)
 <template>
   <el-container class="fixed top-0 bottom-0 left-0 right-0 overflow-hidden bg">
     <el-main class="overflow-hidden">
-      <el-row class="h-full w-full overflow-hidden">
-        <el-col
-          :span="3"
-          class="border-r-[0px] select-none h-full overflow-y-auto relative flex flex-col"
+      <div class="h-full w-full flex overflow-hidden">
+        <div
+          class="border-r-[0px] select-none h-full overflow-y-auto relative flex flex-col min-w-[200px] w-[200px]"
         >
           <div class="w-full flex items-center h-[60px] p-4 sticky top-0 bg-[#eef6ff]">
             <div class="flex gap-2 items-center font-bold cursor-pointer" @click="router.push('/')">
@@ -86,8 +85,8 @@ initSetting(setting)
               >
             </div>
           </div>
-        </el-col>
-        <el-col :span="21" class="h-full">
+        </div>
+        <div class="h-full w-full flex-grow">
           <el-header
             class="flex justify-between items-center shadow-none shadow-slate-100 border-b-[0px] border-slate-200 sticky top-0 select-none"
           >
@@ -99,8 +98,8 @@ initSetting(setting)
           <el-main class="relative" style="height: calc(100% - 60px)">
             <RouterView />
           </el-main>
-        </el-col>
-      </el-row>
+        </div>
+      </div>
     </el-main>
   </el-container>
 </template>
