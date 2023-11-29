@@ -221,7 +221,7 @@ if (query.tab === 'record') {
           />
         </div>
         <el-table :data="tableData" empty-text="暂无脚本" style="width: 100%; height: 100%">
-          <el-table-column fixed prop="id" label="ID" width="66" />
+          <!--          <el-table-column fixed prop="id" label="ID" width="66" />-->
           <el-table-column prop="type.title" label="类型" width="88">
             <template v-slot="scope">
               <div class="flex items-center gap-2">
@@ -469,5 +469,9 @@ if (query.tab === 'record') {
 }
 :deep(.el-dialog__body) {
   padding: 0 1rem 1rem 1rem;
+}
+
+:deep(.el-table__row) {
+  height: 3.5rem;
 }
 </style>
