@@ -4,7 +4,6 @@ import UserInfo from '@/components/system/UserInfo.vue'
 import { RouterView } from 'vue-router'
 import initSetting from '@/components/system/setting'
 import { ref } from 'vue'
-import { getUserRole } from '@/request/app'
 
 const setting = ref({
   title: '',
