@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { getUserRole } from '@/request/app'
+import { ElMessage } from 'element-plus'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -116,6 +118,27 @@ const router = createRouter({
 router.onError((error, to) => {
   if (error.message.includes('Failed to fetch dynamically imported module')) {
     window.location.href = to.fullPath
+  }
+})
+
+router.beforeEach(async (to) => {
+  const rules = {
+    '/devops': ['administrators', 'devops'],
+    '/admin': ['administrators']
+  }
+  for (const key in rules) {
+    if (to.fullPath.startsWith(key)) {
+      const res = await getUserRole()
+      // 如果满足一个则为true
+      for (const item of rules[key]) {
+        if (res.includes(item)) {
+          return true
+        }
+      }
+      ElMessage.error('没有权限访问该页面')
+      await router.push('/')
+      return false
+    }
   }
 })
 

@@ -6,12 +6,6 @@ import initSetting from '@/components/system/setting'
 import { ref } from 'vue'
 import { getUserRole } from '@/request/app'
 
-getUserRole().then((res) => {
-  if (!res || res.length === 0) {
-    router.push('/')
-  }
-})
-
 const setting = ref({
   title: '',
   logo: '',
