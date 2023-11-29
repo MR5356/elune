@@ -63,29 +63,29 @@ const menus = [
   //   icon: `<?xml version="1.0" encoding="UTF-8"?><svg width="22" height="22" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="28" r="16" fill="#6abaf3" stroke="#333" stroke-width="2"/><path d="M28 4L20 4" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 4V12" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M35 16L38 13" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 28V22" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 28H18" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   //   path: '/devops/cron'
   // },
-  process.env.NODE_ENV === 'development'
-    ? {
-        title: '迁移工具',
-        icon: `<?xml version="1.0" encoding="UTF-8"?><svg width="22" height="22" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="13.7146" cy="13.7141" r="6.85714" fill="#6abaf3" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="34.2859" cy="34.2854" r="6.85714" fill="#6abaf3" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24.001 44C12.9553 44 4.00098 35.0457 4.00098 24L10.6676 27.3333" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24.001 4C35.0467 4 44.001 12.9543 44.001 24L37.3343 20.6667" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-        path: '/devops/backup',
-        children: [
-          {
-            title: '容器镜像迁移',
-            path: '/devops/about1'
-          },
-          {
-            title: '代码仓库迁移',
-            path: '/devops/about1'
-          }
-        ]
-      }
-    : {},
   {
     title: '备份还原',
     icon: `<?xml version="1.0" encoding="UTF-8"?><svg width="22" height="22" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 8V20C22 22.2091 17.9706 24 13 24C8.02944 24 4 22.2091 4 20V8" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 14C22 16.2091 17.9706 18 13 18C8.02944 18 4 16.2091 4 14" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 8C22 10.2091 17.9706 12 13 12C8.02944 12 4 10.2091 4 8C4 5.79086 8.02944 4 13 4C17.9706 4 22 5.79086 22 8Z" fill="#6abaf3" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M44 28V40C44 42.2091 39.9706 44 35 44C30.0294 44 26 42.2091 26 40V28" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M44 34C44 36.2091 39.9706 38 35 38C30.0294 38 26 36.2091 26 34" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M44 28C44 30.2091 39.9706 32 35 32C30.0294 32 26 30.2091 26 28C26 25.7909 30.0294 24 35 24C39.9706 24 44 25.7909 44 28Z" fill="#6abaf3" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M32 6H38C40.2091 6 42 7.79086 42 10V16" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 42H10C7.79086 42 6 40.2091 6 38V32" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
     path: '/devops/backup'
   }
 ]
+if (process.env.NODE_ENV === 'development') {
+  menus.push({
+    title: '迁移工具',
+    icon: `<?xml version="1.0" encoding="UTF-8"?><svg width="22" height="22" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="13.7146" cy="13.7141" r="6.85714" fill="#6abaf3" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="34.2859" cy="34.2854" r="6.85714" fill="#6abaf3" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24.001 44C12.9553 44 4.00098 35.0457 4.00098 24L10.6676 27.3333" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24.001 4C35.0467 4 44.001 12.9543 44.001 24L37.3343 20.6667" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    path: '/devops/backup',
+    children: [
+      {
+        title: '容器镜像迁移',
+        path: '/devops/about1'
+      },
+      {
+        title: '代码仓库迁移',
+        path: '/devops/about1'
+      }
+    ]
+  })
+}
 </script>
 
 <template>
