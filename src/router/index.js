@@ -29,7 +29,7 @@ const router = createRouter({
     {
       path: '/devops',
       name: 'devops',
-      component: () => import('../layouts/FrameworkLayout.vue'),
+      component: () => import('../layouts/DevOpsLayout.vue'),
       children: [
         {
           path: '',
@@ -57,11 +57,6 @@ const router = createRouter({
           component: () => import('../views/ScriptView.vue')
         },
         {
-          path: 'setting',
-          name: 'setting',
-          component: () => import('../views/SettingView.vue')
-        },
-        {
           path: 'backup',
           name: 'backup',
           component: () => import('../views/BackupView.vue')
@@ -70,6 +65,18 @@ const router = createRouter({
           path: 'about',
           name: 'about',
           component: () => import('../views/AboutView.vue')
+        }
+      ]
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('../layouts/AdminLayout.vue'),
+      children: [
+        {
+          path: 'setting',
+          name: 'setting',
+          component: () => import('../views/SettingView.vue')
         }
       ]
     },
