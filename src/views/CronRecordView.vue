@@ -34,9 +34,9 @@ async function getPage() {
 
 <template>
   <div
-    class="flex flex-col absolute top-0 left-0 right-0 bottom-0 overflow-y-auto rounded-xl bg-white bg-opacity-100 z-10 mb-4 mr-4"
+    class="absolute top-0 left-0 right-0 bottom-0 overflow-y-auto rounded-xl bg-white bg-opacity-0 z-10 mb-4 mr-4"
   >
-    <el-table :data="recordData?.data" style="width: 100%" class-name="flex-grow">
+    <el-table :data="recordData?.data" style="width: 100%">
       <el-table-column prop="title" label="任务名称" width="128" />
       <el-table-column prop="status" label="任务状态" width="128" />
       <el-table-column prop="taskName" label="任务执行器" width="128" />
@@ -67,4 +67,9 @@ async function getPage() {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+:deep(.el-pagination) {
+  background: white;
+  padding: 10px 0;
+}
+</style>
