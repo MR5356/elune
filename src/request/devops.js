@@ -83,3 +83,7 @@ export function enableCron(id) {
 export function disableCron(id) {
   return service.put(`/cron/disable/${id}`)
 }
+
+export function pageCronRecord(pageSize, pageNum) {
+  return service.get(`/cron/record?pageSize=${pageSize}&pageNum=${pageNum}`)
+}

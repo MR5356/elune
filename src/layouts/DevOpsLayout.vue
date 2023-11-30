@@ -70,11 +70,11 @@ const menus = [
     children: [
       {
         title: '计划任务列表',
-        path: '/devops/cron'
+        path: '/devops/cron/list'
       },
       {
         title: '计划任务日志',
-        path: '/devops/cron-log'
+        path: '/devops/cron/record'
       }
     ]
   }
