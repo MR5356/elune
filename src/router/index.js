@@ -153,7 +153,6 @@ router.beforeEach(async (to) => {
         }
       }
       ElMessage.error('没有权限访问该页面')
-      await router.push('/')
       return false
     }
   }
