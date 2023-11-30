@@ -38,7 +38,7 @@ async function getPage() {
   >
     <el-table :data="recordData?.data" style="width: 100%">
       <el-table-column prop="title" label="任务名称" width="128" />
-      <el-table-column prop="status" label="任务状态" width="128" />
+      <!--      <el-table-column prop="status" label="任务状态" width="128" />-->
       <el-table-column prop="taskName" label="任务执行器" width="128" />
       <el-table-column prop="params" label="任务参数" />
       <el-table-column prop="createdAt" label="开始时间" width="200">
