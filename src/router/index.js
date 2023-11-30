@@ -62,6 +62,11 @@ const router = createRouter({
           component: () => import('../views/BackupView.vue')
         },
         {
+          path: 'cron',
+          name: 'cron',
+          component: () => import('../views/CronView.vue')
+        },
+        {
           path: 'about',
           name: 'about',
           component: () => import('../views/AboutView.vue')

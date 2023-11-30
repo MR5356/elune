@@ -1,7 +1,7 @@
 <script setup>
 import { ref, nextTick, onMounted, onBeforeUnmount } from 'vue'
 import router from '@/router'
-import { ElMessageBox } from 'element-plus'
+import { ElMessageBox, ElMessage } from 'element-plus'
 import { Instruction } from '@icon-park/vue-next'
 import {
   listScript,
@@ -13,7 +13,8 @@ import {
   listMachineGroup,
   listJob,
   stopJob,
-  getJobLog
+  getJobLog,
+  addCron
 } from '@/request/devops'
 import moment from 'moment'
 import withLoading from '@/utils/loading'
@@ -174,6 +175,24 @@ async function onShowRunScript(row) {
   }
 }
 
+const showCronRunScript = ref(false)
+const cronRunScript = ref({})
+async function onShowCronRunScript(row) {
+  showCronRunScript.value = true
+  cronRunScript.value = {
+    scriptId: row.id,
+    machineIds: [],
+    machineGroupId: null,
+    params: '',
+    cronString: '',
+    title: row.title,
+    cronTitle: row.title,
+    type: 'machine',
+    ms: await listMachine(),
+    mgs: await listMachineGroup()
+  }
+}
+
 async function onSubmitRunScript() {
   await withLoading(startNewJob, '提交任务', {
     scriptId: runScript.value.scriptId,
@@ -186,6 +205,24 @@ async function onSubmitRunScript() {
   activeTab.value = 'record'
   isRecord.value = true
   await router.replace({ query: { tab: 'record' } })
+}
+
+async function onSubmitCronRunScript() {
+  console.log(cronRunScript.value)
+  await withLoading(addCron, '提交任务', {
+    title: cronRunScript.value.cronTitle,
+    cronString: cronRunScript.value.cronString,
+    taskName: 'script',
+    enabled: true,
+    params: JSON.stringify({
+      scriptId: cronRunScript.value.scriptId,
+      machineIds: cronRunScript.value.machineIds,
+      machineGroupId: cronRunScript.value.machineGroupId || 0,
+      params: cronRunScript.value.params
+    })
+  })
+  showCronRunScript.value = false
+  ElMessage.success('定时任务添加成功')
 }
 
 function onRunScriptTabChange(e) {
@@ -256,7 +293,7 @@ if (query.tab === 'record') {
               </div>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="" width="138">
+          <el-table-column fixed="right" label="" width="208">
             <template #header>
               <el-input
                 v-model="searchKey"
@@ -286,6 +323,9 @@ if (query.tab === 'record') {
               >
               <el-button link type="primary" size="small" @click="onShowRunScript(scope.row)"
                 >运行</el-button
+              >
+              <el-button link type="primary" size="small" @click="onShowCronRunScript(scope.row)"
+                >定时执行</el-button
               >
             </template>
           </el-table-column>
@@ -367,6 +407,74 @@ if (query.tab === 'record') {
             <span>
               <el-button @click="showRunScript = false">取消</el-button>
               <el-button type="primary" @click="onSubmitRunScript">提交</el-button>
+            </span>
+          </template>
+        </el-dialog>
+        <el-dialog
+          v-model="showCronRunScript"
+          :close-on-click-modal="false"
+          :close-on-press-escape="false"
+          :show-close="false"
+          class="max-w-[600px] min-w-[420px]"
+          title="定时任务配置"
+        >
+          <el-form :model="cronRunScript" label-position="top">
+            <el-form-item label="脚本名称">
+              <el-input v-model="cronRunScript.title" readonly disabled />
+            </el-form-item>
+            <el-form-item label="任务名称">
+              <el-input v-model="cronRunScript.cronTitle" />
+            </el-form-item>
+            <el-form-item label="脚本参数">
+              <el-input v-model="cronRunScript.params" type="textarea" :rows="3" />
+            </el-form-item>
+            <el-form-item label="定时策略(使用秒级cron表达式，如 * */5 * * * *)">
+              <el-input v-model="cronRunScript.cronString" />
+            </el-form-item>
+            <el-tabs v-model="cronRunScript.type" @tab-change="onRunScriptTabChange">
+              <el-tab-pane label="选择机器" name="machine">
+                <el-form-item label="">
+                  <el-select v-model="cronRunScript.machineIds" multiple default-first-option>
+                    <el-option
+                      v-for="m in cronRunScript.ms"
+                      :key="m.id"
+                      :label="`${m.title}: ${m.hostInfo?.username}@${m.hostInfo.host}:${m.hostInfo.port}`"
+                      :value="m.id"
+                    />
+                  </el-select>
+                </el-form-item>
+              </el-tab-pane>
+              <el-tab-pane label="选择机器组" name="machineGroup">
+                <el-form-item label="">
+                  <el-select v-model="cronRunScript.machineGroupId" default-first-option>
+                    <el-option
+                      v-for="m in cronRunScript?.mgs"
+                      :key="m.id"
+                      :label="`${m.title}`"
+                      :value="m.id"
+                    />
+                  </el-select>
+                </el-form-item>
+                <div class="flex gap-2 flex-wrap">
+                  <div
+                    class="bg-blue-100 rounded-full px-2 py-1 text-xs text-gray-500"
+                    v-for="m in cronRunScript.mgs?.find(
+                      (i) => i.id === cronRunScript.machineGroupId
+                    )?.machines"
+                    :key="m.id"
+                  >
+                    {{ m.title }}: {{ m.hostInfo.username }}@{{ m.hostInfo.host }}:{{
+                      m.hostInfo.port
+                    }}
+                  </div>
+                </div>
+              </el-tab-pane>
+            </el-tabs>
+          </el-form>
+          <template #footer>
+            <span>
+              <el-button @click="showCronRunScript = false">取消</el-button>
+              <el-button type="primary" @click="onSubmitCronRunScript">提交</el-button>
             </span>
           </template>
         </el-dialog>

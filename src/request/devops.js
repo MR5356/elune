@@ -63,3 +63,23 @@ export function getJobLog(id) {
 export function listJob() {
   return service.get('/execute/list')
 }
+
+export function listCron() {
+  return service.get('/cron/list')
+}
+
+export function addCron(data) {
+  return service.post('/cron/add', data)
+}
+
+export function deleteCron(id) {
+  return service.delete(`/cron/delete/${id}`)
+}
+
+export function enableCron(id) {
+  return service.put(`/cron/enable/${id}`)
+}
+
+export function disableCron(id) {
+  return service.put(`/cron/disable/${id}`)
+}
