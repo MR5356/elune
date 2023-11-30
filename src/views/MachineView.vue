@@ -6,7 +6,8 @@ import {
   listMachineGroup,
   addMachineGroup,
   updateMachine,
-  deleteMachine
+  deleteMachine,
+  deleteMachineGroup
 } from '@/request/devops'
 import { MoreOne } from '@icon-park/vue-next'
 import withLoading from '@/utils/loading'
@@ -32,7 +33,7 @@ async function onClickAddMachine() {
   newMachine.value = {
     title: '',
     desc: '',
-    groupId: machineGroups.value[0].id,
+    groupId: machineGroups.value[0]?.id || '默认分组',
     hostInfo: {
       host: '',
       port: 22,
@@ -109,6 +110,17 @@ function filterMachineData(groupId) {
     machines.value = rawMachines.value.filter((item) => `${item.groupId}` === groupId)
   }
 }
+
+async function onClickDeleteMachineGroup(id) {
+  ElMessageBox.confirm('删除机器组将删除组下所有机器，是否继续', '提示', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    type: 'warning'
+  }).then(async () => {
+    await withLoading(deleteMachineGroup, '删除机器组中', id)
+    await init()
+  })
+}
 </script>
 
 <template>
@@ -131,9 +143,21 @@ function filterMachineData(groupId) {
       >
         <el-menu-item index="0">全部</el-menu-item>
         <template v-for="mg in machineGroups" :key="mg.id">
-          <el-menu-item v-if="mg?.machines.length > 0" :index="`${mg.id}`">{{
-            mg.title
-          }}</el-menu-item>
+          <el-menu-item :index="`${mg.id}`"
+            ><el-popover ref="popover" :width="100" trigger="contextmenu" class="p-0">
+              <template #reference>{{ mg?.title }}</template>
+              <template #default>
+                <div class="flex flex-col gap-0">
+                  <div
+                    class="w-full hover:bg-gray-50 p-2 rounded"
+                    @click="onClickDeleteMachineGroup(mg?.id)"
+                  >
+                    删除
+                  </div>
+                </div>
+              </template>
+            </el-popover></el-menu-item
+          >
         </template>
       </el-menu>
     </div>
