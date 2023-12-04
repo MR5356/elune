@@ -26,6 +26,11 @@ const router = createRouter({
           component: () => import('../views/NavView.vue')
         },
         {
+          path: 'elune',
+          name: 'elune',
+          component: () => import('../views/EluneView.vue')
+        },
+        {
           path: '/:pathMatch(.*)',
           name: 'not-found',
           component: () => import('../views/NotFoundView.vue')
