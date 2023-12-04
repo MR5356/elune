@@ -163,43 +163,45 @@ async function onClickDeleteMachineGroup(id) {
     </div>
     <div class="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4">
       <div
-        class="bg-white bg-opacity-50 rounded-lg shadow p-8 flex justify-between gap-2 sm:p-4 md:p-4 lg:p-6 relative"
+        class="bg-white bg-opacity-50 rounded-lg shadow p-4 flex justify-between gap-2 sm:p-2 md:p-2 lg:p-4 relative"
         v-for="machine in machines"
         :key="machine.id"
       >
-        <div class="flex gap-2">
-          <div
-            class="h-[2.5rem] w-[2.5rem] min-w-[2.5rem] min-h-[2.5rem] max-w-[2.5rem] max-h-[2.5rem] p-0 rounded-md"
-          >
-            <img
-              :src="infos.system[machine.metaInfo.os]"
-              class="w-full h-full rounded-md stroke-gray-400"
-              alt="logo"
-            />
-          </div>
-          <div class="flex flex-col gap-4">
-            <div class="flex flex-col gap-2">
-              <div class="font-bold text-sm">
-                {{ machine.title
-                }}<span
-                  class="ml-2 font-normal text-xs bg-slate-100 rounded-full px-2 p-[2px] text-gray-500"
-                  >{{ machine.group.title }}</span
-                >
-              </div>
-              <div class="text-xs text-gray-500">
-                {{ machine.desc }}
+        <div class="flex flex-col gap-4">
+          <div class="flex gap-2">
+            <div
+              class="h-[2.5rem] w-[2.5rem] min-w-[2.5rem] min-h-[2.5rem] max-w-[2.5rem] max-h-[2.5rem] p-0 rounded-md"
+            >
+              <img
+                :src="infos.system[machine.metaInfo.os]"
+                class="w-full h-full rounded-md stroke-gray-400"
+                alt="logo"
+              />
+            </div>
+            <div class="flex flex-col gap-4">
+              <div class="flex flex-col gap-2">
+                <div class="font-bold text-sm">
+                  {{ machine.title
+                  }}<span
+                    class="ml-2 font-normal text-xs bg-slate-100 rounded-full px-2 p-[2px] text-gray-500"
+                    >{{ machine.group.title }}</span
+                  >
+                </div>
+                <div class="text-xs text-gray-500">
+                  {{ machine.desc }}
+                </div>
               </div>
             </div>
-            <div class="flex gap-2 text-xs text-sky-700 flex-wrap">
-              <div class="bg-sky-100 rounded-full px-2 py-[2px]">
-                {{ machine.metaInfo.hostname }}
-              </div>
-              <div class="bg-sky-100 rounded-full px-2 py-[2px]">{{ machine.metaInfo.os }}</div>
-              <div class="bg-sky-100 rounded-full px-2 py-[2px]">{{ machine.metaInfo.arch }}</div>
-              <div class="bg-sky-100 rounded-full px-2 py-[2px]">{{ machine.metaInfo.kernel }}</div>
-              <div class="bg-sky-100 rounded-full px-2 py-[2px]">
-                {{ machine.metaInfo.cpu }}核心 {{ machine.metaInfo.mem }}内存
-              </div>
+          </div>
+          <div class="flex gap-2 text-xs text-sky-700 flex-wrap">
+            <div class="bg-sky-100 rounded-full px-2 py-[2px]">
+              {{ machine.metaInfo.hostname }}
+            </div>
+            <div class="bg-sky-100 rounded-full px-2 py-[2px]">{{ machine.metaInfo.os }}</div>
+            <div class="bg-sky-100 rounded-full px-2 py-[2px]">{{ machine.metaInfo.arch }}</div>
+            <div class="bg-sky-100 rounded-full px-2 py-[2px]">{{ machine.metaInfo.kernel }}</div>
+            <div class="bg-sky-100 rounded-full px-2 py-[2px]">
+              {{ machine.metaInfo.cpu }}核心 {{ machine.metaInfo.mem }}内存
             </div>
           </div>
         </div>
