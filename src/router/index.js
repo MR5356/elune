@@ -7,7 +7,8 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/public'
+      name: 'index',
+      component: () => import('../views/IndexView.vue')
     },
     {
       path: '/public',
@@ -23,6 +24,11 @@ const router = createRouter({
           path: 'nav',
           name: 'nav',
           component: () => import('../views/NavView.vue')
+        },
+        {
+          path: '/:pathMatch(.*)',
+          name: 'not-found',
+          component: () => import('../views/NotFoundView.vue')
         }
       ]
     },
@@ -89,7 +95,7 @@ const router = createRouter({
           component: () => import('../views/SettingView.vue')
         }
       ]
-    },
+    }
     // {
     //   path: '/player',
     //   name: 'tv',
@@ -125,10 +131,6 @@ const router = createRouter({
     //   name: 'about',
     //   component: () => import('../views/AboutView.vue')
     // }
-    {
-      path: '/:pathMatch(.*)',
-      redirect: '/'
-    }
   ]
 })
 

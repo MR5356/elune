@@ -51,6 +51,13 @@ const setting = ref([
     value: '/favicon.ico',
     readonly: false,
     isImg: true
+  },
+  {
+    id: 'indexPage',
+    name: '网站首页',
+    value: '/public/nav',
+    readonly: false,
+    isImg: false
   }
   // {
   //   id: 'menus',
