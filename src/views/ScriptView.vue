@@ -571,15 +571,11 @@ if (query.tab === 'record') {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 :deep(.el-dialog__header) {
   padding: 1rem;
 }
 :deep(.el-dialog__body) {
   padding: 0 1rem 1rem 1rem;
-}
-
-:deep(.el-table__row) {
-  height: 3.5rem;
 }
 </style>

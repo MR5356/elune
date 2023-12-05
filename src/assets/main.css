@@ -1,3 +1,5 @@
+@import "element-table.scss";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

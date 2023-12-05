@@ -1,0 +1,13 @@
+.el-table tr,
+.el-table td,
+.el-table th {
+  border: 0 !important;
+}
+
+.el-table {
+  border-radius: 12px;
+}
+
+.el-table__row {
+  height: 3rem;
+}
