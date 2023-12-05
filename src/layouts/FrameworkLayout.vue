@@ -28,9 +28,9 @@ initSetting(setting)
     <el-main class="overflow-hidden">
       <div class="h-full w-full flex overflow-hidden">
         <div
-          class="border-r-[0px] select-none h-full overflow-y-auto relative flex flex-col min-w-[200px] w-[200px]"
+          class="border-r-[0px] select-none h-full overflow-y-auto relative flex flex-col min-w-[220px] w-[220px]"
         >
-          <div class="w-full flex items-center h-[60px] p-4 sticky top-0 bg-[#eef6ff]">
+          <div class="w-full flex items-center h-[60px] p-4 sticky top-0 backdrop-blur-md">
             <div class="flex gap-2 items-center font-bold cursor-pointer" @click="router.push('/')">
               <img :src="setting.logo" alt="logo" class="w-8 h-8" />
               <div>{{ setting.title }}</div>
@@ -48,7 +48,7 @@ initSetting(setting)
                 <el-menu-item v-for="item in menu.children" :key="item" :index="item.path">
                   <div class="flex gap-2 items-center">
                     <div v-html="item.icon" />
-                    <span>{{ item.title }}</span>
+                    <span class="indent-0.5">{{ item.title }}</span>
                   </div>
                 </el-menu-item>
               </el-sub-menu>
@@ -62,7 +62,7 @@ initSetting(setting)
           </el-menu>
           <div class="grow" />
           <div
-            class="w-full flex flex-col gap-1 items-start p-4 sticky bottom-0 text-xs backdrop-blur-md text-gray-600"
+            class="w-full flex flex-col gap-1 items-start p-4 sticky bottom-0 text-xs backdrop-blur-md text-slate-50"
           >
             <div v-if="setting.copyright">{{ setting.copyright }}</div>
             <div class="flex flex-col text-[0.7rem]">
@@ -120,17 +120,18 @@ initSetting(setting)
 :deep(.el-sub-menu__title),
 .el-menu-item {
   font-size: 0.9rem;
-  height: 48px !important;
-  color: rgb(75 85 99) !important;
+  height: 46px !important;
+  font-weight: bolder;
+  color: rgb(71 85 105) !important;
   border: 0 !important;
   background: transparent !important;
   //padding: 0 10px !important;
   &.is-active,
   &:hover {
     background: transparent !important;
-    color: #0a0a0a !important;
-    font-weight: 600 !important;
-    animation: jump 0.5s;
+    color: #000 !important;
+    font-weight: bold !important;
+    //animation: jump 0.5s;
   }
 }
 .el-col {
@@ -139,7 +140,7 @@ initSetting(setting)
 
 .bg {
   background:
-    linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.5)),
+    linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.35)),
     url('/src/assets/background.svg') no-repeat;
   background-size: cover;
 }
