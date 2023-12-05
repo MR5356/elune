@@ -140,7 +140,7 @@ initSetting(setting)
 
 .bg {
   background:
-    linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.35)),
+    linear-gradient(270deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.85)),
     url('/src/assets/background.svg') no-repeat;
   background-size: cover;
 }
