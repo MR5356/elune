@@ -12,7 +12,7 @@ defineProps({
       <div class="px-[0.5px] h-[1rem] bg-blue-500 rounded-full text-sm font-medium">&nbsp;</div>
       {{ title }}
     </div>
-    <div class="pt-2">
+    <div class="pt-2 grow">
       <slot></slot>
     </div>
   </div>

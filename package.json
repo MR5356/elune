@@ -27,6 +27,7 @@
     "video.js": "^8.6.1",
     "videojs-contrib-hls": "^5.15.0",
     "vue": "^3.3.4",
+    "vue-number-animation": "^2.0.2",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {

@@ -868,6 +868,11 @@ ajv@^6.12.4:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
+animejs@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.npmmirror.com/animejs/-/animejs-3.2.2.tgz#59be98c58834339d5847f4a70ddba74ac75b6afc"
+  integrity sha512-Ao95qWLpDPXXM+WrmwcKbl6uNlC5tjnowlaRYtuVDHHoygjtIPfDUoK9NthrlZsQSKjZXlmji2TrBUAVbiH0LQ==
+
 ansi-regex@^5.0.1:
   version "5.0.1"
   resolved "https://registry.npmmirror.com/ansi-regex/-/ansi-regex-5.0.1.tgz"
@@ -2932,6 +2937,11 @@ vue-demi@*, vue-demi@>=0.14.5, vue-demi@>=0.14.6:
   resolved "https://registry.npmmirror.com/vue-demi/-/vue-demi-0.14.6.tgz"
   integrity sha512-8QA7wrYSHKaYgUxDA5ZC24w+eHm3sYCbp0EzcDwKqN3p6HqtTCGR/GVsPyZW92unff4UlcSh++lmqDWN3ZIq4w==
 
+vue-demi@^0.11.4:
+  version "0.11.4"
+  resolved "https://registry.npmmirror.com/vue-demi/-/vue-demi-0.11.4.tgz#6101992fe4724cf5634018a16e953f3052e94e2a"
+  integrity sha512-/3xFwzSykLW2HiiLie43a+FFgNOcokbBJ+fzvFXd0r2T8MYohqvphUyDQ8lbAwzQ3Dlcrb1c9ykifGkhSIAk6A==
+
 vue-eslint-parser@^9.3.1:
   version "9.3.2"
   resolved "https://registry.npmmirror.com/vue-eslint-parser/-/vue-eslint-parser-9.3.2.tgz"
@@ -2944,6 +2954,14 @@ vue-eslint-parser@^9.3.1:
     esquery "^1.4.0"
     lodash "^4.17.21"
     semver "^7.3.6"
+
+vue-number-animation@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.npmmirror.com/vue-number-animation/-/vue-number-animation-2.0.2.tgz#1cfdff207444979e112e88ab5e0e427e581a2d41"
+  integrity sha512-1YQ1f6SHqQGdrf9/EKykvCa9FlAcUoh7o3c4Fe5Qc0TDbj415brB1lTpuIw6rpkTApLR7APerlZHXjNOWYOA3Q==
+  dependencies:
+    animejs "^3.2.2"
+    vue-demi "^0.11.4"
 
 vue-router@^4.2.5:
   version "4.2.5"
