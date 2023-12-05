@@ -121,7 +121,7 @@ initSetting(setting)
 .el-menu-item {
   font-size: 0.9rem;
   height: 46px !important;
-  font-weight: bolder;
+  font-weight: normal;
   color: rgb(71 85 105) !important;
   border: 0 !important;
   background: transparent !important;

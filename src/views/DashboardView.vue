@@ -46,19 +46,19 @@ const recommendedApplication = ref([
   },
   {
     title: '管理已添加主机',
-    desc: '管理物理机和虚拟机主机,包括主机监控、终端访问等',
+    desc: '管理物理机和虚拟机主机',
     icon: "data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 48 48' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='19' y='32' width='10' height='9' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='5' y='8' width='38' height='24' rx='2' fill='%236abaf3' stroke='%23333' stroke-width='2'/%3E%3Cpath d='M22 27H26' stroke='%23FFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14 41L34 41' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E",
     path: '/devops/machine'
   },
   {
     title: '查看脚本列表',
-    desc: '提供脚本管理、远程执行脚本、查看脚本执行日志等功能',
+    desc: '脚本管理、远程执行脚本',
     icon: "data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 48 48' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M23 40H7C5.34315 40 4 38.6569 4 37V11C4 9.34315 5.34315 8 7 8H41C42.6569 8 44 9.34315 44 11V25.8824' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M4 11C4 9.34315 5.34315 8 7 8H41C42.6569 8 44 9.34315 44 11V20H4V11Z' fill='%236abaf3' stroke='%23333' stroke-width='2'/%3E%3Cpath d='M34 33L30 37L34 41' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M40 33L44 37L40 41' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle r='2' transform='matrix(-1.31134e-07 -1 -1 1.31134e-07 10 14)' fill='%23FFF'/%3E%3Ccircle r='2' transform='matrix(-1.31134e-07 -1 -1 1.31134e-07 16 14)' fill='%23FFF'/%3E%3C/svg%3E",
     path: '/devops/script'
   },
   {
     title: '查看脚本记录',
-    desc: '提供脚本管理、远程执行脚本、查看脚本执行日志等功能',
+    desc: '查看脚本执行日志等功能',
     icon: "data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 48 48' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M23 40H7C5.34315 40 4 38.6569 4 37V11C4 9.34315 5.34315 8 7 8H41C42.6569 8 44 9.34315 44 11V25.8824' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M4 11C4 9.34315 5.34315 8 7 8H41C42.6569 8 44 9.34315 44 11V20H4V11Z' fill='%236abaf3' stroke='%23333' stroke-width='2'/%3E%3Cpath d='M34 33L30 37L34 41' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M40 33L44 37L40 41' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle r='2' transform='matrix(-1.31134e-07 -1 -1 1.31134e-07 10 14)' fill='%23FFF'/%3E%3Ccircle r='2' transform='matrix(-1.31134e-07 -1 -1 1.31134e-07 16 14)' fill='%23FFF'/%3E%3C/svg%3E",
     path: '/devops/script?tab=record'
   },

@@ -208,7 +208,6 @@ async function onSubmitRunScript() {
 }
 
 async function onSubmitCronRunScript() {
-  console.log(cronRunScript.value)
   await withLoading(addCron, '提交任务', {
     title: cronRunScript.value.cronTitle,
     cronString: cronRunScript.value.cronString,

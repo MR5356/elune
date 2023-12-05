@@ -23,7 +23,7 @@ aaa()
     <div class="font-medium text-xl mb-6">集群管理</div>
     <div class="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4">
       <div
-        class="bg-white rounded-lg shadow p-8 flex flex-col gap-2 sm:p-4 md:p-4 lg:p-6 relative"
+        class="bg-white bg-opacity-70 rounded-lg shadow p-8 flex flex-col gap-2 sm:p-4 md:p-4 lg:p-6 relative"
         v-for="i in 10"
         :key="i"
       >
@@ -63,7 +63,7 @@ aaa()
         </div>
       </div>
       <div
-        class="bg-white rounded-lg shadow p-8 flex flex-col gap-2 sm:p-4 md:p-4 lg:p-6 relative cursor-pointer"
+        class="bg-white bg-opacity-70 rounded-lg shadow p-8 flex flex-col gap-2 sm:p-4 md:p-4 lg:p-6 relative cursor-pointer"
       >
         <div class="m-auto flex items-center gap-6">
           <div

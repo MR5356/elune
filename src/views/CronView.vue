@@ -52,8 +52,8 @@ init()
   <div
     class="absolute top-0 left-0 right-0 bottom-0 overflow-y-auto rounded-xl bg-white bg-opacity-0 z-10 mb-4 mr-4"
   >
-    <el-table :data="cronData" empty-text="暂无计划任务" style="width: 100%; height: 100%">
-      <el-table-column prop="title" label="名称" width="128" />
+    <el-table :data="cronData" empty-text="暂无计划任务" style="width: 100%">
+      <el-table-column prop="title" label="名称" width="208" />
       <el-table-column prop="taskName" label="任务执行器" width="128" />
       <el-table-column prop="cronString" label="cron表达式" width="128" />
       <el-table-column prop="cronString" label="下次执行时间" width="188">

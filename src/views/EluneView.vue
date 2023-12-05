@@ -19,22 +19,6 @@ const features = ref([
     title: '多种认证方式',
     desc: 'Elune支持多种认证方式，如内建用户库、gitlab/github单点登录、ldap等，<span class="text-red-300">当前仅支持内建用户库登录，后续会支持多种认证</span>'
     // images: ['https://www.dmoe.cc/random.php']
-  },
-  {
-    title: '多主机管理',
-    desc: 'Elune支持管理多个主机/虚拟机，支持分组管理等'
-  },
-  {
-    title: '脚本管理',
-    desc: 'Elune支持管理脚本，在多个主机/虚拟机上或者按照主机分组一键执行脚本'
-  },
-  {
-    title: '自备份管理',
-    desc: 'Elune支持自备份管理，支持备份/恢复导航菜单、脚本等'
-  },
-  {
-    title: '定时任务管理',
-    desc: 'Elune支持定时任务管理，支持定时执行脚本'
   }
 ])
 </script>
@@ -45,7 +29,6 @@ const features = ref([
       <EluneInfoCard />
     </div>
     <div class="py-10 flex flex-col gap-10 items-center lg:w-[60%]">
-      <div class="font-bold text-3xl">好用的工具，不仅仅是运维</div>
       <div class="flex flex-col gap-4 w-full">
         <div v-for="feature in features" :key="feature.title" class="flex flex-col gap-2 w-full">
           <div class="font-medium">{{ feature.title }}</div>

@@ -163,7 +163,7 @@ async function onClickDeleteMachineGroup(id) {
     </div>
     <div class="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4">
       <div
-        class="bg-white bg-opacity-50 rounded-lg shadow p-4 flex justify-between gap-2 sm:p-2 md:p-2 lg:p-4 relative"
+        class="bg-white bg-opacity-70 rounded-lg shadow p-4 flex justify-between gap-2 sm:p-2 md:p-2 lg:p-4 relative"
         v-for="machine in machines"
         :key="machine.id"
       >
@@ -230,7 +230,7 @@ async function onClickDeleteMachineGroup(id) {
         </div>
       </div>
       <div
-        class="bg-white bg-opacity-50 rounded-lg shadow p-8 flex flex-col gap-2 sm:p-4 md:p-4 lg:p-6 relative cursor-pointer"
+        class="bg-white bg-opacity-70 rounded-lg shadow p-8 flex flex-col gap-2 sm:p-4 md:p-4 lg:p-6 relative cursor-pointer"
         @click="onClickAddMachine"
       >
         <div class="m-auto flex items-center gap-6">
