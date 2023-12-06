@@ -3,7 +3,9 @@ import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <RouterView />
+  <transition name="el-fade-in">
+    <RouterView />
+  </transition>
 </template>
 
 <style scoped lang="scss"></style>
