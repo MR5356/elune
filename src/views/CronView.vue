@@ -56,16 +56,13 @@ init()
       <el-table-column prop="title" label="名称" width="208" />
       <el-table-column prop="taskName" label="任务执行器" width="128" />
       <el-table-column prop="cronString" label="cron表达式" width="128" />
-      <el-table-column prop="cronString" label="下次执行时间" width="188">
+      <el-table-column prop="nextTime" label="下次执行时间" width="188">
         <template v-slot="scope">
           <div class="line-clamp-1 text-ellipsis" :title="scope.row.cronString">
             {{
-              moment(
-                parser
-                  .parseExpression(scope.row.cronString, { tz: 'Asia/Shanghai' })
-                  .next()
-                  .toDate()
-              ).format('YYYY-MM-DD HH:mm:ss')
+              scope.row.nextTime === '0001-01-01T00:00:00Z'
+                ? '-'
+                : moment(scope.row.nextTime).format('YYYY-MM-DD HH:mm:ss')
             }}
           </div>
         </template>

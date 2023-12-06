@@ -58,7 +58,7 @@ async function onLogout() {
           <!--                <div class="border-b-[1px] border-gray-300 my-1"></div>-->
           <div
             class="w-full hover:bg-gray-50 px-2 py-1.5 rounded cursor-pointer"
-            @click="router.push('/devops/machine')"
+            @click="router.push('/devops')"
           >
             运维看板
           </div>

@@ -87,3 +87,19 @@ export function disableCron(id) {
 export function pageCronRecord(pageSize, pageNum) {
   return service.get(`/cron/record?pageSize=${pageSize}&pageNum=${pageNum}`)
 }
+
+export function listKubernetes() {
+  return service.get('/kubernetes/list')
+}
+
+export function addKubernetes(data) {
+  return service.post('/kubernetes/add', data)
+}
+
+export function deleteKubernetes(id) {
+  return service.delete(`/kubernetes/delete/${id}`)
+}
+
+export function updateKubernetes(data) {
+  return service.put('/kubernetes/update', data)
+}
