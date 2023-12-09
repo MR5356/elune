@@ -50,7 +50,7 @@ init()
 
 <template>
   <div
-    class="absolute top-0 left-0 right-0 bottom-0 overflow-y-auto rounded-xl bg-white bg-opacity-0 z-10 mb-4 mr-4"
+    class="absolute top-0 left-0 right-0 bottom-0 overflow-y-auto rounded-xl bg-white bg-opacity-0 z-10 mb-4 mx-4"
   >
     <el-table :data="cronData" empty-text="暂无计划任务" style="width: 100%">
       <el-table-column prop="title" label="名称" width="208" />
@@ -74,7 +74,13 @@ init()
       <!--          </div>-->
       <!--        </template>-->
       <!--      </el-table-column>-->
-      <el-table-column prop="params" label="任务参数" />
+      <el-table-column prop="params" label="任务参数">
+        <template v-slot="scope">
+          <div class="line-clamp-1 text-ellipsis" :title="scope.row.params">
+            {{ scope.row.params }}
+          </div>
+        </template>
+      </el-table-column>
       <el-table-column prop="createdAt" label="创建时间" width="200">
         <template v-slot="scope">
           {{ moment(scope.row.createdAt).format('YYYY-MM-DD HH:mm:ss') }}

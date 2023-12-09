@@ -33,12 +33,15 @@ async function onLogout() {
     v-if="userInfo.value"
   >
     <template #reference>
-      <img
-        src="@/assets/avatar.svg"
-        alt="avatar"
-        class="w-10 h-10 rounded-full jump bg-sky-100 p-1"
-        :title="userInfo.value.username"
-      />
+      <div class="flex items-center gap-2">
+        <img
+          src="@/assets/avatar.svg"
+          alt="avatar"
+          class="w-10 h-10 rounded-full jump bg-sky-100 p-1"
+          :title="userInfo.value.username"
+        />
+        <div class="text-sm">{{ userInfo.value.nickname }}</div>
+      </div>
     </template>
     <template #default>
       <div class="flex flex-col gap-2">
@@ -56,6 +59,12 @@ async function onLogout() {
           <!--                  写文章-->
           <!--                </div>-->
           <!--                <div class="border-b-[1px] border-gray-300 my-1"></div>-->
+          <div
+            class="w-full hover:bg-gray-50 px-2 py-1.5 rounded cursor-pointer"
+            @click="router.push('/space')"
+          >
+            个人中心
+          </div>
           <div
             class="w-full hover:bg-gray-50 px-2 py-1.5 rounded cursor-pointer"
             @click="router.push('/devops')"

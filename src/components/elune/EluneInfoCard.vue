@@ -36,12 +36,14 @@
       </div>
       <div class="flex-col flex justify-center items-center w-[40%]">
         <div
-          class="w-[384px] h-[216px] text-center flex flex-col justify-center items-center bg rounded-lg shadow-lg select-none bg-opacity-80"
+          class="w-[100%] aspect-video text-center flex flex-col justify-center items-center bg rounded-lg shadow-lg select-none bg-opacity-80"
         >
           <div class="w-fit flex flex-col gap-1">
-            <div class="font-medium text-5xl text-white">Elune</div>
+            <div class="font-medium text-3xl xl:text-5xl text-white">Elune</div>
             <div class="h-1 bg-white" />
-            <div class="bg-white px-2 w-full text-blue-400">一站式运维工具平台</div>
+            <div class="bg-white px-2 w-full text-blue-400 text-sm xl:text-base">
+              一站式运维工具平台
+            </div>
           </div>
         </div>
       </div>

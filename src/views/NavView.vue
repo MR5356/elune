@@ -142,7 +142,7 @@ const openPage = (item) => {
 
 <template>
   <div class="flex w-full justify-center">
-    <div class="flex flex-col 2xl:w-[80%] xl:w-[80%] md:w-[95%] w-[98%]">
+    <div class="flex flex-col 2xl:w-[80%] xl:w-[80%] lg:w-[90%] md:w-[95%] w-[98%]">
       <!-- 新增、修改 -->
       <div class="fixed bottom-4 right-4 jump z-[999]" v-if="userInfo.value">
         <el-button color="rgb(203 213 225)" @click="addNav" size="large" :icon="PlusCross" circle />

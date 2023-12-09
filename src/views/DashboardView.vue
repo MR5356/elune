@@ -112,8 +112,8 @@ init()
 
 <template>
   <div class="absolute top-0 left-0 right-0 bottom-0 overflow-y-auto z-10">
-    <div class="grid grid-cols-4 gap-4 pb-4 pr-4">
-      <PanelCard title="系统信息" class="bg-white rounded col-span-3">
+    <div class="grid grid-cols-4 gap-4 pb-4 px-4">
+      <PanelCard title="系统信息" class="bg-white rounded col-span-4 xl:col-span-3">
         <div class="flex justify-between items-center lg:p-4">
           <div
             class="flex flex-col items-center justify-center p-4 gap-4 w-40"
@@ -135,7 +135,10 @@ init()
           </div>
         </div>
       </PanelCard>
-      <PanelCard title="推荐功能" class="col-span-1 row-span-2 rounded bg-white">
+      <PanelCard
+        title="推荐功能"
+        class="col-span-2 rounded bg-white xl:col-span-1 xl:row-span-2 hidden xl:block"
+      >
         <div class="h-full flex flex-col justify-start items-start">
           <div
             class="flex justify-between items-center p-2 w-full gap-4 hover:bg-gray-100 rounded-lg"
@@ -162,7 +165,7 @@ init()
           </div>
         </div>
       </PanelCard>
-      <PanelCard class="col-span-3 rounded bg-white">
+      <PanelCard class="col-span-4 rounded bg-white xl:col-span-3">
         <div class="w-full flex justify-center">
           <div class="lg:w-[66%]">
             <EluneInfoCard />

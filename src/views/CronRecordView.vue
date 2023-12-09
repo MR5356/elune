@@ -34,7 +34,7 @@ async function getPage() {
 
 <template>
   <div
-    class="absolute top-0 left-0 right-0 bottom-0 overflow-y-auto rounded-xl bg-white bg-opacity-0 z-10 mb-4 mr-4"
+    class="absolute top-0 left-0 right-0 bottom-0 overflow-y-auto rounded-xl bg-white bg-opacity-0 z-10 mb-4 mx-4"
   >
     <el-table :data="recordData?.data" style="width: 100%; height: 100%">
       <el-table-column prop="title" label="任务名称" width="208" />

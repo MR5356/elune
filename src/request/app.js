@@ -35,3 +35,7 @@ export function getUserRole() {
 export function updatePassword(data) {
   return service.put('/user/password', data)
 }
+
+export function updateNickname(data) {
+  return service.put('/user/nickname', data)
+}

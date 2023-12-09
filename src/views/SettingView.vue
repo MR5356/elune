@@ -1,13 +1,13 @@
 <script setup>
 import { ref } from 'vue'
 import { getConfig, setConfig, updatePassword } from '@/request/app'
-import { ElMessage } from 'element-plus'
+// import { ElMessage } from 'element-plus'
 import PanelCard from '@/components/common/PanelCard.vue'
 import withLoading from '@/utils/loading'
 
-const password = ref('')
-const confirmPassword = ref('')
-const oldPassword = ref('')
+// const password = ref('')
+// const confirmPassword = ref('')
+// const oldPassword = ref('')
 
 const setting = ref([
   {
@@ -100,25 +100,25 @@ async function onSubmitSetting() {
   history.go(0)
 }
 
-async function onSubmitUser() {
-  // 更新用户信息
-  if (password.value !== confirmPassword.value) {
-    ElMessage.error({
-      message: '两次密码不一致'
-    })
-    return
-  }
-  await withLoading(updatePassword, '更新中', {
-    password: password.value,
-    oldPassword: oldPassword.value
-  })
-  ElMessage.success('密码修改成功')
-  history.go(0)
-}
+// async function onSubmitUser() {
+//   // 更新用户信息
+//   if (password.value !== confirmPassword.value) {
+//     ElMessage.error({
+//       message: '两次密码不一致'
+//     })
+//     return
+//   }
+//   await withLoading(updatePassword, '更新中', {
+//     password: password.value,
+//     oldPassword: oldPassword.value
+//   })
+//   ElMessage.success('密码修改成功')
+//   history.go(0)
+// }
 </script>
 
 <template>
-  <div class="absolute top-0 left-0 right-0 bottom-0 overflow-y-auto rounded-lg z-10 mb-4 pr-4">
+  <div class="absolute top-0 left-0 right-0 bottom-0 overflow-y-auto rounded-lg z-10 mb-4 px-4">
     <div class="font-medium text-xl mb-6">系统设置</div>
     <div class="flex flex-col w-full gap-4">
       <!-- 设置块 -->
@@ -133,20 +133,20 @@ async function onSubmitUser() {
         </el-form>
         <el-button class="jump" color="" @click="onSubmitSetting">保存</el-button>
       </PanelCard>
-      <PanelCard class="bg-white bg-opacity-70" title="修改密码">
-        <el-form :model="newSetting" label-position="top">
-          <el-form-item label="原密码">
-            <el-input v-model="oldPassword" type="password" autocomplete="new-password" />
-          </el-form-item>
-          <el-form-item label="新密码">
-            <el-input v-model="password" type="password" autocomplete="new-password" />
-          </el-form-item>
-          <el-form-item label="确认密码">
-            <el-input v-model="confirmPassword" type="password" autocomplete="new-password" />
-          </el-form-item>
-        </el-form>
-        <el-button class="jump" color="" @click="onSubmitUser">保存</el-button>
-      </PanelCard>
+      <!--      <PanelCard class="bg-white bg-opacity-70" title="修改密码">-->
+      <!--        <el-form :model="newSetting" label-position="top">-->
+      <!--          <el-form-item label="原密码">-->
+      <!--            <el-input v-model="oldPassword" type="password" autocomplete="new-password" />-->
+      <!--          </el-form-item>-->
+      <!--          <el-form-item label="新密码">-->
+      <!--            <el-input v-model="password" type="password" autocomplete="new-password" />-->
+      <!--          </el-form-item>-->
+      <!--          <el-form-item label="确认密码">-->
+      <!--            <el-input v-model="confirmPassword" type="password" autocomplete="new-password" />-->
+      <!--          </el-form-item>-->
+      <!--        </el-form>-->
+      <!--        <el-button class="jump" color="" @click="onSubmitUser">保存</el-button>-->
+      <!--      </PanelCard>-->
     </div>
   </div>
 </template>

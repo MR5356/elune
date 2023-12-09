@@ -125,7 +125,7 @@ async function onClickDeleteMachineGroup(id) {
 
 <template>
   <div
-    class="absolute top-0 left-0 right-0 bottom-0 overflow-y-auto rounded-lg bg-white bg-opacity-0 z-10 mb-4 pr-4"
+    class="absolute top-0 left-0 right-0 bottom-0 overflow-y-auto rounded-lg bg-white bg-opacity-0 z-10 mb-4 pr-4 pl-4"
   >
     <div class="font-medium text-xl mb-6">主机管理</div>
     <div class="overflow-auto">
@@ -161,7 +161,7 @@ async function onClickDeleteMachineGroup(id) {
         </template>
       </el-menu>
     </div>
-    <div class="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4">
+    <div class="grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-4">
       <div
         class="bg-white bg-opacity-70 rounded-lg shadow p-4 flex justify-between gap-2 sm:p-2 md:p-2 lg:p-4 relative"
         v-for="machine in machines"

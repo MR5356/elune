@@ -21,6 +21,11 @@ const router = createRouter({
           redirect: '/public/nav'
         },
         {
+          path: '/space',
+          name: 'space',
+          component: () => import('../views/SpaceView.vue')
+        },
+        {
           path: 'nav',
           name: 'nav',
           component: () => import('../views/NavView.vue')
@@ -148,7 +153,8 @@ router.onError((error, to) => {
 router.beforeEach(async (to) => {
   const rules = {
     '/devops': ['administrators', 'devops'],
-    '/admin': ['administrators']
+    '/admin': ['administrators'],
+    '/space': ['administrators', 'devops', 'users']
   }
   for (const key in rules) {
     if (to.fullPath.startsWith(key)) {

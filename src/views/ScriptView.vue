@@ -243,7 +243,7 @@ if (query.tab === 'record') {
 
 <template>
   <div
-    class="absolute top-0 left-0 right-0 bottom-0 overflow-y-auto rounded-xl bg-white bg-opacity-0 z-10 mb-4 mr-4"
+    class="absolute top-0 left-0 right-0 bottom-0 overflow-y-auto rounded-xl bg-white bg-opacity-0 z-10 mb-4 mx-4"
   >
     <el-tabs v-model="activeTab" @tab-change="onTabChange">
       <el-tab-pane label="脚本管理" name="script">
