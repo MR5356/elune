@@ -103,3 +103,11 @@ export function deleteKubernetes(id) {
 export function updateKubernetes(data) {
   return service.put('/kubernetes/update', data)
 }
+
+export function addNotifierPlugin(data) {
+  return service.post('/notify/plugin/add', data)
+}
+
+export function uploadNotifierPlugin(data) {
+  return service.post('/notify/plugin/upload', data)
+}

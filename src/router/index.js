@@ -88,6 +88,11 @@ const router = createRouter({
           component: () => import('../views/CronRecordView.vue')
         },
         {
+          path: 'notify',
+          name: 'notify',
+          component: () => import('../views/NotifyView.vue')
+        },
+        {
           path: 'about',
           name: 'about',
           component: () => import('../views/AboutView.vue')
