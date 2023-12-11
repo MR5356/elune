@@ -64,6 +64,10 @@ export function listJob() {
   return service.get('/execute/list')
 }
 
+export function pageJob(pageSize, pageNum) {
+  return service.get('/execute/list/page?pageSize=' + pageSize + '&pageNum=' + pageNum)
+}
+
 export function listCron() {
   return service.get('/cron/list')
 }
@@ -110,4 +114,12 @@ export function addNotifierPlugin(data) {
 
 export function uploadNotifierPlugin(data) {
   return service.post('/notify/plugin/upload', data)
+}
+
+export function listNotifierPlugin() {
+  return service.get('/notify/plugin/list')
+}
+
+export function deleteNotifierPlugin(id) {
+  return service.delete(`/notify/plugin/uninstall/${id}`)
 }

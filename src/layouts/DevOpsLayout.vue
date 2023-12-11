@@ -121,6 +121,10 @@ const menus = [
       },
       {
         title: '消息模版'
+      },
+      {
+        title: '通知插件',
+        path: '/devops/notify/plugin'
       }
     ]
   },

@@ -12,6 +12,7 @@ import {
   listMachine,
   listMachineGroup,
   listJob,
+  pageJob,
   stopJob,
   getJobLog,
   addCron
@@ -40,10 +41,18 @@ const logInterval = ref()
 const recordInterval = ref()
 const isRecord = ref(false)
 
+const pageSize = ref(15)
+const pageNum = ref(1)
+const pageTotal = ref(10)
+
 onMounted(() => {
   recordInterval.value = setInterval(async () => {
     if (isRecord.value) {
-      recordData.value = await listJob()
+      const res = await pageJob(pageSize.value, pageNum.value)
+      recordData.value = res.data
+      pageSize.value = res.pageSize
+      pageNum.value = res.currentPage
+      pageTotal.value = res.total
     }
   }, 1000)
 })
@@ -137,7 +146,14 @@ function formatTime(time) {
 }
 
 async function initRecord() {
-  recordData.value = await withLoading(listJob)
+  // recordData.value = await withLoading(listJob)
+  await withLoading(async () => {
+    const res = await pageJob(pageSize.value, pageNum.value)
+    recordData.value = res.data
+    pageSize.value = res.pageSize
+    pageNum.value = res.currentPage
+    pageTotal.value = res.total
+  })
 }
 
 async function init() {
@@ -540,6 +556,20 @@ if (query.tab === 'record') {
             </template>
           </el-table-column>
         </el-table>
+        <div>
+          <el-pagination
+            :page-size="pageSize"
+            layout="prev, pager, next, total"
+            :total="pageTotal"
+            hide-on-single-page
+            @current-change="
+              (e) => {
+                pageNum = e
+                initRecord()
+              }
+            "
+          />
+        </div>
         <el-dialog
           v-model="showLogView"
           :close-on-click-modal="true"
@@ -576,5 +606,11 @@ if (query.tab === 'record') {
 }
 :deep(.el-dialog__body) {
   padding: 0 1rem 1rem 1rem;
+}
+:deep(.el-pagination) {
+  background: white;
+}
+:deep(.el-scrollbar__view) {
+  overflow-y: hidden !important;
 }
 </style>

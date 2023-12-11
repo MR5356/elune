@@ -15,3 +15,33 @@
 .el-dialog {
   border-radius: 12px !important;
 }
+
+/* // ----------修改elementui表格的默认样式----------- */
+.el-table__body-wrapper {
+  &::-webkit-scrollbar {
+    // 整个滚动条
+    width: 0; // 纵向滚动条的宽度
+    background: rgba(213, 215, 220, 0.3);
+    border: none;
+  }
+  &::-webkit-scrollbar-track {
+    // 滚动条轨道
+    border: none;
+  }
+}
+
+/* // --------------------隐藏table gutter列和内容区右侧的空白 start */
+.el-table th.gutter {
+  display: none;
+  width: 0;
+}
+.el-table colgroup col[name="gutter"] {
+  display: none;
+  width: 0;
+}
+
+.el-table__body {
+  width: 100% !important;
+}
+
+/* // --------------------隐藏table gutter列和内容区右侧的空白 end */

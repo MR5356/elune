@@ -39,3 +39,7 @@ export function updatePassword(data) {
 export function updateNickname(data) {
   return service.put('/user/nickname', data)
 }
+
+export function restartServer() {
+  return service.put('/system/restart')
+}

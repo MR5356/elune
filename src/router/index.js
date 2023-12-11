@@ -88,9 +88,9 @@ const router = createRouter({
           component: () => import('../views/CronRecordView.vue')
         },
         {
-          path: 'notify',
+          path: 'notify/plugin',
           name: 'notify',
-          component: () => import('../views/NotifyView.vue')
+          component: () => import('../views/NotifierPluginView.vue')
         },
         {
           path: 'about',
