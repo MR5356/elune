@@ -89,8 +89,18 @@ const router = createRouter({
         },
         {
           path: 'notify/plugin',
-          name: 'notify',
+          name: 'notify-plugin',
           component: () => import('../views/NotifierPluginView.vue')
+        },
+        {
+          path: 'notify/template',
+          name: 'notify-template',
+          component: () => import('../views/NotifyMessageTemplateView.vue')
+        },
+        {
+          path: 'notify/channel',
+          name: 'notify-channel',
+          component: () => import('../views/NotifierChannelView.vue')
         },
         {
           path: 'about',
@@ -171,6 +181,7 @@ router.beforeEach(async (to) => {
         }
       }
       ElMessage.error('没有权限访问该页面')
+      await router.push('/')
       return false
     }
   }

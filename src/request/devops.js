@@ -123,3 +123,35 @@ export function listNotifierPlugin() {
 export function deleteNotifierPlugin(id) {
   return service.delete(`/notify/plugin/uninstall/${id}`)
 }
+
+export function addNotifierChannel(data) {
+  return service.post('/notify/channel/add', data)
+}
+
+export function listNotifierChannel() {
+  return service.get('/notify/channel/list')
+}
+
+export function deleteNotifierChannel(id) {
+  return service.delete(`/notify/channel/remove/${id}`)
+}
+
+export function sendNotifyMessage(id) {
+  return service.post(`/notify/channel/send/${id}`)
+}
+
+export function listMessageTemplate() {
+  return service.get('/notify/template/list')
+}
+
+export function addMessageTemplate(data) {
+  return service.post('/notify/template/add', data)
+}
+
+export function deleteMessageTemplate(id) {
+  return service.delete(`/notify/template/remove/${id}`)
+}
+
+export function updateMessageTemplate(data) {
+  return service.put('/notify/template/update', data)
+}

@@ -100,7 +100,13 @@ const upload = ref()
       </div>
       <div
         class="bg-white bg-opacity-70 rounded-lg shadow p-8 flex flex-col gap-2 sm:p-4 md:p-4 lg:p-6 relative cursor-pointer"
-        @click="showUploadPlugin = true"
+        @click="
+          () => {
+            ElMessage.warning('生产环境暂不支持上传插件')
+            return
+            showUploadPlugin = true
+          }
+        "
       >
         <div class="m-auto flex items-center gap-6">
           <div
