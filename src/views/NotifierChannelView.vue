@@ -5,7 +5,7 @@ import {
   addNotifierChannel,
   deleteNotifierChannel,
   listNotifierPlugin,
-  sendNotifyMessage
+  sendNotifyTestMessage
 } from '@/request/devops'
 import withLoading from '@/utils/loading'
 import { ElMessage, ElMessageBox } from 'element-plus'
@@ -71,7 +71,7 @@ async function onDeleteNotifierChannel(channel) {
 }
 
 async function onClickSendTestMessage(id) {
-  await withLoading(sendNotifyMessage, '发送中', id)
+  await withLoading(sendNotifyTestMessage, '发送中', id)
   ElMessage.success('测试消息发送成功')
 }
 </script>
