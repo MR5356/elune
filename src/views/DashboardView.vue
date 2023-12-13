@@ -38,12 +38,12 @@ const sumInfo = ref([
 ])
 
 const recommendedApplication = ref([
-  {
-    title: '应用商店',
-    desc: '发布和管理各类应用程序',
-    icon: "data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 48 48' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M39 6H9C7.34315 6 6 7.34315 6 9V39C6 40.6569 7.34315 42 9 42H39C40.6569 42 42 40.6569 42 39V9C42 7.34315 40.6569 6 39 6Z' fill='%236abaf3' stroke='%23333' stroke-width='2'/%3E%3Cpath d='M28 13L21.5 24L19.875 26.75L19.0625 28.125' stroke='%23FFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M15 35L15.8125 33.625' stroke='%23FFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12 29L23 29' stroke='%23FFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M30 29H36' stroke='%23FFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M19 13L22.5 18.5L23.375 19.875' stroke='%23FFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M33 35L29.5 29.5L27.75 26.75L26.875 25.375' stroke='%23FFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E",
-    path: '/devops/machine'
-  },
+  // {
+  //   title: '应用商店',
+  //   desc: '发布和管理各类应用程序',
+  //   icon: "data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 48 48' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M39 6H9C7.34315 6 6 7.34315 6 9V39C6 40.6569 7.34315 42 9 42H39C40.6569 42 42 40.6569 42 39V9C42 7.34315 40.6569 6 39 6Z' fill='%236abaf3' stroke='%23333' stroke-width='2'/%3E%3Cpath d='M28 13L21.5 24L19.875 26.75L19.0625 28.125' stroke='%23FFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M15 35L15.8125 33.625' stroke='%23FFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12 29L23 29' stroke='%23FFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M30 29H36' stroke='%23FFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M19 13L22.5 18.5L23.375 19.875' stroke='%23FFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M33 35L29.5 29.5L27.75 26.75L26.875 25.375' stroke='%23FFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E",
+  //   path: '/devops/machine'
+  // },
   {
     title: '管理已添加主机',
     desc: '管理物理机和虚拟机主机',
