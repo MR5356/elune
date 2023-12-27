@@ -136,7 +136,7 @@ export function deleteNotifierChannel(id) {
   return service.delete(`/notify/channel/remove/${id}`)
 }
 
-export function sendNotifyMessage(id) {
+export function sendNotifyTestMessage(id) {
   return service.post(`/notify/channel/send/${id}`)
 }
 
@@ -154,4 +154,8 @@ export function deleteMessageTemplate(id) {
 
 export function updateMessageTemplate(data) {
   return service.put('/notify/template/update', data)
+}
+
+export function sendNotifyMessage(id, msg) {
+  return service.post(`/notify/message/send/${id}`, msg)
 }
