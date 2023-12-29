@@ -159,3 +159,7 @@ export function updateMessageTemplate(data) {
 export function sendNotifyMessage(id, msg) {
   return service.post(`/notify/message/send/${id}`, msg)
 }
+
+export function listApplications() {
+  return service.get('/app/list')
+}
