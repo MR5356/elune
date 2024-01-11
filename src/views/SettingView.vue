@@ -58,6 +58,21 @@ const setting = ref([
   }
 ])
 
+const notification = ref([
+  {
+    title: '停机公告',
+    message: 'Elune系统升级，将于2023年1月1日停机，敬请谅解',
+    type: 'warning',
+    duration: 0
+  },
+  {
+    title: '停机公告2',
+    message: 'Elune系统升级，将于2023年1月1日停机，敬请谅解',
+    type: 'warning',
+    duration: 0
+  }
+])
+
 async function initSetting() {
   await withLoading(async () => {
     for (const index in setting.value) {
@@ -120,6 +135,27 @@ async function onClickRestartServer() {
         </el-form>
         <el-button class="jump" color="" @click="onSubmitSetting">保存</el-button>
       </PanelCard>
+      <!--      <PanelCard class="bg-white bg-opacity-70" title="网站公告">-->
+      <!--        <div class="grid grid-cols-4 gap-4">-->
+      <!--          <div class="bg-sky-100 p-2 rounded-lg" v-for="(item, index) in notification" :key="index">-->
+      <!--            <el-form :model="newSetting" label-position="top">-->
+      <!--              <el-form-item label="消息标题">-->
+      <!--                <el-input v-model="item.title" autocomplete="off" />-->
+      <!--              </el-form-item>-->
+      <!--              <el-form-item label="消息正文">-->
+      <!--                <el-input v-model="item.message" autocomplete="off" />-->
+      <!--              </el-form-item>-->
+      <!--              <el-form-item label="消息级别">-->
+      <!--                <el-input v-model="item.type" autocomplete="off" />-->
+      <!--              </el-form-item>-->
+      <!--              <el-form-item label="自动关闭">-->
+      <!--                <el-input v-model="item.duration" autocomplete="off" />-->
+      <!--              </el-form-item>-->
+      <!--            </el-form>-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--        <el-button class="jump mt-2" color="">保存</el-button>-->
+      <!--      </PanelCard>-->
       <PanelCard class="bg-white bg-opacity-70" title="系统操作">
         <el-button class="jump" color="" @click="onClickRestartServer">重启服务</el-button>
       </PanelCard>

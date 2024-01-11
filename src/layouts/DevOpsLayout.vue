@@ -96,6 +96,20 @@ const menus = [
     // ]
   },
   // {
+  //   title: '迁移工具',
+  //   icon: `<?xml version="1.0" encoding="UTF-8"?><svg width="22" height="22" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 40V19C6 17.8954 6.89543 17 8 17H15C16.1046 17 17 17.8954 17 19V29C17 30.1046 17.8954 31 19 31H29C30.1046 31 31 31.8954 31 33V40C31 41.1046 30.1046 42 29 42H8C6.89543 42 6 41.1046 6 40Z" fill="#6abaf3" stroke="#333" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M42 8V29C42 30.1046 41.1046 31 40 31H33C31.8954 31 31 30.1046 31 29V19C31 17.8954 30.1046 17 29 17H19C17.8954 17 17 16.1046 17 15V8C17 6.89543 17.8954 6 19 6H40C41.1046 6 42 6.89543 42 8Z" fill="#6abaf3" stroke="#333" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  //   children: [
+  //     {
+  //       title: '镜像迁移',
+  //       path: '/devops/syncer/image'
+  //     },
+  //     {
+  //       title: '代码仓库迁移',
+  //       path: '/devops/syncer/git'
+  //     }
+  //   ]
+  // },
+  // {
   //   title: '备份管理',
   //   path: '/blog',
   //   icon: `<?xml version="1.0" encoding="UTF-8"?><svg width="22" height="22" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 8V20C22 22.2091 17.9706 24 13 24C8.02944 24 4 22.2091 4 20V8" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 14C22 16.2091 17.9706 18 13 18C8.02944 18 4 16.2091 4 14" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 8C22 10.2091 17.9706 12 13 12C8.02944 12 4 10.2091 4 8C4 5.79086 8.02944 4 13 4C17.9706 4 22 5.79086 22 8Z" fill="#6abaf3" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M44 28V40C44 42.2091 39.9706 44 35 44C30.0294 44 26 42.2091 26 40V28" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M44 34C44 36.2091 39.9706 38 35 38C30.0294 38 26 36.2091 26 34" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M44 28C44 30.2091 39.9706 32 35 32C30.0294 32 26 30.2091 26 28C26 25.7909 30.0294 24 35 24C39.9706 24 44 25.7909 44 28Z" fill="#6abaf3" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M32 6H38C40.2091 6 42 7.79086 42 10V16" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 42H10C7.79086 42 6 40.2091 6 38V32" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,

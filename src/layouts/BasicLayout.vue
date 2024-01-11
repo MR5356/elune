@@ -4,6 +4,7 @@ import router from '@/router'
 import UserInfo from '@/components/system/UserInfo.vue'
 import { RouterView } from 'vue-router'
 import initSetting from '@/components/system/setting'
+import { ElNotification } from 'element-plus'
 
 const setting = ref({
   title: '',
@@ -21,17 +22,31 @@ const menus = ref([
   //   path: '/public/nav'
   // },
   // {
+  //   title: '飞屏',
+  //   path: '/public/screen'
+  // }
+  // {
   //   title: '博客',
   //   path: '/blog'
   // },
   // {
   //   title: '关于',
-  //   path: '/about'
+  //   path: '/public/elune'
   // }
 ])
 
 initSetting(setting)
 setting.value.menus = menus.value
+
+async function init() {
+  ElNotification({
+    title: '停机公告',
+    message: 'Elune系统升级，将于2023年1月1日停机，敬请谅解',
+    type: 'warning',
+    duration: 0
+  })
+}
+// init()
 </script>
 
 <template>
