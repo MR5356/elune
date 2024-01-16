@@ -1,7 +1,12 @@
 <script setup>
+import { onBeforeUnmount } from 'vue'
 import { useRoute } from 'vue-router'
 import Terminal from '@/components/Terminal.vue'
 const route = useRoute()
+
+onBeforeUnmount(() => {
+  window.name = ''
+})
 </script>
 
 <template>
