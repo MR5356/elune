@@ -6,6 +6,7 @@ import { FitAddon } from 'xterm-addon-fit'
 import { SerializeAddon } from 'xterm-addon-serialize'
 import { Unicode11Addon } from 'xterm-addon-unicode11'
 import { WebLinksAddon } from 'xterm-addon-web-links'
+import { ElNotification } from 'element-plus'
 import { onMounted, onUnmounted, ref } from 'vue'
 
 let terminalRef = ref(null)
@@ -57,6 +58,7 @@ const initTerm = () => {
   term.loadAddon(webLinksAddon)
   term.open(terminalRef.value)
   term.focus()
+  term.write('连接中...\n')
   fitAddon.fit()
   resizeTerm()
 }
@@ -70,13 +72,13 @@ const initSocket = () => {
   // 绑定复制粘贴事件
   term.onKey((e) => {
     // ctrl + v paste
-    if (e.key == '\x16') {
+    if (e.key === '\x16') {
       navigator.clipboard.readText().then((t) => {
         ws.send(t)
       })
 
       //ctrol+ c copy
-    } else if (e.key == '\x03' && term.hasSelection()) {
+    } else if (e.key === '\x03' && term.hasSelection()) {
       navigator.clipboard.writeText(term.getSelection())
       term.clearSelection()
       e.stop()
@@ -102,6 +104,12 @@ const initSocket = () => {
       term.dispose()
     }
     console.log('socket err: ', err)
+    ElNotification({
+      title: '连接出错',
+      message: '请检查连接信息是否正确或联系管理员',
+      type: 'error',
+      duration: 0
+    })
     ws.destroy()
     initSocket()
   }

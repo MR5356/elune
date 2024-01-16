@@ -13,11 +13,13 @@
           >
             在线演示
           </a>
-          <div
+          <a
+            href="https://github.com/MR5356/elune-aio/blob/main/README.md"
+            target="_blank"
             class="bg-sky-500 hover:animate-pulse text-white rounded-md p-2 px-6 cursor-pointer break-keep select-none"
           >
             使用文档
-          </div>
+          </a>
         </div>
         <div class="flex gap-4">
           <a href="https://github.com/mr5356/elune-aio" target="_blank">

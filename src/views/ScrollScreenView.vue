@@ -24,7 +24,12 @@ onBeforeUnmount(() => {
 })
 
 async function init() {
-  messages.value = ['欲饮桂花同载酒<br/>终不似，少年游', '相识虽浅 似是经年']
+  messages.value = [
+    '欲饮桂花同载酒<br/>终不似，少年游',
+    '相识虽浅 似是经年',
+    '浮云千帆过 流星万眼稀',
+    '醉后不知天在地 无闻不通宵'
+  ]
 }
 init()
 const triggerFullScreen = () => {
