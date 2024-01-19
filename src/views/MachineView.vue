@@ -9,9 +9,12 @@ import {
   deleteMachine,
   deleteMachineGroup
 } from '@/request/devops'
-import { MoreOne } from '@icon-park/vue-next'
+import { MoreOne, Terminal } from '@icon-park/vue-next'
 import withLoading from '@/utils/loading'
 import { ElMessageBox } from 'element-plus'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const machines = ref([])
 const rawMachines = ref([])
@@ -121,6 +124,20 @@ async function onClickDeleteMachineGroup(id) {
     await init()
   })
 }
+
+const openTerminal = (route, host) => {
+  let terminal = route.resolve({ path: '/devops/terminal/' + host.id })
+
+  let win = window.open('', terminal.href)
+  if (win.location.href === 'about:blank') {
+    win = window.open(terminal.href, terminal.href)
+  } else if (win.location.href === window.location.href) {
+    window.name = ''
+    win = window.open(terminal.href, terminal.href)
+  } else {
+    win.focus()
+  }
+}
 </script>
 
 <template>
@@ -206,27 +223,30 @@ async function onClickDeleteMachineGroup(id) {
           </div>
         </div>
         <div>
-          <el-popover :width="88" trigger="hover" class="p-0">
-            <template #reference>
-              <MoreOne />
-            </template>
-            <template #default>
-              <div class="flex flex-col gap-0 text-sm">
-                <div
-                  class="w-full hover:bg-gray-50 p-1.5 rounded cursor-pointer"
-                  @click="onClickEditMachine(machine)"
-                >
-                  编辑
+          <div class="flex gap-4 items-center">
+            <Terminal class="jump" title="终端" @click="() => openTerminal(router, machine)" />
+            <el-popover :width="88" trigger="hover" class="p-0">
+              <template #reference>
+                <MoreOne />
+              </template>
+              <template #default>
+                <div class="flex flex-col gap-0 text-sm">
+                  <div
+                    class="w-full hover:bg-gray-50 p-1.5 rounded cursor-pointer"
+                    @click="onClickEditMachine(machine)"
+                  >
+                    编辑
+                  </div>
+                  <div
+                    class="w-full hover:bg-gray-50 p-1.5 rounded cursor-pointer"
+                    @click="onDeleteMachine(machine.id)"
+                  >
+                    删除
+                  </div>
                 </div>
-                <div
-                  class="w-full hover:bg-gray-50 p-1.5 rounded cursor-pointer"
-                  @click="onDeleteMachine(machine.id)"
-                >
-                  删除
-                </div>
-              </div>
-            </template>
-          </el-popover>
+              </template>
+            </el-popover>
+          </div>
         </div>
       </div>
       <div

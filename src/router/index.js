@@ -43,6 +43,11 @@ const router = createRouter({
       ]
     },
     {
+      path: '/public/screen',
+      name: 'screen',
+      component: () => import('../views/ScrollScreenView.vue')
+    },
+    {
       path: '/devops',
       name: 'devops',
       component: () => import('../layouts/DevOpsLayout.vue'),
@@ -66,6 +71,11 @@ const router = createRouter({
           path: 'machine',
           name: 'machine',
           component: () => import('../views/MachineView.vue')
+        },
+        {
+          path: 'terminal/:id',
+          name: 'terminal',
+          component: () => import('../views/TerminalView.vue')
         },
         {
           path: 'script',
@@ -101,6 +111,16 @@ const router = createRouter({
           path: 'notify/channel',
           name: 'notify-channel',
           component: () => import('../views/NotifierChannelView.vue')
+        },
+        {
+          path: 'syncer/image',
+          name: 'syncer-image',
+          component: () => import('../views/devops/ImageSyncerView.vue')
+        },
+        {
+          path: 'syncer/git',
+          name: 'syncer-git',
+          component: () => import('../views/devops/GitSyncerView.vue')
         },
         {
           path: 'about',
