@@ -62,7 +62,7 @@ initSetting(setting)
           </el-menu>
           <div class="grow" />
           <div
-            class="w-full flex flex-col gap-1 items-start p-4 sticky bottom-0 text-xs backdrop-blur-md text-slate-50"
+            class="w-full flex flex-col gap-1 items-start p-4 sticky bottom-0 text-xs backdrop-blur-md text-gray-400"
           >
             <div v-if="setting.copyright">{{ setting.copyright }}</div>
             <div class="flex flex-col text-[0.7rem]">
