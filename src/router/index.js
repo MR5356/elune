@@ -48,6 +48,18 @@ const router = createRouter({
       component: () => import('../views/ScrollScreenView.vue')
     },
     {
+      path: '/devops/kubernetes',
+      name: 'kubernetes',
+      component: () => import('../layouts/KubernetesLayout.vue'),
+      children: [
+        {
+          path: '',
+          name: 'overview',
+          component: () => import('../views/kubernetes/OverviewView.vue')
+        }
+      ]
+    },
+    {
       path: '/devops',
       name: 'devops',
       component: () => import('../layouts/DevOpsLayout.vue'),
